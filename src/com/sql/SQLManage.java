@@ -1,22 +1,23 @@
-package com.sql.manage;
+package com.sql;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SQLManage extends ActionSupport{
-	private Connection con;
-	private PreparedStatement pstmt;
+	private Connection con = null;
+	private PreparedStatement pstmt = null;
 	
 	public SQLManage(String sqlCmd) throws ClassNotFoundException, SQLException {
-		String url = "jdbc:mysql://localhost:3306/BookDB";
+		String url = "jdbc:mysql://localhost:3306/Account";
 		String username = "root";
-		String password = "******";
+		String password = "951118";
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection(url, username, password);
 		pstmt = con.prepareStatement(sqlCmd);
@@ -26,8 +27,8 @@ public class SQLManage extends ActionSupport{
 		pstmt.setString(index, str);
 	}
 	
-	public void setDate(int index, Date date) throws SQLException {
-		pstmt.setDate(index, date);
+	public void setTimestamp(int index, Timestamp date) throws SQLException {
+		pstmt.setTimestamp(index, date);
 	}
 	
 	public void setDouble(int index, double d) throws SQLException {
