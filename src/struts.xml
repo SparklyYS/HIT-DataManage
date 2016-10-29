@@ -7,11 +7,24 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<package name="show_result" extends="struts-default">
+		<!-- 设置默认action，用户输入非法url自动执行LoginPage这个action -->
+		<default-action-ref name="LoginPage"></default-action-ref>
+		
+		<!-- 全局result -->
 		<global-results>
 			<result name="error">
 				/Error.jsp
 			</result>	
 		</global-results>
+		
+		<!-- 以下是各种action -->
+		<action name="LoginPage"
+			class="com.defaults.ToLogin">
+			<result>
+				/Login.html
+			</result>
+		</action>
+		
 		<action name="LoginAction"
 			class="com.account.LoginIn"
 			method="matchAccount">
@@ -22,6 +35,7 @@
 				/Nomatch.jsp
 			</result>
 		</action>
+		
 		<action name="SignAction"
 			class="com.account.SignUp"
 			method="createAccount">
@@ -32,6 +46,6 @@
 				/Nomatch.jsp
 			</result>
 		</action>
+		
    	</package>
-	
 </struts>

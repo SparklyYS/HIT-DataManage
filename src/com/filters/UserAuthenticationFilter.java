@@ -13,26 +13,58 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class UserAuthenticationFilter implements javax.servlet.Filter {
-	
 	private final String LOGIN_PAGE = "/Login.html";
-	private final String LOGIN_ACTION = "/LoginAction";
-	private final String SIGNUP_ACTION = "/SignAction";
-	private final String SIGNUP_PAGE = "/Regist.html";
-
+	private final String[] passPage = {
+			"/HIT-DataManage/Login.html", 
+			"/HIT-DataManage/LoginAction", 
+			"/HIT-DataManage/SignAction", 
+			"/HIT-DataManage/Regist.html"
+	}; //定义了一系列能躲过过滤器操作的界面或者action
+	
+	private final String[] resource = {
+			"/boostrap",
+			"/img"
+	};
+	
+	//先定义一个方法判断ssession的值是否符合要求
+	public boolean isCorrect(HttpSession session) {
+		if(session == null || session.getAttribute("status") == null || !(session.getAttribute("status").equals("success"))) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
+		boolean isPass = false;
+		boolean isResource = false;
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-		String url= req.getRequestURI();
-		if(url.indexOf(LOGIN_PAGE) == -1 && url.indexOf(LOGIN_ACTION) == -1 && url.indexOf(SIGNUP_ACTION) == -1 && url.indexOf(SIGNUP_PAGE) == -1) {
-			if(session == null || session.getAttribute("status") == null ) {
-				res.sendRedirect(req.getContextPath() + LOGIN_PAGE);
-				return;
+		boolean sessionStatus = isCorrect(session);
+		String url = req.getRequestURI();
+		for(int i = 0; i < passPage.length; i++) {
+			if(url.equals(passPage[i])) {
+				isPass = true;
+				break;
 			}
-			if(!(session.getAttribute("status").equals("success"))) {
-				res.sendRedirect(req.getContextPath() + LOGIN_PAGE); 
+		}
+		for(int i = 0; i < resource.length; i++) {
+			if(url.indexOf(resource[i]) != -1) {
+				isResource = true;
+				break;
+			}
+		}
+		/*
+		 * 先进行过滤页面操作，然后若未登录，
+		 * 直接跳到登录界面
+		 */
+		System.out.println(isResource);
+		if(!isPass && !isResource) {
+			if(!sessionStatus) {
+				res.sendRedirect(req.getContextPath() + LOGIN_PAGE);
 				return;
 			}
 		}
