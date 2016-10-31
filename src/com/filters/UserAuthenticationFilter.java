@@ -61,7 +61,6 @@ public class UserAuthenticationFilter implements javax.servlet.Filter {
 		 * 先进行过滤页面操作，然后若未登录，
 		 * 直接跳到登录界面
 		 */
-		System.out.println(isResource);
 		if(!isPass && !isResource) {
 			if(!sessionStatus) {
 				res.sendRedirect(req.getContextPath() + LOGIN_PAGE);

@@ -10,6 +10,14 @@
 </head>
 <body>
 	<h1>Welcome</h1>
+	<s:iterator value="messages" var="m">
+		<s:property value="%{#m.mess}"/> &emsp; 
+		<s:date name="#m.t" format="yyyy-MM-dd HH:mm:ss"/> 
+	</s:iterator>
+	<br />
+	<s:url var="homeurl"  value="HomeAction">
+	</s:url>
+	<s:a href="%{homeurl}">主页</s:a>
 	<s:debug></s:debug>
 </body>
 </html>

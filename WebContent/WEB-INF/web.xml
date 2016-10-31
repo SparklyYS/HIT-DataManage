@@ -8,7 +8,12 @@
    	<welcome-file-list>
       	<welcome-file>Login.html</welcome-file>
    	</welcome-file-list>
-   
+	
+	<!-- 设置session的有效期 -->
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
+
 	<!-- 这里配置了一个用户登录的过滤器 -->
    	<filter>
    		<filter-name>UserAuthentication</filter-name>

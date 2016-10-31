@@ -6,7 +6,12 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.*;
-import java.util.Date;  
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.interceptor.ServletRequestAware;  
 
 public class SignUp extends ActionSupport {
 	private String userName, userPasswd, userEmail;
@@ -50,11 +55,18 @@ public class SignUp extends ActionSupport {
 			}
 			else {
 				sqlcmd = "insert into users (userName,userPasswd,userEmail,createTime) values (?,?,?,?)";
+				Timestamp t = new Timestamp(new Date().getTime());
 		        mysql = new SQLManage(sqlcmd);
 		        mysql.setString(1, userName);
 		        mysql.setString(2, userPasswd);
 		        mysql.setString(3, userEmail);
-		        mysql.setTimestamp(4, new Timestamp(new Date().getTime()));
+		        mysql.setTimestamp(4, t);
+		        mysql.executeUpdate();
+		        sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
+		        mysql = new SQLManage(sqlcmd);
+		        mysql.setString(1, "create account");
+		        mysql.setTimestamp(2, t);
+		        mysql.setString(3, userName);
 		        mysql.executeUpdate();
 		        status = SUCCESS;
 			}

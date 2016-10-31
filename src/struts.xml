@@ -39,13 +39,30 @@
 		<action name="SignAction"
 			class="com.account.SignUp"
 			method="createAccount">
-			<result>
-				/HomePage.jsp
+			<result type="redirectAction">
+				<param name="actionName">LoginAction</param>
+				<param name="userName">${userName}</param>
+				<param name="userPasswd">${userPasswd}</param>
 			</result>
 			<result name="existed">
 				/Nomatch.jsp
 			</result>
 		</action>
 		
+		<action name="HomeAction"
+			class="com.account.HomePage"
+			method="showHome">
+			<result>
+				/HomePage.jsp
+			</result>			
+		</action>
+		
+		<action name="PDOAction"
+			class="com.myfile.ShowPDO"
+			method="show">
+			<result>
+				/ShowPDO.jsp
+			</result>
+		</action>
    	</package>
 </struts>
