@@ -57,12 +57,49 @@
 			</result>			
 		</action>
 		
-		<action name="PDOAction"
+		<action name="AddPDOAction"
+			class="com.myfile.AddPDO"
+			method="addPDO">
+			<result type="redirectAction">
+				<param name="actionName">PDOAction</param>
+			</result>
+		</action>
+		
+		<action name="ShowPDOAction"
 			class="com.myfile.ShowPDO"
-			method="show">
+			method="showPDO">
 			<result>
 				/ShowPDO.jsp
 			</result>
 		</action>
+		
+		<action name="EventPassAction"
+			class="com.myfile.EventPass"
+			method="eventPass">
+			
+		</action>
+		
+		<action name="LinkedAction"
+			class="com.myfile.LinkedPDO"
+			method="linkedPDO">
+			
+		</action>
+		
+		<action name="AddEventAction"
+			class="com.myfile.AddEvent"
+			method="addEvent">
+			<result type="redirectAction">
+				<param name="actionName">PDOAction</param>
+			</result>
+		</action>
+		
+		<action name="ShowEventAction"
+			class="com.myfile.ShowEvent"
+			method="showEvent">
+			<result>
+				/ShowEvent.jsp
+			</result>
+		</action>
+		
    	</package>
 </struts>

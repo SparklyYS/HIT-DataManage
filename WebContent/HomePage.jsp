@@ -18,6 +18,12 @@
 	<s:url var="homeurl"  value="HomeAction">
 	</s:url>
 	<s:a href="%{homeurl}">主页</s:a>
+	<br />
+	
+	<s:url var="pdourl"  value="ShowPDOAction">
+	</s:url>
+	<s:a href="%{pdourl}">我的文件</s:a>
+	
 	<s:debug></s:debug>
 </body>
 </html>

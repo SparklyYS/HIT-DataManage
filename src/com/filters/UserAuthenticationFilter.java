@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 public class UserAuthenticationFilter implements javax.servlet.Filter {
 	private final String LOGIN_PAGE = "/Login.html";
 	private final String[] passPage = {
+			"/HIT-DataManage",
 			"/HIT-DataManage/Login.html", 
 			"/HIT-DataManage/LoginAction", 
 			"/HIT-DataManage/SignAction", 

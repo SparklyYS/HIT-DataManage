@@ -34,7 +34,7 @@ public class ShowPDO extends ActionSupport implements ServletRequestAware {
 		this.request = request;
 	}
 	
-	public String show() {
+	public String showPDO() {
 		HttpServletRequest req = (HttpServletRequest) request; 
 		HttpSession session = req.getSession(); 
 		String userName = session.getAttribute("userName").toString();
