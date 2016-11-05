@@ -5,21 +5,24 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.interceptor.ServletRequestAware;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
 
 public class AddPDO extends ActionSupport implements ServletRequestAware {
-	private HttpServletRequest request;
 	private String status;
 	private List<String> headers = new ArrayList<String>();
 	private String PDOName;
+	private HttpServletRequest request;
 	
+	public HttpServletRequest getServletRequest() {
+		return request;
+	}
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
 	public String getPDOName() {
 		return PDOName;
 	}
@@ -32,18 +35,11 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 	public void setHeaders(List<String> headers) {
 		this.headers = headers;
 	}
-	public HttpServletRequest getServletRequest() {
-		return request;
-	}
-	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
 	
 	public String addPDO() {
 		HttpServletRequest req = (HttpServletRequest) request; 
-		HttpSession session = req.getSession(); 
+		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
-		
 		try {
 			String sqlcmd = "insert into pdos (PDOName,PDOTime,userName) values (?,?,?)";
 			SQLManage mysql = new SQLManage(sqlcmd);
@@ -53,17 +49,20 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 			mysql.setString(3, userName);
 			mysql.executeUpdate();
 			String PDOTable = userName + "_" + PDOName;
-			sqlcmd = "create table ? ";
-			sqlcmd += "(";
-			for(int i = 0;i < headers.size() - 1;i++) {
-				sqlcmd += "?,";
+			sqlcmd = "create table " + PDOTable + "(";
+			sqlcmd += "eventID int not null auto_increment,";
+			for(String header : headers) {
+				sqlcmd += header + " varchar(100) not null,";
 			}
-			sqlcmd += "?)";
+			sqlcmd += "link varchar(100) not null,primary key (eventID)";
 			mysql = new SQLManage(sqlcmd);
-			for(int i = 0;i < headers.size();i++) {
-				mysql.setString(i+1, headers.get(i));
-			}
 			mysql.executeUpdate();
+			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
+	        mysql = new SQLManage(sqlcmd);
+	        mysql.setString(1, "add a PDO named "+PDOName);
+	        mysql.setTimestamp(2, t);
+	        mysql.setString(3, userName);
+	        mysql.executeUpdate();
 			status = SUCCESS;
 			mysql.close();
 		}

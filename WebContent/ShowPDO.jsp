@@ -11,10 +11,9 @@
 	<s:url var="addpdourl"  value="AddPDO.jsp">
 	</s:url>
 	<s:a href="%{addpdourl}">添加PDO</s:a>
-	&emsp;
-	<s:url var="addeventurl"  value="AddEventPass.jsp">
+	<s:url var="addeventurl"  value="ChooseLinkAction">
 	</s:url>
-	<s:a href="%{addeventurl}">添加PDO</s:a>
+	<s:a href="%{addeventurl}">添加事件</s:a>
 	<br/>
 	<s:iterator value="pdos" var="p">
 		<s:url var="detailurl"  value="ShowEventAction">
@@ -22,7 +21,10 @@
 		</s:url>
 		<s:a href="%{detailurl}"><s:property value="%{#p.PDOName}"/></s:a>
 		 &emsp; &emsp; &emsp; 
-		<s:date name="#p.t" format="yyyy-MM-dd HH:mm:ss"/> 
+		<s:date name="#p.t" format="yyyy-MM-dd HH:mm:ss"/>  &emsp;
+		<s:property value="%{#p.count}"/> &emsp;
+		<br/>
 	</s:iterator>
+	
 </body>
 </html>

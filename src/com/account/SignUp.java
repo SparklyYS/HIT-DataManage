@@ -8,10 +8,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sql.*;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.interceptor.ServletRequestAware;  
 
 public class SignUp extends ActionSupport {
 	private String userName, userPasswd, userEmail;

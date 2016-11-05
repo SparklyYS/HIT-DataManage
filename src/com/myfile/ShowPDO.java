@@ -5,27 +5,15 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.interceptor.ServletRequestAware;
-
-import com.account.Message;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
-
 public class ShowPDO extends ActionSupport implements ServletRequestAware {
 	private String status;
-	private HttpServletRequest request;
 	private List<PDO> pdos = new ArrayList<PDO>();
-	
-	public List<PDO> getPdos() {
-		return pdos;
-	}
-	public void setPdos(List<PDO> pdos) {
-		this.pdos = pdos;
-	}
+	private HttpServletRequest request;
 	
 	public HttpServletRequest getServletRequest() {
 		return request;
@@ -33,10 +21,16 @@ public class ShowPDO extends ActionSupport implements ServletRequestAware {
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
+	public List<PDO> getPdos() {
+		return pdos;
+	}
+	public void setPdos(List<PDO> pdos) {
+		this.pdos = pdos;
+	}
 	
 	public String showPDO() {
 		HttpServletRequest req = (HttpServletRequest) request; 
-		HttpSession session = req.getSession(); 
+		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		try {
 			String sqlcmd = "select * from pdos where userName=?";
@@ -47,7 +41,8 @@ public class ShowPDO extends ActionSupport implements ServletRequestAware {
 			while(mypdo.next()) {
 				String pdoName = mypdo.getString("PDOName");
 				Timestamp t = mypdo.getTimestamp("PDOTime");
-				pdos.add(new PDO(pdoName, t));
+				int count = mypdo.getInt("counts");
+				pdos.add(new PDO(pdoName, t,count));
 			}
 			mysql.close();
 		}

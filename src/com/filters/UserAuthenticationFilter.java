@@ -15,10 +15,12 @@ import javax.servlet.http.HttpSession;
 public class UserAuthenticationFilter implements javax.servlet.Filter {
 	private final String LOGIN_PAGE = "/Login.html";
 	private final String[] passPage = {
-			"/HIT-DataManage",
+			"/HIT-DataManage/",
 			"/HIT-DataManage/Login.html", 
 			"/HIT-DataManage/LoginAction", 
 			"/HIT-DataManage/SignAction", 
+			"/HIT-DataManage/LoginAction.action", 
+			"/HIT-DataManage/SignAction.action",
 			"/HIT-DataManage/Regist.html"
 	}; //定义了一系列能躲过过滤器操作的界面或者action
 	

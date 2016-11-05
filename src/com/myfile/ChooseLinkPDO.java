@@ -1,22 +1,26 @@
-package com.account;
+package com.myfile;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.interceptor.ServletRequestAware;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
-public class HomePage extends ActionSupport implements ServletRequestAware {
+
+public class ChooseLinkPDO extends ActionSupport implements ServletRequestAware {
 	private String status;
-	private List<Message> messages = new ArrayList<Message>();
+	private List<String> choosedPDO = new ArrayList<String>();
 	private HttpServletRequest request;
+	
+	public List<String> getChoosedPDO() {
+		return choosedPDO;
+	}
+	public void setChoosedPDO(List<String> choosedPDO) {
+		this.choosedPDO = choosedPDO;
+	}
 	public HttpServletRequest getServletRequest() {
 		return request;
 	}
@@ -24,28 +28,20 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 		this.request = request;
 	}
 	
-	public List<Message> getMessages() {
-		return messages;
-	}
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
-	}
 	
-	public String showHome() {
+	public String choose() {
 		HttpServletRequest req = (HttpServletRequest) request; 
 		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		try {
-			String sqlcmd = "select * from messages where userName=?";
+			String sqlcmd = "select * from pdos where userName=?";
 			SQLManage mysql = new SQLManage(sqlcmd);
 			mysql.setString(1, userName);
-			ResultSet mymess = mysql.executeQuery();
-			status = SUCCESS;
-			while(mymess.next()) {
-				String mess = mymess.getString("message");
-				Timestamp t = mymess.getTimestamp("messageTime");
-				messages.add(new Message(mess, t));
+			ResultSet pdos = mysql.executeQuery();
+			while(pdos.next()) {
+				choosedPDO.add(pdos.getString("PDOName"));
 			}
+			status = SUCCESS;
 			mysql.close();
 		}
 		catch(ClassNotFoundException e) {
@@ -58,4 +54,5 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 		}	
 		return status;
 	}
+
 }

@@ -6,9 +6,7 @@
 
 <struts>
 	<constant name="struts.devMode" value="true" />
-	<package name="show_result" extends="struts-default">
-		<!-- 设置默认action，用户输入非法url自动执行LoginPage这个action -->
-		<default-action-ref name="LoginPage"></default-action-ref>
+	<package name="show_result" namespace="/" extends="struts-default">
 		
 		<!-- 全局result -->
 		<global-results>
@@ -18,10 +16,10 @@
 		</global-results>
 		
 		<!-- 以下是各种action -->
-		<action name="LoginPage"
-			class="com.defaults.ToLogin">
+		<!-- 设置默认action，用户输入非法url自动执行LoginPage这个action -->
+		<action name="*">
 			<result>
-				/Login.html
+				/Error.jsp
 			</result>
 		</action>
 		
@@ -61,7 +59,7 @@
 			class="com.myfile.AddPDO"
 			method="addPDO">
 			<result type="redirectAction">
-				<param name="actionName">PDOAction</param>
+				<param name="actionName">ShowPDOAction</param>
 			</result>
 		</action>
 		
@@ -73,23 +71,27 @@
 			</result>
 		</action>
 		
-		<action name="EventPassAction"
-			class="com.myfile.EventPass"
-			method="eventPass">
-			
+		<action name="ChooseLinkAction"
+			class="com.myfile.ChooseLinkPDO"
+			method="choose">
+			<result>
+				/ChooseLinkPDO.jsp
+			</result>
 		</action>
 		
-		<action name="LinkedAction"
-			class="com.myfile.LinkedPDO"
-			method="linkedPDO">
-			
+		<action name="ShowHeaderAction"
+			class="com.myfile.ShowHeader"
+			method="showHeader">
+			<result>
+				/ShowHeader.jsp
+			</result>
 		</action>
 		
 		<action name="AddEventAction"
 			class="com.myfile.AddEvent"
 			method="addEvent">
 			<result type="redirectAction">
-				<param name="actionName">PDOAction</param>
+				<param name="actionName">ShowEventAction</param>
 			</result>
 		</action>
 		

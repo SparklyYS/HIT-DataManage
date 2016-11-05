@@ -3,24 +3,26 @@ package com.myfile;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.interceptor.ServletRequestAware;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
-
 public class ShowEvent extends ActionSupport implements ServletRequestAware {
 	private String status;
 	private String PDOName;
 	private List<String> headers = new ArrayList<String>();
-	private HttpServletRequest request;
 	private List<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+	private HttpServletRequest request;
+	
+	public HttpServletRequest getServletRequest() {
+		return request;
+	}
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
 	
 	public String getPDOName() {
 		return PDOName;
@@ -40,16 +42,10 @@ public class ShowEvent extends ActionSupport implements ServletRequestAware {
 	public void setData(List<ArrayList<String>> data) {
 		this.data = data;
 	}
-	public HttpServletRequest getServletRequest() {
-		return request;
-	}
-	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
 	
 	public String showEvent() {
 		HttpServletRequest req = (HttpServletRequest) request; 
-		HttpSession session = req.getSession(); 
+		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		try {
 			String pdoName = userName + "_" + PDOName;
@@ -61,7 +57,6 @@ public class ShowEvent extends ActionSupport implements ServletRequestAware {
 			for(int i = 1;i <= columnCount;i++) {
 				headers.add(column.getColumnName(i));
 			}
-			status = SUCCESS;
 			while(myevent.next()) {
 				ArrayList<String> single = new ArrayList<String>();
 				for(int i = 1;i <= columnCount;i++) {
@@ -69,6 +64,7 @@ public class ShowEvent extends ActionSupport implements ServletRequestAware {
 				}
 				data.add(single);
 			}
+			status = SUCCESS;
 			mysql.close();
 		}
 		catch(ClassNotFoundException e) {
