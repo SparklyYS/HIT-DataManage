@@ -27,7 +27,7 @@
 			class="com.account.LoginIn"
 			method="matchAccount">
 			<result>
-				/HomePage.jsp
+				/homepage.html
 			</result>
 			<result name="noMatch">
 				/Nomatch.jsp
@@ -51,7 +51,7 @@
 			class="com.account.HomePage"
 			method="showHome">
 			<result>
-				/HomePage.jsp
+				/homepage.html
 			</result>			
 		</action>
 		
