@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <!--[if !IE]><!-->
 <html lang="en" class="no-js">
@@ -170,14 +173,14 @@
 		<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
-			<ul class="page-sidebar-menu " data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200">
+			<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-			   <!-- <li class="sidebar-toggler-wrapper"> -->
+			   <li class="sidebar-toggler-wrapper">
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<!-- <div class="sidebar-toggler"> -->
-					<!-- </div> -->
+					<div class="sidebar-toggler">
+					</div>
 					<!-- END SIDEBAR TOGGLER BUTTON -->
-				<!-- </li> -->
+				</li>
 				<li class="start active open">
 					<a href="javascript:;">
 					<i class="icon-home"></i>
@@ -199,7 +202,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="javascript:;">
+					<a href="MyFiles.jsp">
 					<i class="icon-briefcase"></i>
 					<span class="title">我的个人数据</span>
 					</a>
