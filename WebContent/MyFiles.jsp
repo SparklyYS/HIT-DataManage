@@ -52,11 +52,8 @@
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
-		<div class="page-logo">
-			<a href="index.html">
-			</a>
-			<div class="menu-toggler sidebar-toggler hide">
-			</div>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">RecordBox</a>
 		</div>
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -186,7 +183,7 @@
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<li>
-					<a href="javascript:;">
+					<a href="homepage.jsp">
 					<i class="icon-home"></i>
 					<span class="title">主页</span>
 					</a>
