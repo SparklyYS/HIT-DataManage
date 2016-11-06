@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <!--[if !IE]><!-->
 <html lang="en" class="no-js">
@@ -133,7 +136,7 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="extra_profile.html">
+							<a href="homepage.jsp">
 							<i class="icon-user"></i>我的主页</a>
 						</li>
 						<li>
