@@ -97,6 +97,7 @@ public class AddEvent extends ActionSupport implements ServletRequestAware {
 	        mysql.setString(3, userName);
 	        mysql.executeUpdate();
 			status = SUCCESS;
+			mysql.close();
 		}
 		catch(ClassNotFoundException e) {
 			status = ERROR;

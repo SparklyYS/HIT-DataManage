@@ -186,7 +186,7 @@
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<li>
-					<a href="javascript:;">
+					<a href="homepage.jsp">
 					<i class="icon-home"></i>
 					<span class="title">主页</span>
 					</a>
@@ -209,12 +209,6 @@
 					<i class="icon-briefcase"></i>
 					<span class="title">我的个人数据</span>
 					<span class="selected"></span>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-present"></i>
-					<span class="title">会员专享</span>
 					</a>
 				</li>
 <!-- 				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
@@ -311,120 +305,33 @@
 									 创建时间
 								</th>
 								<th>
-									最近修改时间
-								</th>
-								<th>
-									操作
+									 操作
 								</th>
 							</tr>
 							</thead>
 							<tbody>
+							<s:iterator value="pdos" var="p">
 							<tr class="odd gradeX">
 								<!-- <td> -->
 									<!-- <input type="checkbox" class="checkboxes" value="1"/> -->
 								<!-- </td> -->
 								<td>
-								     <a href="">
-									 饮食
+								    <s:url var="detailurl"  value="ShowEventAction">
+									<s:param name="PDOName" value="%{#p.PDOName}"></s:param>
+									</s:url>
+									<s:a href="%{detailurl}"><s:property value="%{#p.PDOName}"/></s:a>
 								</td>
 								<td>
-									饮食
+									 <s:property value="%{#p.count}"/>
 								</td>
 								<td>
-									 2016/11/1
+									<s:date name="#p.t" format="yyyy-MM-dd HH:mm:ss"/>
 								</td>
 								<td>
-									2016/11/3
-								</td>
-								<td>
-									1
+									删除 编辑
 								</td>
 							</tr>
-							<tr class="odd gradeX">
-								<!-- <td> -->
-									<!-- <input type="checkbox" class="checkboxes" value="1"/> -->
-								<!-- </td> -->
-								<td>
-									 <a href="">
-									 金钱
-								</td>
-								<td>
-								     50
-								</td>
-								<td>
-									 2016/11/1
-								</td>
-								<td>
-									2016/11/3
-								</td>
-								<td>
-									2
-								</td>
-							</tr>
-							<tr class="odd gradeX">
-								<!-- <td> -->
-									<!-- <input type="checkbox" class="checkboxes" value="1"/> -->
-								<!-- </td> -->
-								<td>
-									 <a href="">
-									 运动
-								</td>
-								<td>
-									 30
-								</td>
-								<td>
-									 2016/11/2
-								</td>
-								<td class="center">
-									2016/11/3
-								</td>
-								<td>
-									3
-								</td>
-							</tr>
-							<tr class="odd gradeX">
-								<!-- <td> -->
-									<!-- <input type="checkbox" class="checkboxes" value="1"/> -->
-								<!-- </td> -->
-								<td>
-									 <a href="">
-									 看书
-								</td>
-								<td>
-									 5
-								</td>
-								<td>
-									 2016/11/3
-								</td>
-								<td class="center">
-									2016/11/3
-								</td>
-								<td>
-									4
-								</td>
-							</tr>
-
-							<tr class="odd gradeX">
-								<!-- <td> -->
-									<!-- <input type="checkbox" class="checkboxes" value="1"/> -->
-								<!-- </td> -->
-								<td>
-									 <a href="">
-									 学习
-								</td>
-								<td>
-									 10
-								</td>
-								<td>
-									 2016/11/3
-								</td>
-								<td class="center">
-									2016/11/3
-								</td>
-								<td>
-									5
-								</td>
-							</tr>
+							</s:iterator>
 							</tbody>
 							</table>
 						</div>

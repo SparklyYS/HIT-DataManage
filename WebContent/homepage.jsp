@@ -202,16 +202,11 @@
 					</a>
 				</li>
 				<li>
-					<a href="MyFiles.jsp">
+					<s:url var="myfile" value="ShowPDOAction"></s:url>
+					<s:a href="%{myfile}">
 					<i class="icon-briefcase"></i>
 					<span class="title">我的个人数据</span>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-present"></i>
-					<span class="title">会员专享</span>
-					</a>
+					</s:a>
 				</li>
 <!-- 				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
 				<li>
