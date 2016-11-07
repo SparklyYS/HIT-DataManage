@@ -363,16 +363,16 @@
       <!-- Contents should be follow the real data -->
       <div class="modal-body">
       <div class="form-group">
-        <input id="Time" class="form-control " type="text" placeholder="">
+        <input id="Time" name="Time" class="form-control " type="text" >
         </div>
         <div class="form-group">
-        <input id="Place" class="form-control " type="text" placeholder="">
+        <input id="Place" name="Place" class="form-control " type="text" placeholder="">
         </div>
         <div class="form-group">
-		<input id="Person" class="form-control " type="text" placeholder="">
+		<input id="Person" name="Person" class="form-control " type="text" placeholder="">
         </div>
         <div class="form-group">
-		<input id="Price" class="form-control " type="text" placeholder="">
+		<input id="Price" name="Price" class="form-control " type="text" placeholder="">
         </div>
       </div>
       <!-- End the Modal Contents  -->
@@ -388,12 +388,11 @@
 <script>
 	function EditInfo(obj){
 		var id = $(obj).attr("id");
-		var Time = document.getElementById("table").rows[id].cells[0].innnerText;
+		var Time = document.getElementById("table").rows[id].cells[0].innerText;
 		var Place = document.getElementById("table").rows[id].cells[1].innerText;
 		var Person = document.getElementById("table").rows[id].cells[2].innerText;
 		var Price = document.getElementById("table").rows[id].cells[3].innerText;
-		alert(Time);
-		$('#Time').attr('placeholder', Time);
+		$('#Time').val(Time);
 		$('#Place').attr('placeholder', Place);
 		$('#Person').attr('placeholder', Person);
 		$('#Price').attr('placeholder', Price);
