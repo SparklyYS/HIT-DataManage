@@ -302,62 +302,40 @@
 								<table class="table table-striped table-bordered table-hover" id="datatable_ajax" align="center">
 								<thead>
 								<tr role="row" class="heading">
-									<th style="font-size: 17px;">
+									<th>
 										时间
 									</th>
-									<th style="font-size: 17px;">
+									<th>
 										地点
 									</th>
-									<th style="font-size: 17px;">
+									<th>
 										人物
 									</th>
-									<th style="font-size: 17px;">
+									<th>
 										花费
 									</th>
-									<th width="15%" style="font-size: 17px; text-align: center">
-									  	<em class="fa fa-cog"></em>
+									<th width="15%" style="align:center;">
+									  	<i class="fa fa-cog"></i>
 									</th>										
 								</tr>
-	<!-- 							<tr>
-									<td>
-										<div class="col-md-3">
-											<div class="input-group input-medium date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-												<input type="text" class="form-control" readonly>
-												<span class="input-group-btn">
-												<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-												</span>
-											</div> -->
-											<!-- /input-group -->
-<!-- 										</div>
-									</td>
-									<td>
-										<input type="text" class="form-control form-filter input-sm" name="Place">
-									</td>
-									<td>
-										<input type="text" class="form-control form-filter input-sm" name="Person">
-									</td>
-									<td>
-										<input type="text" class="form-control form-filter input-sm" name="Price">
-									</td>
-								</tr> -->
 								</thead>
 								<tbody valign="middle">
-									<td style="font-size: 15px;">
+									<td>
 										2016/11/06
 									</td>
-									<td style="font-size: 15px;">
+									<td>
 										黑店
 									</td>
-									<td style="font-size: 15px;">
+									<td>
 										气泡
 									</td>
-									<td style="font-size: 15px;">
+									<td>
 										100
 									</td>
 									<td align="center">
 										<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-pencil"></i>编辑</button>
-											<button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i>删除</button>
+											<button id="1" data-title="Edit" data-toggle="modal" data-target="#edit" class="btn btn-xs yellow filter-submit margin-bottom" onclick="EditInfo(this)"><i class="fa fa-pencil"></i>编辑</button>
+											<button class="btn btn-xs red filter-cancel"><i class="fa fa-times"></i>删除</button>
 										</div>
 									</td>
 								<tbody>
@@ -375,35 +353,53 @@
 	<!-- END CONTENT -->
 
 
-<div class="modal fade" id="AddEvent" tabindex="-1" role="dialog" aria-labelledby="false" aria-hidden="true">
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
       <div class="modal-dialog">
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+        <h4 class="modal-title custom_align" id="Heading">事件编辑</h4>
       </div>
-       <div class="modal-body">
-          <div class="form-group">
-        <input class="form-control " type="text" placeholder="Mohsin">
+      <!-- Contents should be follow the real data -->
+      <div class="modal-body">
+      <div class="form-group">
+        <input id="Time" class="form-control " type="text" placeholder="">
         </div>
         <div class="form-group">
-        
-        <input class="form-control " type="text" placeholder="Irshad">
+        <input id="Place" class="form-control " type="text" placeholder="">
         </div>
         <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
-    
-        
+		<input id="Person" class="form-control " type="text" placeholder="">
+        </div>
+        <div class="form-group">
+		<input id="Price" class="form-control " type="text" placeholder="">
         </div>
       </div>
-          <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+      <!-- End the Modal Contents  -->
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>提交更新</button>
       </div>
         </div>
     <!-- /.modal-content --> 
   </div>
       <!-- /.modal-dialog --> 
-    </div>
+</div>
+
+<script>
+	function EditInfo(obj){
+		var id = $(obj).attr("id");
+		var Time = document.getElementById("table").rows[id].cells[0].innnerText;
+		var Place = document.getElementById("table").rows[id].cells[1].innerText;
+		var Person = document.getElementById("table").rows[id].cells[2].innerText;
+		var Price = document.getElementById("table").rows[id].cells[3].innerText;
+		alert(Time);
+		$('#Time').attr('placeholder', Time);
+		$('#Place').attr('placeholder', Place);
+		$('#Person').attr('placeholder', Person);
+		$('#Price').attr('placeholder', Price);
+	}
+
+</script>
 
 <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
