@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html>  
 <head>
@@ -81,13 +84,13 @@
                 <img width="34" height="34" src="images/avatar-male.jpg" />vachester<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">
-                    <i class="icon-user"></i>‰∏™‰∫∫‰∏ªÈ°µ</a>
+                    <i class="icon-user"></i>∏ˆ»À÷˜“≥</a>
                   </li>
                   <li><a href="#">
-                    <i class="icon-gear"></i>Ë¥¶Êà∑ËÆæÁΩÆ</a>
+                    <i class="icon-gear"></i>’Àªß…Ë÷√</a>
                   </li>
                   <li><a href="login1.html">
-                    <i class="icon-signout"></i>ÁôªÂá∫</a>
+                    <i class="icon-signout"></i>µ«≥ˆ</a>
                   </li>
                 </ul>
               </li>
@@ -99,19 +102,19 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <a class="current" href="index.html"><span aria-hidden="true" class="se7en-home"></span>‰∏ªÈ°µ</a>
+                <a href="index.html"><span aria-hidden="true" class="se7en-home"></span>÷˜“≥</a>
               </li>
-              <li><a href="MyFiles.html">
-                <span aria-hidden="true" class="se7en-forms"></span>ÊàëÁöÑ‰∏™‰∫∫Êï∞ÊçÆ</a>
-              </li>
-              <li><a href="charts.html">
-                <span aria-hidden="true" class="se7en-pages"></span>Ê∑ªÂä†‰∫ã‰ª∂</a>
+              <li><a class="current" href="MyFiles.html">
+                <span aria-hidden="true" class="se7en-forms"></span>Œ“µƒ∏ˆ»À ˝æ›</a>
               </li>
               <li><a href="charts.html">
-                <span aria-hidden="true" class="icon-search"></span>ÊåâÁª¥Â∫¶ÊêúÁ¥¢</a>
+                <span aria-hidden="true" class="se7en-pages"></span>ÃÌº” ¬º˛</a>
               </li>
               <li><a href="charts.html">
-                <span aria-hidden="true" class="icon-user"></span>‰∏™‰∫∫‰∏ªÈ°µ</a>
+                <span aria-hidden="true" class="icon-search"></span>∞¥Œ¨∂»À—À˜</a>
+              </li>
+              <li><a href="charts.html">
+                <span aria-hidden="true" class="icon-user"></span>∏ˆ»À÷˜“≥</a>
               </li>
             </ul>
           </div>
@@ -120,9 +123,91 @@
       <!-- End Navigation -->
       <div class="container-fluid main-content">
         <!-- Statistics -->
-
+      	
+      	    <div class="col-md-12">
+                    <div class="widget-container fluid-height clearfix">
+                        <div class="heading">
+                            <i class="icon-briefcase"></i>“˚ ≥
+                        </div>
+                        <div class="widget-content padded clearfix">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <th>
+                                       	 ±º‰
+                                    </th>
+                                    <th>
+                                        µÿµ„
+                                    </th>
+                                    <th>
+                                       	»ÀŒÔ
+                                    </th>
+                                    <th>
+										ª®∑—
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                2016/11/8
+                                            </td>
+                                            <td>
+                                                ∫⁄µÍ
+                                            </td>
+                                            <td>
+												vachester
+                                            </td>
+                                            <td>
+                                                100
+                                            </td>
+                                           	<td>
+											<div>
+												<button id="1" data-title="Edit" data-toggle="modal" data-target="#edit" class="btn btn-xs btn-warning"><i class="icon-pencil"></i>±‡º≠</button>
+												<button class="btn btn-xs btn-danger filter-can"><i class="icon-remove"></i>…æ≥˝</button>
+											</div>
+											</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end Responsive Table -->
       </div>
     </div>
-  </body>
 
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">±‡º≠ ¬º˛</h4>
+      </div>
+      <!-- Contents should be follow the real data -->
+      <div class="modal-body">
+      <div class="form-group">
+        <input id="Time" class="form-control " type="text" placeholder="">
+        </div>
+        <div class="form-group">
+        <input id="Place" class="form-control " type="text" placeholder="">
+        </div>
+        <div class="form-group">
+		<input id="Person" class="form-control " type="text" placeholder="">
+        </div>
+        <div class="form-group">
+		<input id="Price" class="form-control " type="text" placeholder="">
+        </div>
+      </div>
+      <!-- End the Modal Contents  -->
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Ã·Ωª∏¸–¬</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+</div>
+
+  </body>
 </html>

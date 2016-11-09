@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html>  
 <head>
@@ -99,9 +102,9 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <a href="index.html"><span aria-hidden="true" class="se7en-home"></span>主页</a>
+                <a class="current" href="index.html"><span aria-hidden="true" class="se7en-home"></span>主页</a>
               </li>
-              <li><a class="current" href="MyFiles.html">
+              <li><a href="MyFiles.html">
                 <span aria-hidden="true" class="se7en-forms"></span>我的个人数据</a>
               </li>
               <li><a href="charts.html">
@@ -120,91 +123,9 @@
       <!-- End Navigation -->
       <div class="container-fluid main-content">
         <!-- Statistics -->
-      	
-      	    <div class="col-md-12">
-                    <div class="widget-container fluid-height clearfix">
-                        <div class="heading">
-                            <i class="icon-briefcase"></i>饮食
-                        </div>
-                        <div class="widget-content padded clearfix">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <th>
-                                       	时间
-                                    </th>
-                                    <th>
-                                        地点
-                                    </th>
-                                    <th>
-                                       	人物
-                                    </th>
-                                    <th>
-										花费
-                                    </th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                2016/11/8
-                                            </td>
-                                            <td>
-                                                黑店
-                                            </td>
-                                            <td>
-												vachester
-                                            </td>
-                                            <td>
-                                                100
-                                            </td>
-                                           	<td>
-											<div>
-												<button id="1" data-title="Edit" data-toggle="modal" data-target="#edit" class="btn btn-xs btn-warning"><i class="icon-pencil"></i>编辑</button>
-												<button class="btn btn-xs btn-danger filter-can"><i class="icon-remove"></i>删除</button>
-											</div>
-											</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end Responsive Table -->
+
       </div>
     </div>
-
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">编辑事件</h4>
-      </div>
-      <!-- Contents should be follow the real data -->
-      <div class="modal-body">
-      <div class="form-group">
-        <input id="Time" class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-        <input id="Place" class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-		<input id="Person" class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-		<input id="Price" class="form-control " type="text" placeholder="">
-        </div>
-      </div>
-      <!-- End the Modal Contents  -->
-      <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>提交更新</button>
-      </div>
-        </div>
-    <!-- /.modal-content --> 
-  </div>
-      <!-- /.modal-dialog --> 
-</div>
-
   </body>
+
 </html>
