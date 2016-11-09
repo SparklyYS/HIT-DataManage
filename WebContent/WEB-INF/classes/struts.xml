@@ -67,7 +67,7 @@
 			class="com.myfile.ShowPDO"
 			method="showPDO">
 			<result>
-				/ShowPDO.jsp
+				/MyFiles.jsp
 			</result>
 		</action>
 		
@@ -101,6 +101,35 @@
 			<result>
 				/ShowEvent.jsp
 			</result>
+		</action>
+		
+		<action name="DeletePDOAction"
+			class="com.myfile.DeletePDO"
+			method="deletePDO">
+			<result type="redirectAction">
+				<param name="actionName">ShowPDOAction</param>
+			</result>
+		</action>
+		
+		<action name="EditEventAction"
+			class="com.myfile.EditEvent"
+			method="editEvent">
+			<result type="redirectAction">
+				<param name="actionName">ShowEventAction</param>
+			</result>
+		</action>
+		
+		<action name="DeleteEventAction"
+			class="com.myfile.DeleteEvent"
+			method="deleteEvent">
+			<result type="redirectAction">
+				<param name="actionName">ShowEventAction</param>
+			</result>
+		</action>
+		
+		<action name="ImportPDOAction"
+			class="com.myfile.ImportPDO"
+			method="importPDO">
 		</action>
 		
    	</package>

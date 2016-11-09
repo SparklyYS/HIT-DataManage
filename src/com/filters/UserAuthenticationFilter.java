@@ -26,7 +26,8 @@ public class UserAuthenticationFilter implements javax.servlet.Filter {
 	
 	private final String[] resource = {
 			"/boostrap",
-			"/img"
+			"/img",
+			"/assets"
 	};
 	
 	//先定义一个方法判断ssession的值是否符合要求
