@@ -111,6 +111,14 @@
 			</result>
 		</action>
 		
+		<action name="EditEventAction"
+			class="com.myfile.EditEvent"
+			method="editEvent">
+			<result type="redirectAction">
+				<param name="actionName">ShowEventAction</param>
+			</result>
+		</action>
+		
 		<action name="DeleteEventAction"
 			class="com.myfile.DeleteEvent"
 			method="deleteEvent">
@@ -118,5 +126,11 @@
 				<param name="actionName">ShowEventAction</param>
 			</result>
 		</action>
+		
+		<action name="ImportPDOAction"
+			class="com.myfile.ImportPDO"
+			method="importPDO">
+		</action>
+		
    	</package>
 </struts>

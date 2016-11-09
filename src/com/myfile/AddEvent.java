@@ -1,6 +1,7 @@
 package com.myfile;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
 public class AddEvent extends ActionSupport implements ServletRequestAware {
 	private String status;
-	private ArrayList<HashMap<String, String>> events = new ArrayList<>();
 	private HttpServletRequest request;
 	
 	public HttpServletRequest getServletRequest() {
@@ -23,44 +23,46 @@ public class AddEvent extends ActionSupport implements ServletRequestAware {
 		this.request = request;
 	}
 	
-	public ArrayList<HashMap<String, String>> getEvents() {
-		return events;
-	}
-	public void setEvents(ArrayList<HashMap<String, String>> events) {
-		this.events = events;
-	}
-	
 	public String addEvent() {
 		HttpServletRequest req = (HttpServletRequest) request; 
 		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
-		HashMap<String, Integer> linkdata = new HashMap<>();
+		String pass = request.getParameter("data");
 		try {
 			String sqlcmd,tableName,value,PDOName;
-			SQLManage mysql;
-			ResultSet mydata;
 			Timestamp t = new Timestamp(new Date().getTime());
-			for(HashMap<String, String> event :	events) {
-				PDOName = event.get("PDOName");
+			ResultSet mydata;
+			String[] events = pass.split("\\/");
+			SQLManage mysql;
+			ResultSetMetaData column;
+			HashMap<String, Integer> linkdata = null;
+			for(String event : events) {
+				linkdata = new HashMap<>();
+				String[] data = event.split("\\&");
+				PDOName = data[0];
 				tableName = userName + "_" + PDOName;
-				event.remove("PDOName");
-				sqlcmd = "insert into " + tableName;
-				sqlcmd += "(";
-				for(String header : event.keySet()) {
-					sqlcmd += header + ",";
+				ArrayList<String> header = new ArrayList<String>();
+				sqlcmd = "select * from " + userName + "_" + PDOName;
+				mysql = new SQLManage(sqlcmd);
+				mydata = mysql.executeQuery();
+				column = mydata.getMetaData();
+				int columnCount = column.getColumnCount(); 
+				for(int i = 1;i <= columnCount;i++) {
+					header.add(column.getColumnName(i));
+				}
+				sqlcmd = "insert into " + tableName + " (";
+				for(int i = 1;i < header.size()-1;i++) {
+					sqlcmd += header.get(i) + ",";
 				}
 				sqlcmd = sqlcmd.substring(0, sqlcmd.length()-1);
 				sqlcmd += ") values (";
-				for(int i = 0;i < event.size() - 1;i++) {
+				for(int i = 1;i < data.length - 1;i++) {
 					sqlcmd += "?,";
 				}
 				sqlcmd += "?)";
 				mysql = new SQLManage(sqlcmd);
-				int j = 1;
-				for(String header : event.keySet()) {
-					value = event.get(header);
-					mysql.setString(j, value);
-					j++;
+				for(int i = 1;i < data.length;i++) {
+					mysql.setString(i, data[i]);
 				}
 				mysql.executeUpdate();
 				sqlcmd = "select max(eventID) from " + tableName;
@@ -70,6 +72,7 @@ public class AddEvent extends ActionSupport implements ServletRequestAware {
 					linkdata.put(PDOName, mydata.getInt("eventID"));
 				}
 			}
+			
 			String linkformat;
 			for(String pdo1 : linkdata.keySet()) {
 				sqlcmd = "update " + userName + "_" + pdo1 + " set link=? where eventID=?";
