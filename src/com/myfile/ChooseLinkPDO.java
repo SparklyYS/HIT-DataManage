@@ -14,23 +14,25 @@ public class ChooseLinkPDO extends ActionSupport implements ServletRequestAware 
 	private String status;
 	private List<String> choosedPDO = new ArrayList<String>();
 	private HttpServletRequest request;
-	
+
 	public List<String> getChoosedPDO() {
 		return choosedPDO;
 	}
+
 	public void setChoosedPDO(List<String> choosedPDO) {
 		this.choosedPDO = choosedPDO;
 	}
+
 	public HttpServletRequest getServletRequest() {
 		return request;
 	}
+
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-	
-	
+
 	public String choose() {
-		HttpServletRequest req = (HttpServletRequest) request; 
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		try {
@@ -38,20 +40,18 @@ public class ChooseLinkPDO extends ActionSupport implements ServletRequestAware 
 			SQLManage mysql = new SQLManage(sqlcmd);
 			mysql.setString(1, userName);
 			ResultSet pdos = mysql.executeQuery();
-			while(pdos.next()) {
+			while (pdos.next()) {
 				choosedPDO.add(pdos.getString("PDOName"));
 			}
 			status = SUCCESS;
 			mysql.close();
+		} catch (ClassNotFoundException e) {
+			status = ERROR;
+			e.printStackTrace();
+		} catch (SQLException e) {
+			status = ERROR;
+			e.printStackTrace();
 		}
-		catch(ClassNotFoundException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
-		catch(SQLException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
 		return status;
 	}
 

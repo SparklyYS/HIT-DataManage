@@ -5,16 +5,16 @@ import java.sql.Timestamp;
 public class Message {
 	private String mess;
 	private Timestamp t;
-	
+
 	public Message() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Message(String mess, Timestamp t) {
 		this.mess = mess;
 		this.t = t;
 	}
-	
+
 	public String getMess() {
 		return mess;
 	}
@@ -30,5 +30,5 @@ public class Message {
 	public void setT(Timestamp t) {
 		this.t = t;
 	}
-	
+
 }

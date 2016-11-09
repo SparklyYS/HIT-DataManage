@@ -20,58 +20,62 @@ public class EditEvent extends ActionSupport implements ServletRequestAware {
 	private String PDOName;
 	private int eventID;
 	private HttpServletRequest request;
-	
+
 	public void setEventID(int eventID) {
 		this.eventID = eventID;
 	}
+
 	public HashMap<String, String> getNew_event() {
 		return new_event;
 	}
+
 	public void setNew_event(HashMap<String, String> new_event) {
 		this.new_event = new_event;
 	}
+
 	public String getPDOName() {
 		return PDOName;
 	}
+
 	public void setPDOName(String pDOName) {
 		PDOName = pDOName;
 	}
+
 	public HttpServletRequest getServletRequest() {
 		return request;
 	}
+
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-	
+
 	public String editEvent() {
-		HttpServletRequest req = (HttpServletRequest) request; 
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		try {
-			String sqlcmd = "update " + userName+"_"+PDOName + " set ";
-			for(String header : new_event.keySet()) {
-				sqlcmd = sqlcmd + header+"=?,";
+			String sqlcmd = "update " + userName + "_" + PDOName + " set ";
+			for (String header : new_event.keySet()) {
+				sqlcmd = sqlcmd + header + "=?,";
 			}
-			sqlcmd = sqlcmd.substring(0, sqlcmd.length()-1);
+			sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
 			sqlcmd += "where eventID=?";
 			SQLManage mysql = new SQLManage(sqlcmd);
 			int i = 1;
-			for(String header : new_event.keySet()) {
+			for (String header : new_event.keySet()) {
 				mysql.setString(i, new_event.get(header));
 				i++;
 			}
 			mysql.setInteger(i, eventID);
 			mysql.executeUpdate();
 			mysql.close();
+		} catch (ClassNotFoundException e) {
+			status = ERROR;
+			e.printStackTrace();
+		} catch (SQLException e) {
+			status = ERROR;
+			e.printStackTrace();
 		}
-		catch(ClassNotFoundException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
-		catch(SQLException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
 		return status;
 	}
 }

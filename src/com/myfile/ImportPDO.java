@@ -30,30 +30,35 @@ import com.sql.SQLManage;
 public class ImportPDO extends ActionSupport implements ServletRequestAware {
 	private HttpServletRequest request;
 	private String status;
-	private File excelFile; //上传的文件
-    private String excelFileFileName; //保存原始文件名
-    
+	private File excelFile; // 上传的文件
+	private String excelFileFileName; // 保存原始文件名
+
 	public File getExcelFile() {
 		return excelFile;
 	}
+
 	public void setExcelFile(File excelFile) {
 		this.excelFile = excelFile;
 	}
+
 	public String getExcelFileFileName() {
 		return excelFileFileName;
 	}
+
 	public void setExcelFileFileName(String excelFileFileName) {
 		this.excelFileFileName = excelFileFileName;
 	}
+
 	public HttpServletRequest getServletRequest() {
 		return request;
 	}
+
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-	
+
 	public String importPDO() {
-		HttpServletRequest req = (HttpServletRequest) request; 
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		SQLManage mysql = null;
@@ -63,20 +68,20 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 			Workbook book = WorkbookFactory.create((new FileInputStream(excelFile)));
 			int sheetNum = book.getNumberOfSheets();
 			for (int i = 0; i < sheetNum; i++) {
-				Sheet sheet =  book.getSheetAt(i);
+				Sheet sheet = book.getSheetAt(i);
 				String sheetName = sheet.getSheetName();
 				sqlcmd = "select * from pdos where userName=? and PDOName=?";
 				mysql = new SQLManage(sqlcmd);
 				mysql.setString(1, userName);
 				mysql.setString(2, sheetName);
 				mydata = mysql.executeQuery();
-				if(mydata.next()) {
-					sqlcmd = "insert into " + userName+"_"+sheetName + " (";
+				if (mydata.next()) {
+					sqlcmd = "insert into " + userName + "_" + sheetName + " (";
 					Row ros = sheet.getRow(0);
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
 						sqlcmd += ros.getCell(j).toString() + ",";
 					}
-					sqlcmd = sqlcmd.substring(0, sqlcmd.length()-1);
+					sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
 					sqlcmd += ") values (";
 					String sql_copy = sqlcmd;
 					for (int j = 1; j <= sheet.getLastRowNum(); j++) {
@@ -85,7 +90,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
 							sqlcmd += "?,";
 						}
-						sqlcmd = sqlcmd.substring(0, sqlcmd.length()-1);
+						sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
 						sqlcmd += ")";
 						mysql = new SQLManage(sqlcmd);
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
@@ -93,8 +98,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 						}
 						mysql.executeUpdate();
 					}
-				}
-				else {
+				} else {
 					sqlcmd = "insert into pdos (PDOName,PDOTime,userName) values (?,?,?)";
 					mysql = new SQLManage(sqlcmd);
 					Timestamp t = new Timestamp(new Date().getTime());
@@ -111,12 +115,12 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					sqlcmd += "link varchar(100) not null,primary key (eventID)";
 					mysql = new SQLManage(sqlcmd);
 					mysql.executeUpdate();
-					sqlcmd = "insert into " + userName+"_"+sheetName + " (";
+					sqlcmd = "insert into " + userName + "_" + sheetName + " (";
 					ros = sheet.getRow(0);
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
 						sqlcmd += ros.getCell(j).toString() + ",";
 					}
-					sqlcmd = sqlcmd.substring(0, sqlcmd.length()-1);
+					sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
 					sqlcmd += ") values (";
 					String sql_copy = sqlcmd;
 					for (int j = 1; j <= sheet.getLastRowNum(); j++) {
@@ -125,7 +129,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
 							sqlcmd += "?,";
 						}
-						sqlcmd = sqlcmd.substring(0, sqlcmd.length()-1);
+						sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
 						sqlcmd += ")";
 						mysql = new SQLManage(sqlcmd);
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
@@ -138,16 +142,13 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 			status = SUCCESS;
 			book.close();
 			mysql.close();
-		}
-		catch(ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			status = ERROR;
 			e.printStackTrace();
-		}	
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			status = ERROR;
 			e.printStackTrace();
-		}	
-		catch (Exception e) {
+		} catch (Exception e) {
 			status = ERROR;
 			e.printStackTrace();
 		}

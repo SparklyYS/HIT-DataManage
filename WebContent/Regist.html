@@ -1,53 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>注册</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="boostrap/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-    body {
-        background-color: #444;
-        background: url(img/Login&Regist_background.jpg);        
-    }
-    .form-signup input[type="text"] {
-        margin-bottom: 5px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    .form-signup input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-    .form-signup .form-control {
-        position: relative;
-        font-size: 16px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        height: auto;
-        padding: 10px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    .vertical-offset-100 {
-        padding-top: 100px;
-    }
-    .img-responsive {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: auto;
-    }
-    .panel {
-    margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.75);
-    border: 1px solid transparent;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    }
-    </style>
+<meta charset="utf-8">
+<title>注册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="boostrap/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+body {
+	background-color: #444;
+	background: url(img/Login&Regist_background.jpg);
+}
+
+.form-signup input[type="text"] {
+	margin-bottom: 5px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.form-signup input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.form-signup .form-control {
+	position: relative;
+	font-size: 16px;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	height: auto;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.vertical-offset-100 {
+	padding-top: 100px;
+}
+
+.img-responsive {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: auto;
+}
+
+.panel {
+	margin-bottom: 20px;
+	background-color: rgba(255, 255, 255, 0.75);
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+</style>
 </head>
 <script>
     function checkpwd(){
@@ -68,43 +74,51 @@
     }
 </script>
 <body>
-        <div class="container">
-                <div class="row vertical-offset-100">
-                    <div class="col-md-4 col-md-offset-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">                                
-                                <div class="row-fluid user-row">
-                                    <img src="img/Logo.png" class="img-responsive" alt="Conxole Admin"/>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <form accept-charset="UTF-8" role="form" class="form-signup" action="SignAction" method="post">
-                                        <label class="panel-Regist">
-                                            <div class="Regist_result"></div>
-                                        </label>
-                                        <div class="form-group">
-                                        <input class="form-control" placeholder="用户名" id="username" name="userName" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                        <input class="form-control" placeholder="邮箱地址" id="EmailAddress" name="userEmail" type="email">
-                                        </div>
-                                        <div class="form-group">
-                                        <input class="form-control" placeholder="密码" id="password" name="userPasswd" type="password">
-                                        </div>
-                                        <div class="form-group">
-                                        <input class="form-control" placeholder="确认密码" id="confirmpassword" type="password" onchange="checkpwd()">
-                                        </div>
-                                        <div id="msg" style="color:red;"></div>
-                                        <p>已有账号？您可以<a href="Login.html">立即登录</a></p>
-                                        <br></br>
-                                        <input class="btn btn-lg btn-success btn-block" type="submit" id="Regist" value="立即注册 »">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </body>
-    </div>
+	<div class="container">
+		<div class="row vertical-offset-100">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row-fluid user-row">
+							<img src="img/Logo.png" class="img-responsive"
+								alt="Conxole Admin" />
+						</div>
+					</div>
+					<div class="panel-body">
+						<form accept-charset="UTF-8" role="form" class="form-signup"
+							action="SignAction" method="post">
+							<label class="panel-Regist">
+								<div class="Regist_result"></div>
+							</label>
+							<div class="form-group">
+								<input class="form-control" placeholder="用户名" id="username"
+									name="userName" type="text">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="邮箱地址" id="EmailAddress"
+									name="userEmail" type="email">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="密码" id="password"
+									name="userPasswd" type="password">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="确认密码"
+									id="confirmpassword" type="password" onchange="checkpwd()">
+							</div>
+							<div id="msg" style="color: red;"></div>
+							<p>
+								已有账号？您可以<a href="Login.html">立即登录</a>
+							</p>
+							<br></br> <input class="btn btn-lg btn-success btn-block"
+								type="submit" id="Regist" value="立即注册 »">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</div>
 </body>
 </html>

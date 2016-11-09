@@ -17,47 +17,50 @@ public class DeletePDO extends ActionSupport implements ServletRequestAware {
 	private String status;
 	private String PDOName;
 	private HttpServletRequest request;
-	
+
 	public HttpServletRequest getServletRequest() {
 		return request;
 	}
+
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
+
 	public String getPDOName() {
 		return PDOName;
 	}
+
 	public void setPDOName(String pDOName) {
 		PDOName = pDOName;
 	}
-	
+
 	public String deletePDO() {
-		HttpServletRequest req = (HttpServletRequest) request; 
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		try {
 			HashMap<Integer, String> link = new HashMap<>();
-			String sqlcmd = "select * from " + userName+"_"+PDOName;
+			String sqlcmd = "select * from " + userName + "_" + PDOName;
 			SQLManage mysql = new SQLManage(sqlcmd);
 			ResultSet mypdo = mysql.executeQuery();
-			while(mypdo.next()) {
+			while (mypdo.next()) {
 				link.put(mypdo.getInt("eventID"), mypdo.getString("link"));
 			}
 			Pattern splitLink = Pattern.compile("&");
-			for(int id : link.keySet()) {
+			for (int id : link.keySet()) {
 				String[] links = splitLink.split(link.get(id));
-				for(String s : links) {
+				for (String s : links) {
 					String new_link = "";
-					for(String t : links) {
-						if(!s.equals(t)) {
+					for (String t : links) {
+						if (!s.equals(t)) {
 							new_link += t + "&";
 						}
 					}
-					if(!new_link.equals("")) {
+					if (!new_link.equals("")) {
 						new_link = new_link.substring(0, new_link.length() - 1);
 					}
 					String pdoName = userName + "_" + s.substring(0, s.indexOf("_"));
-					int eventID = Integer.parseInt(s.substring(s.indexOf("_")+1));
+					int eventID = Integer.parseInt(s.substring(s.indexOf("_") + 1));
 					sqlcmd = "update from " + pdoName + " set link=? where eventID=?";
 					mysql = new SQLManage(sqlcmd);
 					mysql.setString(1, new_link);
@@ -75,15 +78,13 @@ public class DeletePDO extends ActionSupport implements ServletRequestAware {
 			mysql.executeUpdate();
 			status = SUCCESS;
 			mysql.close();
+		} catch (ClassNotFoundException e) {
+			status = ERROR;
+			e.printStackTrace();
+		} catch (SQLException e) {
+			status = ERROR;
+			e.printStackTrace();
 		}
-		catch(ClassNotFoundException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
-		catch(SQLException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
 		return status;
 	}
 }

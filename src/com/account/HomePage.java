@@ -13,26 +13,30 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
+
 public class HomePage extends ActionSupport implements ServletRequestAware {
 	private String status;
 	private List<Message> messages = new ArrayList<Message>();
 	private HttpServletRequest request;
+
 	public HttpServletRequest getServletRequest() {
 		return request;
 	}
+
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-	
+
 	public List<Message> getMessages() {
 		return messages;
 	}
+
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
-	
+
 	public String showHome() {
-		HttpServletRequest req = (HttpServletRequest) request; 
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		String userName = session.getAttribute("userName").toString();
 		try {
@@ -41,21 +45,19 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 			mysql.setString(1, userName);
 			ResultSet mymess = mysql.executeQuery();
 			status = SUCCESS;
-			while(mymess.next()) {
+			while (mymess.next()) {
 				String mess = mymess.getString("message");
 				Timestamp t = mymess.getTimestamp("messageTime");
 				messages.add(new Message(mess, t));
 			}
 			mysql.close();
+		} catch (ClassNotFoundException e) {
+			status = ERROR;
+			e.printStackTrace();
+		} catch (SQLException e) {
+			status = ERROR;
+			e.printStackTrace();
 		}
-		catch(ClassNotFoundException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
-		catch(SQLException e) {
-			status = ERROR;
-			e.printStackTrace();
-		}	
 		return status;
 	}
 }
