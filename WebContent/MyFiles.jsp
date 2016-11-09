@@ -102,18 +102,18 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <a href="index.html"><span aria-hidden="true" class="se7en-home"></span>主页</a>
+                <a href="homepage.jsp"><span aria-hidden="true" class="se7en-home"></span>主页</a>
               </li>
-              <li><a class="current" href="MyFiles.html">
+              <li><a class="current" href="MyFiles.jsp">
                 <span aria-hidden="true" class="se7en-forms"></span>我的个人数据</a>
               </li>
-              <li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+              <li><a href="">
                 <span aria-hidden="true" class="se7en-pages"></span>添加事件</a>
               </li>
-              <li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+              <li><a href="">
                 <span aria-hidden="true" class="icon-search"></span>按维度搜索</a>
               </li>
-              <li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+              <li><a href="">
                 <span aria-hidden="true" class="icon-user"></span>个人主页</a>
               </li>
             </ul>
@@ -129,9 +129,10 @@
             <div class="widget-container fluid-height clearfix">
               <div class="heading">
               	<div class="col-md-5">
-                <button id="sample_editable_1_new" class="btn btn-success">
+                <a href="AddPDO.jsp"><button id="sample_editable_1_new" class="btn btn-success">
 				<i class="icon-plus"></i>新建PDO
 				</button>
+				</a>
 				</div>
 				<div class="pull-right">
 				<div class="btn-group">
