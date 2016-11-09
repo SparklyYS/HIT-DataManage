@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv='refresh' content='0;url=HomeAction'>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>加载中......</title>
 </head>
 <body>
 

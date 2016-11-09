@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-
 <!DOCTYPE html>
 <html>  
 <head>
@@ -103,18 +102,18 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <a href="homepage.jsp"><span aria-hidden="true" class="se7en-home"></span>主页</a>
+                <a href="index.html"><span aria-hidden="true" class="se7en-home"></span>主页</a>
               </li>
-              <li><a class="current" href="MyFiles.jsp">
+              <li><a class="current" href="MyFiles.html">
                 <span aria-hidden="true" class="se7en-forms"></span>我的个人数据</a>
               </li>
-              <li><a href="">
+              <li><a href="charts.html">
                 <span aria-hidden="true" class="se7en-pages"></span>添加事件</a>
               </li>
-              <li><a href="">
+              <li><a href="charts.html">
                 <span aria-hidden="true" class="icon-search"></span>按维度搜索</a>
               </li>
-              <li><a href="">
+              <li><a href="charts.html">
                 <span aria-hidden="true" class="icon-user"></span>个人主页</a>
               </li>
             </ul>
@@ -214,5 +213,3 @@ function deltr(opp){
 </body>
 
 </html>
-
-

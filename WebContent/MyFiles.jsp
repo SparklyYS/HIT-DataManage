@@ -1,342 +1,151 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<!--[if !IE]><!-->
-<html lang="en" class="no-js">
-<!--<![endif]-->
-<!-- BEGIN HEAD -->
-<head>
-<meta charset="utf-8"/>
-<title>RecordBox</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="" name="description"/>
-<meta content="" name="author"/>
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-<link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-<link href="assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
-<!-- END GLOBAL MANDATORY STYLES -->
-<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
-<link href="assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
-<link href="assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
-<!-- END PAGE LEVEL PLUGIN STYLES -->
-<!-- BEGIN PAGE STYLES -->
-<link href="assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
-<!-- END PAGE STYLES -->
-<!-- BEGIN THEME STYLES -->
-<link href="assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
-<link href="assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link href="assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
-<link href="assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
-
-<style>
-#PDOtable{
-	margin: 20px;
-}
-</style>
-</head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo page-container-bg-solid">
-<!-- BEGIN HEADER -->
-<div class="page-header navbar navbar-fixed-top">
-	<!-- BEGIN HEADER INNER -->
-	<div class="page-header-inner">
-		<!-- BEGIN LOGO -->
-		<div class="page-logo">
-			<a href="index.html">
-			</a>
-			<div class="menu-toggler sidebar-toggler hide">
-			</div>
-		</div>
-		<!-- END LOGO -->
-		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-		</a>
-		<!-- END RESPONSIVE MENU TOGGLER -->
-		<!-- BEGIN TOP NAVIGATION MENU -->
-		<div class="top-menu">
-			<ul class="nav navbar-nav pull-right">
-				<!-- BEGIN NOTIFICATION DROPDOWN -->
-				<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<i class="icon-bell"></i>
-					<span class="badge badge-default">
-					4 </span>
-					</a>
-					<ul class="dropdown-menu">
-						<li class="external">
-							<h3><span class="bold">4 </span>个未读的信息</h3>
-							<a href="extra_profile.html">view all</a>
-						</li>
-						<li>
-							<ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-								<li>
-									<a href="javascript:;">
-									<span class="time">just now</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									删除「饮食」一个事件</span>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:;">
-									<span class="time">3 mins</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-success">
-									<i class="fa fa-plus"></i>
-									</span>
-									在「饮食」中添加事件</span>
-									</a>
-								</li>
-
-								<li>
-									<a href="javascript:;">
-									<span class="time">5 mins</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-success">
-									<i class="fa fa-plus"></i>
-									</span>
-									新建「饮食」数据对象</span>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:;">
-									<span class="time">20 mins</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-warning">
-									<i class="fa fa-bell-o"></i>
-									</span>
-									新用户注册成功</span>
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<!-- END NOTIFICATION DROPDOWN -->
-				<!-- BEGIN INBOX DROPDOWN -->
-				<li class="dropdown dropdown-user">
-					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<img alt="" class="img-circle" src="assets/admin/layout/img/vachester.jpg"/>
-					<span class="username username-hide-on-mobile">
-					vachester </span>
-					<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-default">
-						<li>
-							<a href="homepage.jsp">
-							<i class="icon-user"></i>我的主页</a>
-						</li>
-						<li>
-							<a href="page_calendar.html">
-							<i class="icon-calendar"></i>我的RecordBox</a>
-						</li>
-						<li class="divider">
-						</li>
-						<li>
-							<a href="extra_lock.html">
-							<i class="icon-lock"></i> 锁 屏</a>
-						</li>
-						<li>
-							<a href="login.html">
-							<i class="icon-key"></i> 登 出 </a>
-						</li>
-					</ul>
-				</li>
-				<!-- END USER LOGIN DROPDOWN -->
-				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
-				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-				<li class="dropdown dropdown-quick-sidebar-toggler">
-					<a href="javascript:;" class="dropdown-toggle">
-					<i class="icon-logout"></i>
-					</a>
-				</li>
-				<!-- END QUICK SIDEBAR TOGGLER -->
-			</ul>
-		</div>
-		<!-- END TOP NAVIGATION MENU -->
-	</div>
-	<!-- END HEADER INNER -->
-</div>
-<!-- END HEADER -->
-<div class="clearfix">
-</div>
-<!-- BEGIN CONTAINER -->
-<div class="page-container">
-	<!-- BEGIN SIDEBAR -->
-	<div class="page-sidebar-wrapper">
-		<div class="page-sidebar navbar-collapse collapse">
-			<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-			   <li class="sidebar-toggler-wrapper">
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler">
-					</div>
-					<!-- END SIDEBAR TOGGLER BUTTON -->
-				</li>
-				<li>
-					<a href="homepage.jsp">
-					<i class="icon-home"></i>
-					<span class="title">主页</span>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-paper-plane"></i>
-					<span class="title">
-					多维度搜索</span>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-docs"></i>
-					<span class="title">添加事件</span>
-					</a>
-				</li>
-				<li class="start active open">
-					<a href="javascript:;">
-					<i class="icon-briefcase"></i>
-					<span class="title">我的个人数据</span>
-					<span class="selected"></span>
-					</a>
-				</li>
-<!-- 				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
-				<li>
-					<a href="javascript:;">
-					<i class="icon-user"></i>
-					<span class="title">我的主页</span>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-settings"></i>
-					<span class="title">设置</span>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-logout"></i>
-					<span class="title">登 出</span>
-					</a>
-				</li>
-		</div>
-	</div>
-	<!-- END SIDEBAR -->
-	<!-- BEGIN CONTENT -->
-	<div class="page-content-wrapper">
-		<div class="page-content">
-			<div class="page-bar">
-				<ul class="page-breadcrumb">
-					<li>
-						<i class="icon-briefcase"></i>
-						<a href="MyFiles.html">我的个人数据</a>
-						<i class="fa fa-angle-right"></i>
-					</li>
-				</ul>
-				<div class="page-toolbar">
-					<div id="dashboard-report-range" class="pull-right tooltips btn btn-sm btn-default" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-						<i class="icon-calendar"></i>&nbsp; <span class="thin uppercase visible-lg-inline-block"></span>&nbsp; <i class="fa fa-angle-down"></i>
-					</div>
+<!DOCTYPE html>
+<!-- saved from url=(0043)file:///E:/JavaWEB/RecordBoxTest/index.html -->
+<html class="csstransforms csstransforms3d csstransitions js flexbox flexboxlegacy canvas canvastext postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+    RecordBox
+    </title>
+    <!--<link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" media="all" rel="stylesheet" type="text/css" />-->
+	<link href="./MyFiles_files/bootstrap.min.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/font-awesome.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/se7en-font.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/isotope.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/jquery.fancybox.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/fullcalendar.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/wizard.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/select2.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/morris.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/datatables.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/datepicker.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/timepicker.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/colorpicker.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/bootstrap-switch.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/daterange-picker.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/typeahead.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/summernote.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/pygments.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/style.css" media="all" rel="stylesheet" type="text/css">
+	<link href="./MyFiles_files/green.css" media="all" rel="alternate stylesheet" title="green-theme" type="text/css">
+	<link href="./MyFiles_files/orange.css" media="all" rel="alternate stylesheet" title="orange-theme" type="text/css">
+	<link href="./MyFiles_files/magenta.css" media="all" rel="alternate stylesheet" title="magenta-theme" type="text/css">
+	<link href="./MyFiles_files/gray.css" media="all" rel="alternate stylesheet" title="gray-theme" type="text/css">
+	<div class="fit-vids-style" id="fit-vids-style" style="display: none;">­<style>.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></div><script src="./MyFiles_files/jquery.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery-ui.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/bootstrap.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/raphael.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/selectivizr-min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.mousewheel.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.vmap.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.vmap.sampledata.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.vmap.world.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/fullcalendar.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/gcal.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/datatable-editable.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.easy-pie-chart.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/excanvas.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.isotope.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/isotope_extras.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/modernizr.custom.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.fancybox.pack.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/select2.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/styleswitcher.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/wysiwyg.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/summernote.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.inputmask.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.validate.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/bootstrap-fileupload.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/bootstrap-datepicker.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/bootstrap-timepicker.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/bootstrap-colorpicker.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/bootstrap-switch.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/typeahead.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/daterange-picker.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/date.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/morris.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/skycons.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/fitvids.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/jquery.sparkline.min.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/main.js" type="text/javascript"></script>
+	<script src="./MyFiles_files/respond.js" type="text/javascript"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <style type="text/css">.fancybox-margin{margin-right:0px;}</style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+  <body>
+    <div class="modal-shiftfix">
+      <!-- Navigation -->
+      <div class="navbar navbar-fixed-top scroll-hide" style="overflow: visible;">
+        <div class="container-fluid top-bar">
+          <div class="pull-right">
+            <ul class="nav navbar-nav pull-right">
+              <li class="dropdown user hidden-xs"><a data-toggle="dropdown" class="dropdown-toggle" href="file:///E:/JavaWEB/RecordBoxTest/index.html#">
+                <img width="34" height="34" src="./MyFiles_files/avatar-male.jpg">vachester<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="file:///E:/JavaWEB/RecordBoxTest/index.html#">
+                    <i class="icon-user"></i>个人主页</a>
+                  </li>
+                  <li><a href="file:///E:/JavaWEB/RecordBoxTest/index.html#">
+                    <i class="icon-gear"></i>账户设置</a>
+                  </li>
+                  <li><a href="file:///E:/JavaWEB/RecordBoxTest/login1.html">
+                    <i class="icon-signout"></i>登出</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="file:///E:/JavaWEB/RecordBoxTest/index.html#">RecordBox</a>
+        </div>
+        <div class="container-fluid main-nav clearfix">
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <a href="index.html"><span aria-hidden="true" class="se7en-home"></span>主页</a>
+              </li>
+              <li><a class="current" href="MyFiles.html">
+                <span aria-hidden="true" class="se7en-forms"></span>我的个人数据</a>
+              </li>
+              <li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+                <span aria-hidden="true" class="se7en-pages"></span>添加事件</a>
+              </li>
+              <li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+                <span aria-hidden="true" class="icon-search"></span>按维度搜索</a>
+              </li>
+              <li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+                <span aria-hidden="true" class="icon-user"></span>个人主页</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid main-content">
+        <div class="page-title">
+        </div>
+        <!-- DataTables Example -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="widget-container fluid-height clearfix">
+              <div class="heading">
+              	<div class="col-md-5">
+              	<a href="AddPDO.jsp">
+                <button id="sample_editable_1_new" class="btn btn-success">
+				<i class="icon-plus"></i>新建PDO
+				</button>
+				</a>
 				</div>
-			</div>
-			<!-- 我的个人数据表格 -->
-		    <div class="row">
-				<div class="col-md-12">
-					<!-- BEGIN EXAMPLE TABLE PORTLET-->
-					<div class="portlet box yellow">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-globe"></i>我的个人数据
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="table-toolbar">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="btn-group">
-											<button id="sample_editable_1_new" class="btn green">
-											<i class="fa fa-plus"></i>新建PDO
-											</button>
-										</div>
-									</div>
-
-									<div class="col-md-5 pull-right">
-										<div class="btn-group">
-											<button class="btn default">
-												<i class="fa fa-file-text">
-												</i>个人数据导入
-											</button>
-											<button class="btn default">
-												<i class="fa fa-file">
-												</i>个人数据导出
-											</button>
-											<button class="btn default">
-												<i class="icon-docs">
-												</i>添加事件
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<table class="table table-striped table-bordered table-hover" id="sample_1">
-							<thead>
-							<tr>
-								<!-- <th class="table-checkbox"> -->
-									<!-- <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"/> -->
-								<!-- </th> -->
-								<th>
-									 数据名
-								</th>
-								<th>
-									 事件数
-								</th>
-								<th>
-									 创建时间
-								</th>
-								<th>
-									 操作
-								</th>
-							</tr>
-							</thead>
-							<tbody>
-							<s:iterator value="pdos" var="p">
-							<tr class="odd gradeX">
-								<!-- <td> -->
-									<!-- <input type="checkbox" class="checkboxes" value="1"/> -->
-								<!-- </td> -->
-								<td>
-								    <s:url var="detailurl"  value="ShowEventAction">
-									<s:param name="PDOName" value="%{#p.PDOName}"></s:param>
-									</s:url>
-									<s:a href="%{detailurl}"><s:property value="%{#p.PDOName}"/></s:a>
-								</td>
-								<td>
-									 <s:property value="%{#p.count}"/>
-								</td>
-								<td>
-									<s:date name="#p.t" format="yyyy-MM-dd HH:mm:ss"/>
-								</td>
-								<td>
-									删除 编辑
-								</td>
-							</tr>
-							</s:iterator>
-							</tbody>
-							</table>
-						</div>
-					</div>
-					<!-- END EXAMPLE TABLE PORTLET-->
->>>>>>> origin/vachester
+				<div class="pull-right">
+				<div class="btn-group">
+					<button class="btn btn-info">
+						<i class="fa fa-file-text">
+						</i>添加事件
+					</button>
+					<button data-title="Edit" data-toggle="modal" data-target="#edit" class="btn btn-info">
+						<i class="fa fa-file">
+						</i>Excel导入
+						</button>
+				</div>
 				</div>
               </div>
               <div class="widget-content padded clearfix">

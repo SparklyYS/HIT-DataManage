@@ -84,13 +84,13 @@
                 <img width="34" height="34" src="images/avatar-male.jpg" />vachester<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">
-                    <i class="icon-user"></i>∏ˆ»À÷˜“≥</a>
+                    <i class="icon-user"></i>‰∏™‰∫∫‰∏ªÈ°µ</a>
                   </li>
                   <li><a href="#">
-                    <i class="icon-gear"></i>’Àªß…Ë÷√</a>
+                    <i class="icon-gear"></i>Ë¥¶Êà∑ËÆæÁΩÆ</a>
                   </li>
                   <li><a href="login1.html">
-                    <i class="icon-signout"></i>µ«≥ˆ</a>
+                    <i class="icon-signout"></i>ÁôªÂá∫</a>
                   </li>
                 </ul>
               </li>
@@ -102,19 +102,19 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <a href="index.html"><span aria-hidden="true" class="se7en-home"></span>÷˜“≥</a>
+                <a href="index.html"><span aria-hidden="true" class="se7en-home"></span>‰∏ªÈ°µ</a>
               </li>
               <li><a class="current" href="MyFiles.html">
-                <span aria-hidden="true" class="se7en-forms"></span>Œ“µƒ∏ˆ»À ˝æ›</a>
+                <span aria-hidden="true" class="se7en-forms"></span>ÊàëÁöÑ‰∏™‰∫∫Êï∞ÊçÆ</a>
               </li>
               <li><a href="charts.html">
-                <span aria-hidden="true" class="se7en-pages"></span>ÃÌº” ¬º˛</a>
+                <span aria-hidden="true" class="se7en-pages"></span>Ê∑ªÂä†‰∫ã‰ª∂</a>
               </li>
               <li><a href="charts.html">
-                <span aria-hidden="true" class="icon-search"></span>∞¥Œ¨∂»À—À˜</a>
+                <span aria-hidden="true" class="icon-search"></span>ÊåâÁª¥Â∫¶ÊêúÁ¥¢</a>
               </li>
               <li><a href="charts.html">
-                <span aria-hidden="true" class="icon-user"></span>∏ˆ»À÷˜“≥</a>
+                <span aria-hidden="true" class="icon-user"></span>‰∏™‰∫∫‰∏ªÈ°µ</a>
               </li>
             </ul>
           </div>
@@ -127,23 +127,23 @@
       	    <div class="col-md-12">
                     <div class="widget-container fluid-height clearfix">
                         <div class="heading">
-                            <i class="icon-briefcase"></i>“˚ ≥
+                            <i class="icon-briefcase"></i>È•ÆÈ£ü
                         </div>
                         <div class="widget-content padded clearfix">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                     <th>
-                                       	 ±º‰
+                                       	Êó∂Èó¥
                                     </th>
                                     <th>
-                                        µÿµ„
+                                        Âú∞ÁÇπ
                                     </th>
                                     <th>
-                                       	»ÀŒÔ
+                                       	‰∫∫Áâ©
                                     </th>
                                     <th>
-										ª®∑—
+										Ëä±Ë¥π
                                     </th>
                                     </thead>
                                     <tbody>
@@ -152,7 +152,7 @@
                                                 2016/11/8
                                             </td>
                                             <td>
-                                                ∫⁄µÍ
+                                                ÈªëÂ∫ó
                                             </td>
                                             <td>
 												vachester
@@ -162,8 +162,8 @@
                                             </td>
                                            	<td>
 											<div>
-												<button id="1" data-title="Edit" data-toggle="modal" data-target="#edit" class="btn btn-xs btn-warning"><i class="icon-pencil"></i>±‡º≠</button>
-												<button class="btn btn-xs btn-danger filter-can"><i class="icon-remove"></i>…æ≥˝</button>
+												<button id="1" data-title="Edit" data-toggle="modal" data-target="#edit" class="btn btn-xs btn-warning"><i class="icon-pencil"></i>ÁºñËæë</button>
+												<button class="btn btn-xs btn-danger filter-can"><i class="icon-remove"></i>Âà†Èô§</button>
 											</div>
 											</td>
                                         </tr>
@@ -182,7 +182,7 @@
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">±‡º≠ ¬º˛</h4>
+        <h4 class="modal-title custom_align" id="Heading">ÁºñËæë‰∫ã‰ª∂</h4>
       </div>
       <!-- Contents should be follow the real data -->
       <div class="modal-body">
@@ -201,7 +201,7 @@
       </div>
       <!-- End the Modal Contents  -->
       <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Ã·Ωª∏¸–¬</button>
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Êèê‰∫§Êõ¥Êñ∞</button>
       </div>
         </div>
     <!-- /.modal-content --> 
