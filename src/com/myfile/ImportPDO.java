@@ -30,8 +30,8 @@ import com.sql.SQLManage;
 public class ImportPDO extends ActionSupport implements ServletRequestAware {
 	private HttpServletRequest request;
 	private String status;
-	private File excelFile; // 涓婁紶鐨勬枃浠�
-	private String excelFileFileName; // 淇濆瓨鍘熷鏂囦欢鍚�
+	private File excelFile; 
+	private String excelFileFileName; 
 
 	public File getExcelFile() {
 		return excelFile;
@@ -143,7 +143,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
 			mysql = new SQLManage(sqlcmd);
 			Timestamp t = new Timestamp(new Date().getTime());
-			mysql.setString(1, "瀵煎叆浜唀xcel鏂囦欢锛�"+excelFileFileName);
+			mysql.setString(1, "从excel文件导入PDO："+excelFileFileName);
 			mysql.setTimestamp(2, t);
 			mysql.setString(3, userName);
 			mysql.executeUpdate();

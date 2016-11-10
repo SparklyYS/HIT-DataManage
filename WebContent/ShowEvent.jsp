@@ -165,7 +165,7 @@
 				<div class="widget-container fluid-height clearfix">
 					<div class="heading">
 						<i class="icon-briefcase"></i>
-						<s:property value="PDOName" />
+						<span id="PDOName"><s:property value="PDOName" /></span>
 					</div>
 					<div class="widget-content padded clearfix">
 						<div class="table-responsive">
@@ -229,6 +229,7 @@
 					</button>
 					<h4 class="modal-title custom_align" id="Heading">编辑事件</h4>
 				</div>
+				<form action="EditEventAction" method="post" name="form">
 				<div class="modal-body" id="Dynamic_Modal">
 
 					<!--       <div class="form-group">
@@ -245,11 +246,12 @@
         </div> -->
 				</div>
 				<div class="modal-footer ">
-					<button type="button" class="btn btn-warning btn-lg"
-						style="width: 100%;">
-						<span class="glyphicon glyphicon-ok-sign"></span>提交更新
-					</button>
+						<button type="submit" class="btn btn-warning btn-lg"
+							style="width: 100%;">
+							<span class="glyphicon glyphicon-ok-sign"></span>提交更新
+						</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -270,9 +272,13 @@
 							$('#table_head').find('th').each(function() {
 								headers.push($(this).text());
 							});
+							
+							var PDOName = $('#PDOName').text();
+							$('#Dynamic_Modal')
+							.append(
+									"<div class='form-group' style='display:none'><input class='form-control' type='text' name='PDOName' value="+PDOName+"></input></div>");
 							var index = -1;
-							$(this)
-									.closest('tr')
+							$(this).closest('tr')
 									.find("td[name='data']")
 									.each(
 											function() {
@@ -283,7 +289,7 @@
 															.append(
 																	"<div class='form-group' style='display:none'><label>"
 																			+ headers[0]
-																			+ "</label><input class='form-control' type='text' name='eventID' placeholder="+Cell+"></input></div>");
+																			+ "</label><input class='form-control' type='text' name='eventID' value="+Cell+"></input></div>");
 
 												} else {
 													$('#Dynamic_Modal')

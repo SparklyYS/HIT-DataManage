@@ -122,6 +122,7 @@
 			method="editEvent">
 			<result type="redirectAction">
 				<param name="actionName">ShowEventAction</param>
+				<param name="PDOName">${PDOName}</param>
 			</result>
 		</action>
 		
