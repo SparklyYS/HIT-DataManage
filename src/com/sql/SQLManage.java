@@ -16,7 +16,7 @@ public class SQLManage extends ActionSupport {
 	public SQLManage(String sqlCmd) throws ClassNotFoundException, SQLException {
 		String url = "jdbc:mysql://localhost:3306/Account";
 		String username = "root";
-		String password = "zhi";
+		String password = "123456";
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection(url, username, password);
 		pstmt = con.prepareStatement(sqlCmd);

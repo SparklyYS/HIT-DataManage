@@ -189,7 +189,7 @@
 												</s:if>
 											</s:iterator>
 											<td>
-												<div>
+												<div class="myclass">
 													<button id="Edit" data-title="Edit" data-toggle="modal"
 														data-target="#edit" class="btn btn-xs btn-warning">
 														<i class="icon-pencil"></i>编辑
@@ -257,9 +257,7 @@
 	</div>
 	<!-- End of the dialog -->
 
-	</div>
 	<script type="text/javascript">
-	  <script type="text/javascript">
 	    $(".myclass").each(function(){
 	      var btn = $(this).children();
 	      btn.bind("click", function(event) {
@@ -272,6 +270,7 @@
 	        $('#table_head').find('th').each(function() {
 	        headers.push($(this).text());
 	        });
+	        var PDOName = $('#PDOName').text();
 	        $('#Dynamic_Modal')
 			.append(
 					"<div class='form-group' style='display:none'><input class='form-control' type='text' name='PDOName' value="+PDOName+"></input></div>");
@@ -281,17 +280,16 @@
 	          var Cell = $(this).text();
 
 	          if(index == -1){
-	          $('#Dynamic_Modal').append("<div class='form-group' style='display:none'><label>"+headers[0]+"</label><input class='form-control' type='text' name='eventID' placeholder="+Cell+"></input></div>");
+	          $('#Dynamic_Modal').append("<div class='form-group' style='display:none'><label>"+headers[0]+"</label><input class='form-control' type='text' name='eventID' value="+Cell+"></input></div>");
 
 	          }else{
-	          $('#Dynamic_Modal').append("<div class='form-group'><label>"+headers[index+1]+"</label><input class='form-control' type='text' name=" +"data"+"["+index+"] placeholder="+Cell+"></input></div>");
+	          $('#Dynamic_Modal').append("<div class='form-group'><label>"+headers[index+1]+"</label><input class='form-control' type='text' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");
 	          }
 	          index++;
 	        });
 	      });
 	    });
 	  </script>
-	</script>
 
 </body>
 </html>
