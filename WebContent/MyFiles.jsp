@@ -186,7 +186,7 @@
 								<li><a href="file:///E:/JavaWEB/RecordBoxTest/index.html#">
 										<i class="icon-gear"></i>账户设置
 								</a></li>
-								<li><a href="file:///E:/JavaWEB/RecordBoxTest/login1.html">
+								<li><a href="LogOutAction">
 										<i class="icon-signout"></i>登出
 								</a></li>
 							</ul></li>

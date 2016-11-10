@@ -116,7 +116,7 @@
 								</a></li>
 								<li><a href="#"> <i class="icon-gear"></i>账户设置
 								</a></li>
-								<li><a href="login1.html"> <i class="icon-signout"></i>登出
+								<li><a href="LogOutAction"> <i class="icon-signout"></i>登出
 								</a></li>
 							</ul></li>
 					</ul>
