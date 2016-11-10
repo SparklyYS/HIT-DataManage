@@ -259,49 +259,38 @@
 
 	</div>
 	<script type="text/javascript">
-		$('#Edit')
-				.click(
-						function() {
-							/* Act on the event */
-							//delete Every row before
-							$('#Dynamic_Modal').find("div[class='form-group']")
-									.each(function() {
-										$(this).remove();
-									});
-							var headers = [];
-							$('#table_head').find('th').each(function() {
-								headers.push($(this).text());
-							});
-							
-							var PDOName = $('#PDOName').text();
-							$('#Dynamic_Modal')
-							.append(
-									"<div class='form-group' style='display:none'><input class='form-control' type='text' name='PDOName' value="+PDOName+"></input></div>");
-							var index = -1;
-							$(this).closest('tr')
-									.find("td[name='data']")
-									.each(
-											function() {
-												//Data Cell's value
-												var Cell = $(this).text();
-												if (index == -1) {
-													$('#Dynamic_Modal')
-															.append(
-																	"<div class='form-group' style='display:none'><label>"
-																			+ headers[0]
-																			+ "</label><input class='form-control' type='text' name='eventID' value="+Cell+"></input></div>");
+	  <script type="text/javascript">
+	    $(".myclass").each(function(){
+	      var btn = $(this).children();
+	      btn.bind("click", function(event) {
+	        /* Act on the event */
+	        //delete Every rows before
+	        $('#Dynamic_Modal').find("div[class='form-group']").each(function(){
+	          $(this).remove();
+	        });
+	        var headers = [];
+	        $('#table_head').find('th').each(function() {
+	        headers.push($(this).text());
+	        });
+	        $('#Dynamic_Modal')
+			.append(
+					"<div class='form-group' style='display:none'><input class='form-control' type='text' name='PDOName' value="+PDOName+"></input></div>");
+	        var index = -1;
+	        $(this).closest('tr').find("td[name='data']").each(function() {
+	          //Data Cell's value
+	          var Cell = $(this).text();
 
-												} else {
-													$('#Dynamic_Modal')
-															.append(
-																	"<div class='form-group'><label>"
-																			+ headers[index + 1]
-																			+ "</label><input class='form-control' type='text' name=" +"data"+"["+index+"] placeholder="+Cell+"></input></div>");
-												}
-												index++;
-											});
-							// alert(index);
-						});
+	          if(index == -1){
+	          $('#Dynamic_Modal').append("<div class='form-group' style='display:none'><label>"+headers[0]+"</label><input class='form-control' type='text' name='eventID' placeholder="+Cell+"></input></div>");
+
+	          }else{
+	          $('#Dynamic_Modal').append("<div class='form-group'><label>"+headers[index+1]+"</label><input class='form-control' type='text' name=" +"data"+"["+index+"] placeholder="+Cell+"></input></div>");
+	          }
+	          index++;
+	        });
+	      });
+	    });
+	  </script>
 	</script>
 
 </body>
