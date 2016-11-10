@@ -66,7 +66,7 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 			mysql.executeUpdate();
 			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
 			mysql = new SQLManage(sqlcmd);
-			mysql.setString(1, "add a PDO named " + PDOName);
+			mysql.setString(1, "添加了一个PDO：" + PDOName);
 			mysql.setTimestamp(2, t);
 			mysql.setString(3, userName);
 			mysql.executeUpdate();

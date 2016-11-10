@@ -132,9 +132,9 @@
 			<div class="container-fluid main-nav clearfix">
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href="index.html"><span aria-hidden="true"
+						<li><a href="HomeAction"><span aria-hidden="true"
 								class="se7en-home"></span>主页</a></li>
-						<li><a class="current" href="MyFiles.html"> <span
+						<li><a class="current" href="ShowPDOAction"> <span
 								aria-hidden="true" class="se7en-forms"></span>我的个人数据
 						</a></li>
 						<li><a href="charts.html"> <span aria-hidden="true"
@@ -157,35 +157,48 @@
 			<div class="col-md-12">
 				<div class="widget-container fluid-height clearfix">
 					<div class="heading">
-						<i class="icon-briefcase"></i>饮食
+						<i class="icon-briefcase"></i>
+						<s:property value="PDOName" />
 					</div>
 					<div class="widget-content padded clearfix">
 						<div class="table-responsive">
 							<table class="table">
 								<thead>
-									<th>时间</th>
-									<th>地点</th>
-									<th>人物</th>
-									<th>花费</th>
+									<th style="display:none">id</th>
+									<s:iterator value="headers" var="head">
+										<th><s:property value="#head" /></th>
+									</s:iterator>
 								</thead>
 								<tbody>
-									<tr>
-										<td>2016/11/8</td>
-										<td>黑店</td>
-										<td>vachester</td>
-										<td>100</td>
-										<td>
-											<div>
-												<button id="1" data-title="Edit" data-toggle="modal"
-													data-target="#edit" class="btn btn-xs btn-warning">
-													<i class="icon-pencil"></i>编辑
-												</button>
-												<button class="btn btn-xs btn-danger filter-can">
-													<i class="icon-remove"></i>删除
-												</button>
-											</div>
-										</td>
-									</tr>
+									<s:iterator value="data" var="row">
+										<tr>
+											<s:iterator value="#row" var="cell" status="judge">
+												<s:if test="#judge.getIndex == 0">
+													<td style="display:none"><s:property value="#cell" /></td>
+												</s:if>
+												<s:if test="#judge.getIndex != 0">
+													<td><s:property value="#cell" /></td>
+												</s:if>
+											</s:iterator>
+											<td>
+												<div>
+													<button id="1" data-title="Edit" data-toggle="modal"
+														data-target="#edit" class="btn btn-xs btn-warning">
+														<i class="icon-pencil"></i>编辑
+													</button>
+													<s:url var="deleteurl" value="DeleteEventAction">
+														<s:param name="PDOName" value="%{PDOName}"></s:param>
+														<s:param name="eventID" value="%{#row[0]}"></s:param>
+													</s:url>
+													<s:a href="%{deleteurl}">
+														<button class="btn btn-xs btn-danger filter-can">
+														<i class="icon-remove"></i>删除
+													</button>
+													</s:a>
+												</div>
+											</td>
+										</tr>
+									</s:iterator>
 								</tbody>
 							</table>
 						</div>

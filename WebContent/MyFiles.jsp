@@ -204,9 +204,9 @@
 			<div class="container-fluid main-nav clearfix">
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href="index.html"><span aria-hidden="true"
+						<li><a href="HomeAction"><span aria-hidden="true"
 								class="se7en-home"></span>主页</a></li>
-						<li><a class="current" href="MyFiles.html"> <span
+						<li><a class="current" href="ShowPDOAction"> <span
 								aria-hidden="true" class="se7en-forms"></span>我的个人数据
 						</a></li>
 						<li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
@@ -309,7 +309,7 @@
 					<h4 class="modal-title custom_align" id="Heading">Excel文件导入</h4>
 				</div>
 				<!-- Contents should be follow the real data -->
-				<form action="" method="post" enctype="multipart/form-data">
+				<form action="ImportPDOAction" method="post" enctype="multipart/form-data">
 					<div class="modal-body">
 						<input type="file" name="excelFile">
 					</div>

@@ -97,7 +97,7 @@ public class AddEvent extends ActionSupport implements ServletRequestAware {
 			linkformat = linkformat.substring(0, linkformat.length() - 1);
 			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
 			mysql = new SQLManage(sqlcmd);
-			mysql.setString(1, "add some event linked each other,they are " + linkformat);
+			mysql.setString(1, "" + linkformat);
 			mysql.setTimestamp(2, t);
 			mysql.setString(3, userName);
 			mysql.executeUpdate();

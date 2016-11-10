@@ -81,7 +81,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
 						sqlcmd += ros.getCell(j).toString() + ",";
 					}
-					sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
+					sqlcmd+="link";
 					sqlcmd += ") values (";
 					String sql_copy = sqlcmd;
 					for (int j = 1; j <= sheet.getLastRowNum(); j++) {
@@ -90,29 +90,30 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
 							sqlcmd += "?,";
 						}
-						sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
-						sqlcmd += ")";
+						sqlcmd += "?)";
 						mysql = new SQLManage(sqlcmd);
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
-							mysql.setString(k, ros.getCell(k).toString());
+							mysql.setString(k+1, ros.getCell(k).toString());
 						}
+						mysql.setString(ros.getLastCellNum()+1, "");
 						mysql.executeUpdate();
 					}
 				} else {
-					sqlcmd = "insert into pdos (PDOName,PDOTime,userName) values (?,?,?)";
+					sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts) values (?,?,?,?)";
 					mysql = new SQLManage(sqlcmd);
 					Timestamp t = new Timestamp(new Date().getTime());
 					mysql.setString(1, sheetName);
 					mysql.setTimestamp(2, t);
 					mysql.setString(3, userName);
+					mysql.setInteger(4, 0);
 					mysql.executeUpdate();
-					sqlcmd = "create table " + userName + "_" + sheetName + "(";
+					sqlcmd = "create table " + userName + "_" + sheetName + " (";
 					sqlcmd += "eventID int not null auto_increment,";
 					Row ros = sheet.getRow(0);
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
 						sqlcmd += ros.getCell(j).toString() + " varchar(100) not null,";
 					}
-					sqlcmd += "link varchar(100) not null,primary key (eventID)";
+					sqlcmd += "link varchar(100) not null,primary key (eventID))";
 					mysql = new SQLManage(sqlcmd);
 					mysql.executeUpdate();
 					sqlcmd = "insert into " + userName + "_" + sheetName + " (";
@@ -120,7 +121,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
 						sqlcmd += ros.getCell(j).toString() + ",";
 					}
-					sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
+					sqlcmd = sqlcmd + "link";
 					sqlcmd += ") values (";
 					String sql_copy = sqlcmd;
 					for (int j = 1; j <= sheet.getLastRowNum(); j++) {
@@ -129,16 +130,23 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
 							sqlcmd += "?,";
 						}
-						sqlcmd = sqlcmd.substring(0, sqlcmd.length() - 1);
-						sqlcmd += ")";
+						sqlcmd += "?)";
 						mysql = new SQLManage(sqlcmd);
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
-							mysql.setString(k, ros.getCell(k).toString());
+							mysql.setString(k+1, ros.getCell(k).toString());
 						}
+						mysql.setString(ros.getLastCellNum()+1, "");
 						mysql.executeUpdate();
 					}
 				}
 			}
+			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
+			mysql = new SQLManage(sqlcmd);
+			Timestamp t = new Timestamp(new Date().getTime());
+			mysql.setString(1, "导入了excel文件："+excelFileFileName);
+			mysql.setTimestamp(2, t);
+			mysql.setString(3, userName);
+			mysql.executeUpdate();
 			status = SUCCESS;
 			book.close();
 			mysql.close();

@@ -62,25 +62,34 @@ public class DeleteEvent extends ActionSupport implements ServletRequestAware {
 			String[] links = splitLink.split(link);
 			for (String s : links) {
 				String new_link = "";
-				for (String t : links) {
-					if (!s.equals(t)) {
-						new_link += t + "&";
+				if(!s.equals("")) {
+					for (String t : links) {
+						if (!s.equals(t)) {
+							new_link += t + "&";
+						}
 					}
+					if (!new_link.equals("")) {
+						new_link = new_link.substring(0, new_link.length() - 1);
+					}
+					String pdoName = userName + "_" + s.substring(0, s.indexOf("_"));
+					int id = Integer.parseInt(s.substring(s.indexOf("_") + 1));
+					sqlcmd = "update " + pdoName + " set link=? where eventID=?";
+					mysql = new SQLManage(sqlcmd);
+					mysql.setString(1, new_link);
+					mysql.setInteger(2, id);
+					mysql.executeUpdate();
 				}
-				if (!new_link.equals("")) {
-					new_link = new_link.substring(0, new_link.length() - 1);
-				}
-				String pdoName = userName + "_" + s.substring(0, s.indexOf("_"));
-				int id = Integer.parseInt(s.substring(s.indexOf("_") + 1));
-				sqlcmd = "update from " + pdoName + " set link=? where eventID=?";
-				mysql = new SQLManage(sqlcmd);
-				mysql.setString(1, new_link);
-				mysql.setInteger(2, id);
-				mysql.executeUpdate();
 			}
 			sqlcmd = "delete from " + userName + "_" + PDOName + " where eventID=?";
 			mysql = new SQLManage(sqlcmd);
 			mysql.setInteger(1, eventID);
+			mysql.executeUpdate();
+			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
+			mysql = new SQLManage(sqlcmd);
+			Timestamp t = new Timestamp(new Date().getTime());
+			mysql.setString(1, "在PDO："+PDOName+"中删除了一个事件");
+			mysql.setTimestamp(2, t);
+			mysql.setString(3, userName);
 			mysql.executeUpdate();
 			status = SUCCESS;
 			mysql.close();

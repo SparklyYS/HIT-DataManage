@@ -66,7 +66,7 @@ public class ShowEvent extends ActionSupport implements ServletRequestAware {
 			}
 			while (myevent.next()) {
 				ArrayList<String> single = new ArrayList<String>();
-				for (int i = 2; i < columnCount; i++) {
+				for (int i = 1; i < columnCount; i++) {
 					single.add(myevent.getString(i));
 				}
 				data.add(single);

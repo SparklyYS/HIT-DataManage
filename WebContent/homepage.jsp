@@ -132,7 +132,7 @@
 			<div class="container-fluid main-nav clearfix">
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a class="current" href="homepage.jsp"><span
+						<li><a class="current" href="HomeAction"><span
 								aria-hidden="true" class="se7en-home"></span>主页</a></li>
 						<li><a href="ShowPDOAction"> <span aria-hidden="true"
 								class="se7en-forms"></span>我的个人数据

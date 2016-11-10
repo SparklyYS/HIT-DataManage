@@ -38,9 +38,7 @@
 			class="com.account.SignUp"
 			method="createAccount">
 			<result type="redirectAction">
-				<param name="actionName">LoginAction</param>
-				<param name="userName">${userName}</param>
-				<param name="userPasswd">${userPasswd}</param>
+				<param name="actionName">HomeAction</param>
 			</result>
 			<result name="existed">
 				/Nomatch.jsp
@@ -124,12 +122,16 @@
 			method="deleteEvent">
 			<result type="redirectAction">
 				<param name="actionName">ShowEventAction</param>
+				<param name="PDOName">${PDOName}</param>
 			</result>
 		</action>
 		
 		<action name="ImportPDOAction"
 			class="com.myfile.ImportPDO"
 			method="importPDO">
+			<result type="redirectAction">
+				<param name="actionName">ShowPDOAction</param>
+			</result>
 		</action>
 		
    	</package>
