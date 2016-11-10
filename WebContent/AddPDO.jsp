@@ -110,11 +110,9 @@
 					<ul class="nav navbar-nav pull-right">
 						<li class="dropdown user hidden-xs"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"> <img width="34" height="34"
-								src="images/avatar-male.jpg" />vachester<b class="caret"></b></a>
+								src="images/avatar-male.jpg" />${sessionScope.userName}<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"> <i class="icon-user"></i>个人主页
-								</a></li>
-								<li><a href="#"> <i class="icon-gear"></i>账户设置
 								</a></li>
 								<li><a href="LogOutAction"> <i class="icon-signout"></i>登出
 								</a></li>
@@ -132,9 +130,9 @@
 			<div class="container-fluid main-nav clearfix">
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href="index.html"><span aria-hidden="true"
+						<li><a href="HomeAction"><span aria-hidden="true"
 								class="se7en-home"></span>主页</a></li>
-						<li><a class="current" href="MyFiles.html"> <span
+						<li><a class="current" href="ShowPDOAction"> <span
 								aria-hidden="true" class="se7en-forms"></span>我的个人数据
 						</a></li>
 						<li><a href="charts.html"> <span aria-hidden="true"

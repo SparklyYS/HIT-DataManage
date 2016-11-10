@@ -177,14 +177,11 @@
 						<li class="dropdown user hidden-xs"><a data-toggle="dropdown"
 							class="dropdown-toggle"
 							href="file:///E:/JavaWEB/RecordBoxTest/index.html#"> <img
-								width="34" height="34" src="./MyFiles_files/avatar-male.jpg">vachester<b
+								width="34" height="34" src="./MyFiles_files/avatar-male.jpg">${sessionScope.userName}<b
 								class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="file:///E:/JavaWEB/RecordBoxTest/index.html#">
 										<i class="icon-user"></i>个人主页
-								</a></li>
-								<li><a href="file:///E:/JavaWEB/RecordBoxTest/index.html#">
-										<i class="icon-gear"></i>账户设置
 								</a></li>
 								<li><a href="LogOutAction">
 										<i class="icon-signout"></i>登出
