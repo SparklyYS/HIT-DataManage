@@ -34,7 +34,7 @@ public class ShowPDO extends ActionSupport implements ServletRequestAware {
 
 	public String showPDO() {
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(); 
 		String userName = session.getAttribute("userName").toString();
 		try {
 			String sqlcmd = "select * from pdos where userName=?";
