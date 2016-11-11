@@ -248,6 +248,7 @@
 						<div class="widget-content padded clearfix">
 							<table class="table table-bordered table-striped" id="dataTable1">
 								<thead>
+									<tr>
 									<th class="check-header hidden-xs"><label><input
 											id="checkAll" name="checkAll" type="checkbox"><span></span></label>
 									</th>
@@ -257,6 +258,7 @@
 									<th style="display: none">最近修改时间</th>
 									<th style="display: none">status</th>
 									<th></th>
+									</tr>
 								</thead>
 								<tbody>
 									<s:iterator value="pdos" var="pdo">
@@ -346,7 +348,23 @@
       <!-- /.modal-dialog --> 
   </div>
   <!-- end the delete dialog -->
-
+  
+  <script>
+  	$('.actions').each(function(){
+    	var btn = $(this).children();
+    	btn.bind('click', function(event) {
+      	/* Act on the event */
+      	//delete every rows before
+      	$('#Delete_Modal').find("div[class='form-group']").each(function(){
+          $(this).remove();
+      	});
+      	//Get PDOName
+      	var PDOName = $(this).parent().parent().find("td:nth-child(2)").text();
+      	//Append PDOName row
+      	$('#Delete_Modal').append("<div class='form-group' style='display:none'><input class='form-control' type='text' name='PDOName' value="+PDOName+"></input></div>");    
+    	});
+  	});
+  </script>
 
 </body>
 </html>

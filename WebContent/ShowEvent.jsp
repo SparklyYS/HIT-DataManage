@@ -169,10 +169,12 @@
 						<div class="table-responsive">
 							<table class="table">
 								<thead id="table_head">
+									<tr>
 									<th style="display: none">id</th>
 									<s:iterator value="headers" var="head">
 										<th><s:property value="#head" /></th>
 									</s:iterator>
+									</tr>
 								</thead>
 								<tbody>
 									<s:iterator value="data" var="row">
