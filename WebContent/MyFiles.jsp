@@ -130,6 +130,7 @@
 	type="text/javascript"></script>
 <script src="./MyFiles_files/main.js" type="text/javascript"></script>
 <script src="./MyFiles_files/respond.js" type="text/javascript"></script>
+<script src="./javascripts/jquery.cookie.js" type="text/javascript"></script>
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	name="viewport">
@@ -228,7 +229,7 @@
 						<div class="heading">
 							<div class="col-md-5">
 								<!-- <a href="AddPDO.jsp"> -->
-									<button id="sample_editable_1_new" class="btn btn-success">
+									<button id="AddPDO" data-title="AddPDO" data-toggle="modal" data-target="#ChooseProperty" class="btn btn-success">
 										<i class="icon-plus"></i>新建PDO
 									</button>
 								<!-- </a> -->
@@ -357,6 +358,51 @@
   </div>
   <!-- end the delete dialog -->
   
+	<!-- Begin the choose dialog -->
+	<div class="modal fade" id="ChooseProperty" tabindex="-1" role="dialog"
+		aria-labelledby="edit" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title custom_align" id="Heading">维度选择(可以不选)</h4>
+				</div>
+				<!-- Contents should be follow the real data -->
+				<div class="modal-body">
+					<table>
+						<tbody>
+							<tr>
+								<td><label><input class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label></td>
+								<td>时间</td>
+							</tr>
+							<tr>
+								<td><label><input class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label></td>
+								<td>地点</td>
+							</tr>
+							<tr>
+								<td><label><input class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label></td>
+								<td>人物</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- End the Modal Contents  -->
+				<div class="modal-footer ">
+					<button type="submit" class="btn btn-warning btn-lg"
+							style="width: 100%;">
+						<span class="glyphicon glyphicon-ok-sign">确定</span>
+					</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- End the choose dialog -->
+  
   <script>
   	$('.actions').each(function(){
     	var btn = $(this).children();
@@ -428,10 +474,8 @@
   </script>
   
 <script type="text/javascript">
-  $('#AddPDO').click(function(){
-    $.cookies.set("num","123");
-    alert("hello");
-  });
+	//TODO
+	//Add Some JQuery Code to get the status about the checkbox then transport to AddPDO.jsp
 </script>
 </body>
 </html>

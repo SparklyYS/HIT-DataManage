@@ -97,6 +97,7 @@
 <script src="javascripts/jquery.sparkline.min.js" type="text/javascript"></script>
 <script src="javascripts/main.js" type="text/javascript"></script>
 <script src="javascripts/respond.js" type="text/javascript"></script>
+<script src="./javascripts/jquery.cookie.js" type="text/javascript"></script>
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	name="viewport">
@@ -212,6 +213,13 @@
 			<!-- end DataTables Example -->
 		</div>
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			alert($.cookie("str"));
+		});
+	</script>
+	
 	<script>
 		function Hello() {
 			$('#tabletemplate tbody tr').clone()
