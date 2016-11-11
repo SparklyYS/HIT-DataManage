@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
@@ -28,6 +31,8 @@ public class AddEvent extends ActionSupport implements ServletRequestAware {
 	public String addEvent() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		HttpServletResponse response = ServletActionContext.getResponse(); 
+		response.setContentType("application/msexcel;charset=UTF-8"); 
 		String userName = session.getAttribute("userName").toString();
 		String pass = request.getParameter("data");
 		try {

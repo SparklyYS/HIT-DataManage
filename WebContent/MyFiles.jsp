@@ -335,7 +335,7 @@
         	</div>
         	<form name="form" action="DeletePDOAction" method="post">
         	<div class="modal-body" id="Delete_Modal">
-        	<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>您确定要删除该事件吗？</div>
+        	<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>您确定要删除该PDO吗？</div>
         	</div>
        		<div class="modal-footer ">
         	<button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>确定</button>

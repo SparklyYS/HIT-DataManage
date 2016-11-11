@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.ServletActionContext;
+
 public class UserAuthenticationFilter implements javax.servlet.Filter {
 	private final String LOGIN_PAGE = "/Login.html";
 	private final String[] passPage = { "/HIT-DataManage/", "/HIT-DataManage/Login.html", "/HIT-DataManage/LoginAction",
@@ -37,6 +39,7 @@ public class UserAuthenticationFilter implements javax.servlet.Filter {
 		boolean isResource = false;
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
+		res.setContentType("application/msexcel;charset=UTF-8"); 
 		HttpSession session = req.getSession();
 		boolean sessionStatus = isCorrect(session);
 		String url = req.getRequestURI();

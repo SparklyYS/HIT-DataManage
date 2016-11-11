@@ -260,8 +260,8 @@
 	       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>您确定要删除该事件吗？</div>
 	      	</div>
 	        <div class="modal-footer ">
-	        <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+	        <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>确定</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>取消</button>
 	        </div>
 	       </form>
 	       <!-- End the form -->

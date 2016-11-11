@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
@@ -44,6 +47,8 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 	public String addPDO() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		HttpServletResponse response = ServletActionContext.getResponse(); 
+		response.setContentType("application/msexcel;charset=UTF-8"); 
 		String userName = session.getAttribute("userName").toString();
 		try {
 			String sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts) values (?,?,?,?)";
@@ -60,7 +65,7 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 			for (String header : headers) {
 				sqlcmd += header + " varchar(100) not null,";
 			}
-			sqlcmd += "link varchar(100) not null,primary key (eventID))";
+			sqlcmd += "link varchar(100) not null,primary key (eventID)) charset=utf8";
 			mysql = new SQLManage(sqlcmd);
 			System.out.println(sqlcmd);
 			mysql.executeUpdate();
