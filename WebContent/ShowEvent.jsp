@@ -231,19 +231,6 @@
 				</div>
 				<form action="EditEventAction" method="post" name="form">
 				<div class="modal-body" id="Dynamic_Modal">
-
-					<!--       <div class="form-group">
-        <input id="Time"  class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-        <input id="Place" class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-		<input id="Person" class="form-control " type="text" placeholder="">
-        </div>
-        <div class="form-group">
-		<input id="Price" class="form-control " type="text" placeholder="">
-        </div> -->
 				</div>
 				<div class="modal-footer ">
 						<button type="submit" class="btn btn-warning btn-lg"
@@ -265,9 +252,9 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 	        <h4 class="modal-title custom_align" id="Heading">提示</h4>
 	      </div>
+	      <!-- Begin the form 指定action -->
+	      <form name="form" action="deleteclass" method="post">
 	      <div class="modal-body" id="Delete_Modal">
-	      <!-- Begin the form -->
-	      <form name="" action="" method="post">
 	       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>您确定要删除该事件吗？</div>
 	      	</div>
 	        <div class="modal-footer ">
@@ -342,5 +329,7 @@
 	      });
 	    })
   	</script>
+  	
+  	
 </body>
 </html>

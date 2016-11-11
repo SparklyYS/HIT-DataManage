@@ -274,14 +274,11 @@
 													format="yyyy/MM/dd" /></td>
 											<td style="display: none">2016/11/3</td>
 											<td style="display: none">Approved</td>
-											<td class="actions"><s:url var="deleteurl"
-													value="DeletePDOAction">
-													<s:param name="PDOName" value="%{#pdo.pdoName}"></s:param>
-												</s:url> <s:a href="%{deleteurl}">
-													<div class="action-buttons">
-														<i class="icon-trash"></i>
-													</div>
-												</s:a></td>
+											<td class="actions">
+												<a class="table-actions" data-title="Delete" data-toggle="modal" data-target="#delete">
+												<i class="icon-trash"></i>
+												</a>
+											</td>
 										</tr>
 									</s:iterator>
 								</tbody>
@@ -293,7 +290,8 @@
 			<!-- end DataTables Example -->
 		</div>
 	</div>
-
+	
+	<!-- Begin the dialog -->
 	<div class="modal fade" id="edit" tabindex="-1" role="dialog"
 		aria-labelledby="edit" aria-hidden="true">
 		<div class="modal-dialog">
@@ -323,6 +321,31 @@
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
+	<!-- End the dialog -->
+	
+	<!-- begin the delete dialog -->
+	 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    	<div class="modal-content">
+        	<div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        	<h4 class="modal-title custom_align" id="Heading">提示</h4>
+        	</div>
+        	<form name="form" action="DeletePDOAction" method="post">
+        	<div class="modal-body" id="Delete_Modal">
+        	<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>您确定要删除该事件吗？</div>
+        	</div>
+       		<div class="modal-footer ">
+        	<button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>确定</button>
+        	<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        	</div>
+			</form>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+  </div>
+  <!-- end the delete dialog -->
 
 
 </body>
