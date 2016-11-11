@@ -249,7 +249,7 @@
 							<table class="table table-bordered table-striped" id="dataTable1">
 								<thead>
 									<tr>
-									<th class="tcheckbox check-header hidden-xs"><label><input
+									<th style="display:none" class="tcheckbox check-header"><label><input
 											id="checkAll" name="checkAll" type="checkbox"><span></span></label>
 									</th>
 									<th>数据名</th>
@@ -263,7 +263,7 @@
 								<tbody>
 									<s:iterator value="pdos" var="pdo">
 										<tr>
-											<td class="thcheckbox check hidden-xs"><label><input
+											<td style="display:none" class="thcheckbox check"><label><input
 													class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label>
 											</td>
 											<td><s:url var="eventurl" value="ShowEventAction">
@@ -420,7 +420,7 @@
 	    var index = 0;
 	    //遍历数组
 	    $(headers).each(function(){
-	       form.append("<input type='text' style='display:none' value="+this+" name=tag["+index+"]>")
+	       form.append("<input type='text' style='display:none' value="+this+" name=choosedPDO["+index+"]>")
 	       index++;
 	    });
 	    form.submit();
