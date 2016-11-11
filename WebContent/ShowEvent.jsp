@@ -187,20 +187,22 @@
 												</s:if>
 											</s:iterator>
 											<td>
-												<div class="myclass">
+												<div>
+													<span class="myclass">
 													<button id="Edit" data-title="Edit" data-toggle="modal"
 														data-target="#edit" class="btn btn-xs btn-warning">
 														<i class="icon-pencil"></i>编辑
 													</button>
-													<s:url var="deleteurl" value="DeleteEventAction">
+													</span>
+<%-- 													<s:url var="deleteurl" value="DeleteEventAction">
 														<s:param name="PDOName" value="%{PDOName}"></s:param>
 														<s:param name="eventID" value="%{#row[0]}"></s:param>
-													</s:url>
-													<s:a href="%{deleteurl}">
+													</s:url> --%>
+													<span class="deleteclass">
 														<button class="btn btn-xs btn-danger filter-can">
 															<i class="icon-remove"></i>删除
 														</button>
-													</s:a>
+													</span>
 												</div>
 											</td>
 										</tr>
@@ -254,6 +256,33 @@
 		</div>
 	</div>
 	<!-- End of the dialog -->
+	
+	<!-- begin of the delete dialog -->
+	  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+	      <div class="modal-dialog">
+	    <div class="modal-content">
+	          <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+	        <h4 class="modal-title custom_align" id="Heading">提示</h4>
+	      </div>
+	      <div class="modal-body" id="Delete_Modal">
+	      <!-- Begin the form -->
+	      <form name="" action="" method="post">
+	       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>您确定要删除该事件吗？</div>
+	      	</div>
+	        <div class="modal-footer ">
+	        <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+	        </div>
+	       </form>
+	       <!-- End the form -->
+	        </div>
+	    <!-- /.modal-content --> 
+	  </div>
+	      <!-- /.modal-dialog --> 
+	    </div>
+	<!-- End of the delete dialog -->
+	
 
 	<script type="text/javascript">
 	    $(".myclass").each(function(){
@@ -288,6 +317,30 @@
 	      });
 	    });
 	  </script>
-
+	  
+  	<script type="text/javascript">
+	    $('.deleteclass').each(function(){
+	      var btn = $(this).children();
+	      btn.bind('click', function(event) {
+	        /* Act on the event */
+	        //delete Every rows before
+	        $('#Delete_Modal').find("div[class='form-group']").each(function(){
+	          $(this).remove();
+	        });
+	        //Get PDOName
+	        var PDOName = $('#PDOName').text();
+	        // alert(PDOName);
+	        //Get EventID
+	        var EventID = $(this).parent().parent().parent().parent().find("td:first").text();
+	        // alert(EventID);
+	        //Add PDOName row
+	        $('#Delete_Modal').append("<div class='form-group' style='display:none'><input class='form-control' type='text' name='PDOName' value="+PDOName+"></input></div>");
+	
+	        //Add EventID row
+	        $('#Delete_Modal').append("<div class='form-group' style='display:none'><input class='form-control' type='text' name='eventID' value="+EventID+"></input></div>");
+	
+	      });
+	    })
+  	</script>
 </body>
 </html>
