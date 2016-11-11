@@ -206,13 +206,13 @@
 						<li><a class="current" href="ShowPDOAction"> <span
 								aria-hidden="true" class="se7en-forms"></span>我的个人数据
 						</a></li>
-						<li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+						<li><a href="">
 								<span aria-hidden="true" class="se7en-pages"></span>添加事件
 						</a></li>
-						<li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+						<li><a href="">
 								<span aria-hidden="true" class="icon-search"></span>按维度搜索
 						</a></li>
-						<li><a href="file:///E:/JavaWEB/RecordBoxTest/charts.html">
+						<li><a href="">
 								<span aria-hidden="true" class="icon-user"></span>个人主页
 						</a></li>
 					</ul>
@@ -235,7 +235,7 @@
 							</div>
 							<div class="pull-right">
 								<div class="btn-group">
-									<button class="btn btn-info">
+									<button id="AddEvent" class="btn btn-info">
 										<i class="fa fa-file-text"> </i>添加事件
 									</button>
 									<button data-title="Edit" data-toggle="modal"
@@ -249,7 +249,7 @@
 							<table class="table table-bordered table-striped" id="dataTable1">
 								<thead>
 									<tr>
-									<th class="check-header hidden-xs"><label><input
+									<th class="tcheckbox check-header hidden-xs"><label><input
 											id="checkAll" name="checkAll" type="checkbox"><span></span></label>
 									</th>
 									<th>数据名</th>
@@ -263,8 +263,8 @@
 								<tbody>
 									<s:iterator value="pdos" var="pdo">
 										<tr>
-											<td class="check hidden-xs"><label><input
-													name="optionsRadios1" type="checkbox" value="option1"><span></span></label>
+											<td class="thcheckbox check hidden-xs"><label><input
+													class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label>
 											</td>
 											<td><s:url var="eventurl" value="ShowEventAction">
 													<s:param name="PDOName" value="%{#pdo.pdoName}"></s:param>
@@ -286,11 +286,19 @@
 								</tbody>
 							</table>
 						</div>
+						<form id="PdoForm" method="post" action ="">
+		            	<div id="AddSuccess" class="pull-right" style="display: none">
+		                <button id="AddBtn" type="button" class="btn btn-success">
+		                  <i class="glyphicon glyphicon-ok-sign">
+		                  </i>确定添加
+		                </button>
+		                </div>
+		            	</div>
+            			</form>
 					</div>
 				</div>
 			</div>
 			<!-- end DataTables Example -->
-		</div>
 	</div>
 	
 	<!-- Begin the dialog -->
@@ -365,6 +373,59 @@
     	});
   	});
   </script>
-
+  
+  <script type="text/javascript">
+      var status = 0;
+	  $('#AddEvent').click(function(){
+	    if(status == 0){ //fadeIn
+	      //Change the text in the button
+	      $(this).text("撤销添加");
+	      //Change the style of the button
+	      $(this).toggleClass('btn-info btn-danger');
+	      //fadeIn all tcheckbox
+	      $('.thcheckbox').fadeIn();
+	      $('.tcheckbox').fadeIn();
+	      //fadeIn all AddSuccess btn
+	      $('#AddSuccess').fadeIn();
+	      status = 1;
+	    }else{
+	      //Change the text in the button
+	      $(this).text("添加事件");
+	      //Change the style of the button
+	      $(this).toggleClass('btn-info btn-danger');
+	      //fadeOut all tcheckbox
+	      $('.thcheckbox').fadeOut();
+	      $('.tcheckbox').fadeOut();
+	      //fadeOut all AddSuccess btn
+	      $('#AddSuccess').fadeOut();
+	      status = 0;
+	    }
+	  });
+  </script>
+  
+  <script type="text/javascript">
+	  $('#AddBtn').click(function(){
+	    var headers = [];
+	    $('.tbox').each(function(){
+	      if($(this).is(':checked')){
+	         var header = $(this).parent().parent().parent().find("td:nth-child(2)").text();
+	         headers.push(header); //Add to the header array
+	      }
+	    });
+	
+	    //bind dynamic form
+	    var form = $('#PdoForm');
+	    //创建input
+	    var MyInput = $('<input type="text" />');
+	    var index = 0;
+	    //遍历数组
+	    $(headers).each(function(){
+	       form.append("<input type='text' style='display:none' value="+this+" name=tag["+index+"]>")
+	       index++;
+	    });
+	    form.submit();
+	  });
+  </script>
+  
 </body>
 </html>

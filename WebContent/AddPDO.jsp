@@ -218,7 +218,7 @@
 					.appendTo('#dynamictable tbody');
 			ChangeIndex();
 		}
-
+		
 		function ChangeIndex() {
 			var index = -1;
 			$('#dynamictable tbody tr').each(
