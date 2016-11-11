@@ -227,11 +227,11 @@
 					<div class="widget-container fluid-height clearfix">
 						<div class="heading">
 							<div class="col-md-5">
-								<a href="AddPDO.jsp">
+								<!-- <a href="AddPDO.jsp"> -->
 									<button id="sample_editable_1_new" class="btn btn-success">
 										<i class="icon-plus"></i>新建PDO
 									</button>
-								</a>
+								<!-- </a> -->
 							</div>
 							<div class="pull-right">
 								<div class="btn-group">
@@ -427,5 +427,11 @@
 	  });
   </script>
   
+<script type="text/javascript">
+  $('#AddPDO').click(function(){
+    $.cookies.set("num","123");
+    alert("hello");
+  });
+</script>
 </body>
 </html>
