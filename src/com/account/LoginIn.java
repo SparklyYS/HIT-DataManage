@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -57,6 +59,8 @@ public class LoginIn extends ActionSupport implements ServletRequestAware {
 	public String matchAccount() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		HttpServletResponse response = ServletActionContext.getResponse(); 
+		response.setContentType("application/msexcel;charset=UTF-8"); 
 		try {
 			String sqlcmd = "";
 			if (userName.contains("@")) {

@@ -8,8 +8,10 @@ import com.sql.*;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 public class SignUp extends ActionSupport implements ServletRequestAware {
@@ -53,6 +55,8 @@ public class SignUp extends ActionSupport implements ServletRequestAware {
 	public String createAccount() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		HttpServletResponse response = ServletActionContext.getResponse(); 
+		response.setContentType("application/msexcel;charset=UTF-8"); 
 		try {
 			String sqlcmd = "select * from users where userName=? or userEmail=?";
 			SQLManage mysql;

@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
@@ -53,6 +56,8 @@ public class ShowEvent extends ActionSupport implements ServletRequestAware {
 	public String showEvent() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		HttpServletResponse response = ServletActionContext.getResponse(); 
+		response.setContentType("application/msexcel;charset=UTF-8"); 
 		String userName = session.getAttribute("userName").toString();
 		try {
 			String pdoName = userName + "_" + PDOName;

@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -22,6 +23,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -60,6 +62,8 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 	public String importPDO() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		HttpServletResponse response = ServletActionContext.getResponse(); 
+		response.setContentType("application/msexcel;charset=UTF-8"); 
 		String userName = session.getAttribute("userName").toString();
 		SQLManage mysql = null;
 		String sqlcmd;
@@ -113,7 +117,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
 						sqlcmd += ros.getCell(j).toString() + " varchar(100) not null,";
 					}
-					sqlcmd += "link varchar(100) not null,primary key (eventID))";
+					sqlcmd += "link varchar(100) not null,primary key (eventID)) charset=utf8";
 					mysql = new SQLManage(sqlcmd);
 					mysql.executeUpdate();
 					sqlcmd = "insert into " + userName + "_" + sheetName + " (";
