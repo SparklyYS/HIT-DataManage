@@ -160,16 +160,12 @@
 					<div class="widget-content padded">
 						<s:iterator value="pdoHeaders.keySet()" var="pdo">
 							<div class="external-events">
-								<div class="heading">
-									<i class="icon-briefcase"></i>
-									<s:property value="#pdo" />
-								</div>
+								<div class="heading" id="PDOName"><i class="icon-briefcase"></i><s:property value="#pdo" /></div>
 								<s:iterator value="pdoHeaders[#pdo]" var="head">
-									<div class="form-group">
-										<label><b><s:property value="#head" /></b></label>
-										<input class="input form-control" name="data" id="event_title"
-											type="text" value="">
-									</div>
+								<div class="form-group">
+								<label><b><s:property value="#head" /></b></label>
+								<input class="input form-control" name="data" id="event_title" type="text" value="">
+								</div>
 								</s:iterator>
 							</div>
 						</s:iterator>
@@ -179,5 +175,24 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		$('#event_add').click(function(){
+			var data = "";
+			$('.external-events').each(function(){
+				//Add PDOName to the str
+				data += $(this).find('#PDOName').text();
+				var InputList = $(this).find("input");
+				InputList.each(function(){
+				data = data + "&" + $(this).val(); //Add Property value to the str
+				});
+				data += "//";
+				// alert(data);
+			});
+			data = data.substring(0, data.length-2);
+			$.cookie("data", data);
+			window.location='ShowPDOAction';
+		}
+	</script>
 </body>
 </html>
