@@ -20,6 +20,16 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 	private String PDOName;
 	private HttpServletRequest request;
 	private String tag;
+	private String[] dimension;
+	
+	
+	public String[] getDimension() {
+		return dimension;
+	}
+
+	public void setDimension(String[] dimension) {
+		this.dimension = dimension;
+	}
 
 	public String getTag() {
 		return tag;
@@ -60,7 +70,7 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		try {
-			String sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts,tag) values (?,?,?,?)";
+			String sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts,tag) values (?,?,?,?,?)";
 			SQLManage mysql = new SQLManage(sqlcmd);
 			Timestamp t = new Timestamp(new Date().getTime());
 			mysql.setString(1, PDOName);
