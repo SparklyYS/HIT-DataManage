@@ -170,7 +170,7 @@
 							<tbody>
 								<tr name="property">
 									<td name="No" width=6%>属性ID: 1</td>
-									<td><input id="property" name="headers"
+									<td><input id="property" name="headers[0]"
 										class="form-control"></td>
 									<td>
 										<button id="Button2" onclick="deltr(this)"

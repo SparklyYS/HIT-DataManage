@@ -201,7 +201,7 @@
 														<s:param name="eventID" value="%{#row[0]}"></s:param>
 													</s:url> --%>
 													<span class="deleteclass">
-														<button class="btn btn-xs btn-danger filter-can">
+														<button data-title="delete" data-toggle="modal" data-target="#delete" class="btn btn-xs btn-danger filter-can">
 															<i class="icon-remove"></i>删除
 														</button>
 													</span>
@@ -255,7 +255,7 @@
 	        <h4 class="modal-title custom_align" id="Heading">提示</h4>
 	      </div>
 	      <!-- Begin the form 指定action -->
-	      <form name="form" action="deleteclass" method="post">
+	      <form name="form" action="DeleteEventAction" method="post">
 	      <div class="modal-body" id="Delete_Modal">
 	       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>您确定要删除该事件吗？</div>
 	      	</div>

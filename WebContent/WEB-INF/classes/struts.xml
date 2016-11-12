@@ -77,14 +77,6 @@
 			</result>
 		</action>
 		
-		<action name="ChooseLinkAction"
-			class="com.myfile.ChooseLinkPDO"
-			method="choose">
-			<result>
-				/ChooseLinkPDO.jsp
-			</result>
-		</action>
-		
 		<action name="ShowHeaderAction"
 			class="com.myfile.ShowHeader"
 			method="showHeader">
