@@ -17,9 +17,17 @@ import com.sql.SQLManage;
 
 public class ShowHeader extends ActionSupport implements ServletRequestAware {
 	private String status;
-	private List<String> allPDO = new ArrayList<String>();
+	private List<String> choosedPDO = new ArrayList<String>();
 	private HashMap<String, ArrayList<String>> pdoHeaders = new HashMap<>();
 	private HttpServletRequest request;
+
+	public List<String> getChoosedPDO() {
+		return choosedPDO;
+	}
+
+	public void setChoosedPDO(List<String> choosedPDO) {
+		this.choosedPDO = choosedPDO;
+	}
 
 	public HttpServletRequest getServletRequest() {
 		return request;
@@ -37,14 +45,6 @@ public class ShowHeader extends ActionSupport implements ServletRequestAware {
 		this.pdoHeaders = pdoHeaders;
 	}
 
-	public List<String> getAllPDO() {
-		return allPDO;
-	}
-
-	public void setAllPDO(List<String> allPDO) {
-		this.allPDO = allPDO;
-	}
-
 	public String showHeader() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
@@ -58,14 +58,14 @@ public class ShowHeader extends ActionSupport implements ServletRequestAware {
 			ResultSetMetaData column;
 			int columnCount;
 			ArrayList<String> tmp;
-			for (String pdoName : allPDO) {
+			for (String pdoName : choosedPDO) {
 				tmp = new ArrayList<String>();
 				sqlcmd = "select * from " + userName + "_" + pdoName;
 				mysql = new SQLManage(sqlcmd);
 				mydata = mysql.executeQuery();
 				column = mydata.getMetaData();
 				columnCount = column.getColumnCount();
-				for (int i = 1; i <= columnCount; i++) {
+				for (int i = 2; i < columnCount; i++) {
 					tmp.add(column.getColumnName(i));
 				}
 				pdoHeaders.put(pdoName, tmp);
