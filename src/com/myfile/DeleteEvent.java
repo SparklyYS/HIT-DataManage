@@ -88,6 +88,21 @@ public class DeleteEvent extends ActionSupport implements ServletRequestAware {
 			mysql = new SQLManage(sqlcmd);
 			mysql.setInteger(1, eventID);
 			mysql.executeUpdate();
+			sqlcmd = "select * from pdos where userName=? and PDOName=?";
+			mysql = new SQLManage(sqlcmd);
+			mysql.setString(1, userName);
+			mysql.setString(2, PDOName);
+			mydata = mysql.executeQuery();
+			int count = 0;
+			if(mydata.next()) {
+				count = mydata.getInt("counts");
+			}
+			sqlcmd = "update pdos set counts=? where userName=? and PDOName=?";
+			mysql = new SQLManage(sqlcmd);
+			mysql.setInteger(1, count-1);
+			mysql.setString(2, userName);
+			mysql.setString(3, PDOName);
+			mysql.executeUpdate();
 			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
 			mysql = new SQLManage(sqlcmd);
 			Timestamp t = new Timestamp(new Date().getTime());

@@ -78,3 +78,15 @@
 
 ####内容
 * 主要是尝试解决excel导入时候乱码以及数据库乱码问题
+
+###提交2.3
+`提交名为“fix data format problem on both xls and xlsx”`
+
+####内容
+* 终于解决了xls和xlsx文件中所有日期格式处理的问题
+
+###提交2.4
+`提交名为“complete events counts”`
+
+####内容
+* 实现对event个数的计数问题

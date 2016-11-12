@@ -4,11 +4,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,18 +56,18 @@ public class EditEvent extends ActionSupport implements ServletRequestAware {
 		this.request = request;
 	}
 
-	public String editEvent() {
+	public String editEvent() throws ParseException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		HttpServletResponse response = ServletActionContext.getResponse(); 
-		response.setContentType("application/msexcel;charset=UTF-8"); 
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		try {
-			String sqlcmd,link="";
+			String sqlcmd, link = "";
 			SQLManage mysql;
 			ResultSet mydata;
 			ResultSetMetaData column;
-			int columnCount;
+			int columnCount, timeIndex = 0;
 			ArrayList<String> head = new ArrayList<>();
 			sqlcmd = "select * from " + userName + "_" + PDOName;
 			mysql = new SQLManage(sqlcmd);
@@ -76,12 +76,15 @@ public class EditEvent extends ActionSupport implements ServletRequestAware {
 			columnCount = column.getColumnCount();
 			for (int i = 2; i < columnCount; i++) {
 				head.add(column.getColumnName(i));
+				if (column.getColumnName(i).equals("时间")) {
+					timeIndex = i;
+				}
 			}
 			sqlcmd = "select * from " + userName + "_" + PDOName + " where eventID=?";
 			mysql = new SQLManage(sqlcmd);
 			mysql.setInteger(1, eventID);
 			mydata = mysql.executeQuery();
-			if(mydata.next()) {
+			if (mydata.next()) {
 				link = mydata.getString("link");
 			}
 			sqlcmd = "update " + userName + "_" + PDOName + " set ";
@@ -91,16 +94,22 @@ public class EditEvent extends ActionSupport implements ServletRequestAware {
 			sqlcmd += "link=?";
 			sqlcmd += " where eventID=?";
 			mysql = new SQLManage(sqlcmd);
-			for(int i = 1;i <= data.size();i++) {
-				mysql.setString(i, data.get(i-1));
+			for (int i = 1; i <= data.size(); i++) {
+				if (timeIndex == i + 1) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					java.sql.Date d =  new java.sql.Date(sdf.parse(data.get(i-1)).getTime());
+					mysql.setDate(i, d);
+				} else {
+					mysql.setString(i, data.get(i - 1));
+				}
 			}
-			mysql.setString(data.size()+1, link);
-			mysql.setInteger(data.size()+2, eventID);
+			mysql.setString(data.size() + 1, link);
+			mysql.setInteger(data.size() + 2, eventID);
 			mysql.executeUpdate();
 			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
 			mysql = new SQLManage(sqlcmd);
 			Timestamp t = new Timestamp(new Date().getTime());
-			mysql.setString(1, "编辑了PDO："+PDOName);
+			mysql.setString(1, "编辑了PDO：" + PDOName);
 			mysql.setTimestamp(2, t);
 			mysql.setString(3, userName);
 			mysql.executeUpdate();
