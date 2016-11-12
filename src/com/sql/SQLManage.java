@@ -1,6 +1,7 @@
 package com.sql;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,6 +39,10 @@ public class SQLManage extends ActionSupport {
 		pstmt.setInt(index, i);
 	}
 
+	public void setDate(int index, Date s) throws SQLException {
+		pstmt.setDate(index, s);
+	}
+		
 	public ResultSet executeQuery() throws SQLException {
 		return pstmt.executeQuery();
 	}

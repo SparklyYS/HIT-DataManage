@@ -19,6 +19,15 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 	private List<String> headers = new ArrayList<String>();
 	private String PDOName;
 	private HttpServletRequest request;
+	private String tag;
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 
 	public HttpServletRequest getServletRequest() {
 		return request;
@@ -47,17 +56,18 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 	public String addPDO() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		HttpServletResponse response = ServletActionContext.getResponse(); 
-		response.setContentType("application/msexcel;charset=UTF-8"); 
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		try {
-			String sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts) values (?,?,?,?)";
+			String sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts,tag) values (?,?,?,?)";
 			SQLManage mysql = new SQLManage(sqlcmd);
 			Timestamp t = new Timestamp(new Date().getTime());
 			mysql.setString(1, PDOName);
 			mysql.setTimestamp(2, t);
 			mysql.setString(3, userName);
 			mysql.setInteger(4, 0);
+			mysql.setString(5, tag);
 			mysql.executeUpdate();
 			String PDOTable = userName + "_" + PDOName;
 			sqlcmd = "create table " + PDOTable + " (";
@@ -65,9 +75,18 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 			for (String header : headers) {
 				sqlcmd += header + " varchar(100) not null,";
 			}
-			sqlcmd += "link varchar(100) not null,primary key (eventID)) charset=utf8";
+			if (tag.charAt(0) == '1') {
+				sqlcmd += "时间 date,";
+			}
+			if (tag.charAt(1) == '1') {
+				sqlcmd += "地点 varchar(100) not null,";
+			}
+			if (tag.charAt(2) == '1') {
+				sqlcmd += "人物 varchar(100) not null,";
+			}
+			sqlcmd += "link varchar(100) not null,";
+			sqlcmd += "primary key (eventID)) charset=utf8";
 			mysql = new SQLManage(sqlcmd);
-			System.out.println(sqlcmd);
 			mysql.executeUpdate();
 			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
 			mysql = new SQLManage(sqlcmd);

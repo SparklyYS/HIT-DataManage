@@ -25,6 +25,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
 
+
 public class ImportPDO extends ActionSupport implements ServletRequestAware {
 	private HttpServletRequest request;
 	private String status;
@@ -100,12 +101,13 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		SQLManage mysql = null;
-		String sqlcmd;
+		String sqlcmd,tag;
 		ResultSet mydata = null;
 		try {
 			Workbook book = WorkbookFactory.create((new FileInputStream(excelFile)));
 			int sheetNum = book.getNumberOfSheets();
 			for (int i = 0; i < sheetNum; i++) {
+				tag = "000";
 				Sheet sheet = book.getSheetAt(i);
 				String sheetName = sheet.getSheetName();
 				sqlcmd = "select * from pdos where userName=? and PDOName=?";
@@ -117,7 +119,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					sqlcmd = "insert into " + userName + "_" + sheetName + " (";
 					Row ros = sheet.getRow(0);
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
-						sqlcmd += ros.getCell(j).toString() + ",";
+						sqlcmd += ros.getCell(j).getRichStringCellValue().toString() + ",";
 					}
 					sqlcmd += "link";
 					sqlcmd += ") values (";
@@ -150,7 +152,28 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					sqlcmd += "eventID int not null auto_increment,";
 					Row ros = sheet.getRow(0);
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
-						sqlcmd += ros.getCell(j).toString() + " varchar(100) not null,";
+						switch(ros.getCell(j).getRichStringCellValue().toString()) {
+						case "时间" :
+							tag = "1" + tag.substring(1);
+							break;
+						case "地点" :
+							tag = tag.substring(0, 1) + "1" + tag.substring(2);
+							break;
+						case "人物" :
+							tag = tag.substring(0,2) + "1";
+							break;
+						default:
+							sqlcmd += ros.getCell(j).getRichStringCellValue().toString() + " varchar(100) not null,";	
+						}
+					}
+					if (tag.charAt(0) == '1') {
+						sqlcmd += "时间 date,";
+					}
+					if (tag.charAt(1) == '1') {
+						sqlcmd += "地点 varchar(100) not null,";
+					}
+					if (tag.charAt(2) == '1') {
+						sqlcmd += "人物 varchar(100) not null,";
 					}
 					sqlcmd += "link varchar(100) not null,primary key (eventID)) charset=utf8";
 					mysql = new SQLManage(sqlcmd);
