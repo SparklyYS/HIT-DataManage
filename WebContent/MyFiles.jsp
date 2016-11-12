@@ -271,7 +271,7 @@
 												</s:a></td>
 											<td><s:property value="#pdo.count" /></td>
 											<td class="hidden-xs"><s:date name="#pdo.t"
-													format="yyyy/MM/dd" /></td>
+													format="yyyy/MM/dd HH:mm:ss" /></td>
 											<td style="display: none">2016/11/3</td>
 											<td style="display: none">Approved</td>
 											<td class="actions"><s:url var="deleteurl"

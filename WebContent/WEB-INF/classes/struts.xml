@@ -61,6 +61,13 @@
 			</result>			
 		</action>
 		
+		<action name="ChooseTagAction"
+			class="com.myfile.ChooseTag" >
+			<result>
+				/AddPDO.jsp
+			</result>
+		</action>
+		
 		<action name="AddPDOAction"
 			class="com.myfile.AddPDO"
 			method="addPDO">

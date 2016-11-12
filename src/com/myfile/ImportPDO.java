@@ -2,27 +2,23 @@ package com.myfile;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -32,8 +28,8 @@ import com.sql.SQLManage;
 public class ImportPDO extends ActionSupport implements ServletRequestAware {
 	private HttpServletRequest request;
 	private String status;
-	private File excelFile; 
-	private String excelFileFileName; 
+	private File excelFile;
+	private String excelFileFileName;
 
 	public File getExcelFile() {
 		return excelFile;
@@ -59,11 +55,49 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 		this.request = request;
 	}
 
+	public String toFormat(Cell cell) {
+		String result = "";
+		switch (cell.getCellType()) {
+		case Cell.CELL_TYPE_NUMERIC:
+			short format = cell.getCellStyle().getDataFormat();
+			SimpleDateFormat sdf = null;
+			if (format == 14 || format == 31 || format == 57 || format == 58) {
+				sdf = new SimpleDateFormat("yyyy-MM-dd");
+				double value = cell.getNumericCellValue();
+				Date date = org.apache.poi.ss.usermodel.DateUtil.getJavaDate(value);
+				result = sdf.format(date);
+			} else if (format == 20 || format == 32) {
+				sdf = new SimpleDateFormat("HH:mm");
+				double value = cell.getNumericCellValue();
+				Date date = org.apache.poi.ss.usermodel.DateUtil.getJavaDate(value);
+				result = sdf.format(date);
+			}
+			else {
+				double value = cell.getNumericCellValue();
+				int tmp = (int) value;
+				result = Double.toString(value);
+				if (result.endsWith(".0")) {
+					result = Integer.toString(tmp);
+				}
+			}
+			break;
+		case Cell.CELL_TYPE_STRING:
+			result = cell.getRichStringCellValue().toString();
+			break;
+		case Cell.CELL_TYPE_BLANK:
+			result = "";
+		default:
+			result = "";
+			break;
+		}
+		return result;
+	}
+
 	public String importPDO() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		HttpServletResponse response = ServletActionContext.getResponse(); 
-		response.setContentType("application/msexcel;charset=UTF-8"); 
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		SQLManage mysql = null;
 		String sqlcmd;
@@ -85,7 +119,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					for (int j = 0; j < ros.getLastCellNum(); j++) {
 						sqlcmd += ros.getCell(j).toString() + ",";
 					}
-					sqlcmd+="link";
+					sqlcmd += "link";
 					sqlcmd += ") values (";
 					String sql_copy = sqlcmd;
 					for (int j = 1; j <= sheet.getLastRowNum(); j++) {
@@ -97,9 +131,10 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 						sqlcmd += "?)";
 						mysql = new SQLManage(sqlcmd);
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
-							mysql.setString(k+1, ros.getCell(k).toString());
+							String result = toFormat(ros.getCell(k));
+							mysql.setString(k + 1, result);
 						}
-						mysql.setString(ros.getLastCellNum()+1, "");
+						mysql.setString(ros.getLastCellNum() + 1, "");
 						mysql.executeUpdate();
 					}
 				} else {
@@ -137,22 +172,22 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 						sqlcmd += "?)";
 						mysql = new SQLManage(sqlcmd);
 						for (int k = 0; k < ros.getLastCellNum(); k++) {
-							mysql.setString(k+1, ros.getCell(k).toString());
+							String result = toFormat(ros.getCell(k));
+							mysql.setString(k + 1, result);
 						}
-						mysql.setString(ros.getLastCellNum()+1, "");
+						mysql.setString(ros.getLastCellNum() + 1, "");
 						mysql.executeUpdate();
 					}
 				}
-			} 
+			}
 			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
 			mysql = new SQLManage(sqlcmd);
 			Timestamp t = new Timestamp(new Date().getTime());
-			mysql.setString(1, "从excel文件导入PDO："+excelFileFileName);
+			mysql.setString(1, "从excel文件导入PDO：" + excelFileFileName);
 			mysql.setTimestamp(2, t);
 			mysql.setString(3, userName);
 			mysql.executeUpdate();
 			status = SUCCESS;
-			book.close();
 			mysql.close();
 		} catch (ClassNotFoundException e) {
 			status = ERROR;
