@@ -299,7 +299,11 @@
 	          $('#Dynamic_Modal').append("<div class='form-group' style='display:none'><label>"+headers[0]+"</label><input class='form-control' type='text' name='eventID' value="+Cell+"></input></div>");
 
 	          }else{
-	          $('#Dynamic_Modal').append("<div class='form-group'><label>"+headers[index+1]+"</label><input class='form-control' type='text' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");
+	        	 if(headers[index+1] == "时间"){ //Add Calendar
+	          		$('#Dynamic_Modal').append("<div class='form-group'><label><b>"+headers[index+1]+"</b></label><input class='form-control' type='date' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");
+	        	 }else{
+		          	$('#Dynamic_Modal').append("<div class='form-group'><label><b>"+headers[index+1]+"</b></label><input class='form-control' type='text' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");
+	        	 }
 	          }
 	          index++;
 	        });
