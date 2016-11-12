@@ -162,13 +162,14 @@
 								<i class="icon-plus"></i>添加属性
 							</button>
 						</div>
+						
 						<table class="table table-bordered table-striped"
 							id="tabletemplate" style="display: none">
 							<thead>
 							</thead>
 							<tbody>
-								<tr>
-									<td name="No" width=6%></td>
+								<tr name="property">
+									<td name="No" width=6%>属性ID: 1</td>
 									<td><input id="property" name="headers"
 										class="form-control"></td>
 									<td>
@@ -178,6 +179,7 @@
 								</tr>
 							</tbody>
 						</table>
+							
 						<div class="widget-content padded clearfix">
 							<form action="AddPDOAction" method="post" name="form">
 								<table class="table table-bordered table-striped"
@@ -186,13 +188,13 @@
 										<tr>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="pdobody">
 										<tr>
 											<td width=6%>PDO名称</td>
 											<td><input name="PDOName" class="form-control">
 											</td>
 										</tr>
-										<tr>
+<!-- 										<tr>
 											<td name="No" width=6%>属性ID: 1</td>
 											<td><input id="property" name="headers[0]"
 												class="form-control"></td>
@@ -200,7 +202,7 @@
 												<button id="Button2" onclick="deltr(this)"
 													class='btn btn-danger btn-sm glyphicon glyphicon-remove row-remove'></button>
 											</td>
-										</tr>
+										</tr> -->
 									</tbody>
 								</table>
 								<button id="submit" type="submit"
@@ -216,7 +218,24 @@
 	
 	<script>
 		$(document).ready(function(){
-			alert($.cookie("str"));
+			//alert($.cookie("tag"));
+			var tag = $.cookie("tag");
+	  		if(tag[0] == '1'){
+				$('#pdobody').append("<tr><td width='6%'>维度</td><td><input type='text' name='dimension' class='form-control' value='时间' readonly='true'></td></tr>");
+			}
+			if(tag[1] == '1'){
+				$('#pdobody').append("<tr><td width='6%'>维度</td><td><input type='text' name='dimension' class='form-control' value='地点' readonly='true'></td></tr>");
+			}
+			if(tag[2] == '1'){
+				$('#pdobody').append("<tr><td width='6%'>维度</td><td><input type='text' name='dimension' class='form-control' value='人物' readonly='true'></td></tr>");
+			}
+			
+			$('#pdobody').append("<tr style='display:none'><td width='6%'>Status</td><td><input type='text' name='tag' class='form-control' value="+tag+"></td></tr>");
+			$('#tabletemplate tbody tr').clone()
+			.appendTo('#dynamictable tbody');
+			
+			//delete the tag cookie
+			$.cookie("tag", null);
 		});
 	</script>
 	
@@ -228,8 +247,8 @@
 		}
 		
 		function ChangeIndex() {
-			var index = -1;
-			$('#dynamictable tbody tr').each(
+			var index = 0;
+			$("#dynamictable tbody tr[name='property']").each(
 					function() {
 						$(this).find("td[name='No']").html(
 								"属性ID: " + (index + 1));

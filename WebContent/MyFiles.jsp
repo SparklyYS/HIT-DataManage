@@ -375,15 +375,15 @@
 					<table>
 						<tbody>
 							<tr>
-								<td><label><input class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label></td>
+								<td><label><input id="time" class="tbox" name="time" type="checkbox" value="option1"><span></span></label></td>
 								<td>时间</td>
 							</tr>
 							<tr>
-								<td><label><input class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label></td>
+								<td><label><input id="place" class="tbox" name="place" type="checkbox" value="option1"><span></span></label></td>
 								<td>地点</td>
 							</tr>
 							<tr>
-								<td><label><input class="tbox" name="optionsRadios1" type="checkbox" value="option1"><span></span></label></td>
+								<td><label><input id="person" class="tbox" name="person" type="checkbox" value="option1"><span></span></label></td>
 								<td>人物</td>
 							</tr>
 						</tbody>
@@ -391,7 +391,7 @@
 				</div>
 				<!-- End the Modal Contents  -->
 				<div class="modal-footer ">
-					<button type="submit" class="btn btn-warning btn-lg"
+					<button id="DimensionBtn" type="button" class="btn btn-warning btn-lg"
 							style="width: 100%;">
 						<span class="glyphicon glyphicon-ok-sign">确定</span>
 					</button>
@@ -453,7 +453,7 @@
 	  $('#AddBtn').click(function(){
 	    var headers = [];
 	    $('.tbox').each(function(){
-	      if($(this).is(':checked')){
+	      if($(this).is(':checked')){ //if the checkbox is checked
 	         var header = $(this).parent().parent().parent().find("td:nth-child(2)").text();
 	         headers.push(header); //Add to the header array
 	      }
@@ -476,6 +476,34 @@
 <script type="text/javascript">
 	//TODO
 	//Add Some JQuery Code to get the status about the checkbox then transport to AddPDO.jsp
+	$('#DimensionBtn').click(function(){
+		var tag = "";
+		//check the time
+		if($('#time').is(':checked')){
+			tag += '1';
+		}else{
+			tag += '0';
+		}
+		
+		//check the place
+		if($('#place').is(':checked')){
+			tag += '1';
+		}else{
+			tag += '0';
+		}
+		
+		//check the person
+		if($('#person').is(':checked')){
+			tag += '1';
+		}else{
+			tag += '0';
+		}
+		
+		//alert(tag);
+		//Add tag to the cookie
+		$.cookie("tag", tag);
+		location.href="AddPDO.jsp"
+	});
 </script>
 </body>
 </html>
