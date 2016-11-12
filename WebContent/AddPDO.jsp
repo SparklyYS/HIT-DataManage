@@ -158,7 +158,7 @@
 						<div class="heading">
 							<i class="icon-tasks"></i>新建PDO
 							<button class="btn btn-sm btn-primary-outline pull-right"
-								id="add-row" onclick="Hello()">
+								id="add-row" onclick="AddRow()">
 								<i class="icon-plus"></i>添加属性
 							</button>
 						</div>
@@ -220,16 +220,15 @@
 		$(document).ready(function(){
 			//alert($.cookie("tag"));
 			var tag = $.cookie("tag");
-	  		if(tag[0] == '1'){
-				$('#pdobody').append("<tr><td width='6%'>维度</td><td><input type='text' name='dimension' class='form-control' value='时间' readonly='true'></td></tr>");
-			}
-			if(tag[1] == '1'){
-				$('#pdobody').append("<tr><td width='6%'>维度</td><td><input type='text' name='dimension' class='form-control' value='地点' readonly='true'></td></tr>");
-			}
-			if(tag[2] == '1'){
-				$('#pdobody').append("<tr><td width='6%'>维度</td><td><input type='text' name='dimension' class='form-control' value='人物' readonly='true'></td></tr>");
-			}
 			
+			//Add the PDO dimensions
+			var InputVal = ["时间", "地点","人物"];
+			for(var i = 0; i < tag.length; i++){
+				if(tag[i] == '1'){
+					$('#pdobody').append("<tr><td width='6%'>维度</td><td><input type='text' name='dimension' class='form-control' value="+InputVal[i]+" readonly='true'></td></tr>");
+				}
+			}
+		
 			$('#pdobody').append("<tr style='display:none'><td width='6%'>Status</td><td><input type='text' name='tag' class='form-control' value="+tag+"></td></tr>");
 			$('#tabletemplate tbody tr').clone()
 			.appendTo('#dynamictable tbody');
@@ -240,7 +239,7 @@
 	</script>
 	
 	<script>
-		function Hello() {
+		function AddRow() {
 			$('#tabletemplate tbody tr').clone()
 					.appendTo('#dynamictable tbody');
 			ChangeIndex();

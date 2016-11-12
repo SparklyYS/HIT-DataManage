@@ -372,6 +372,7 @@
 				</div>
 				<!-- Contents should be follow the real data -->
 				<div class="modal-body">
+					<div style="padding-left:250px">
 					<table>
 						<tbody>
 							<tr>
@@ -388,6 +389,7 @@
 							</tr>
 						</tbody>
 					</table>
+					</div>
 				</div>
 				<!-- End the Modal Contents  -->
 				<div class="modal-footer ">
