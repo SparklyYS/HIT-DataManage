@@ -95,9 +95,9 @@ public class EditEvent extends ActionSupport implements ServletRequestAware {
 			sqlcmd += " where eventID=?";
 			mysql = new SQLManage(sqlcmd);
 			for (int i = 1; i <= data.size(); i++) {
-				if (timeIndex == i - 1) {
+				if (timeIndex == i + 1) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					java.sql.Date d = (java.sql.Date) sdf.parse(data.get(data.size()));
+					java.sql.Date d =  new java.sql.Date(sdf.parse(data.get(i-1)).getTime());
 					mysql.setDate(i, d);
 				} else {
 					mysql.setString(i, data.get(i - 1));

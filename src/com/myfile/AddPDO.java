@@ -76,7 +76,7 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 				sqlcmd += header + " varchar(100) not null,";
 			}
 			if (tag.charAt(0) == '1') {
-				sqlcmd += "时间 date,";
+				sqlcmd += "时间 date not null,";
 			}
 			if (tag.charAt(1) == '1') {
 				sqlcmd += "地点 varchar(100) not null,";

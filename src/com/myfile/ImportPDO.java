@@ -20,11 +20,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.components.Else;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.sql.SQLManage;
-
 
 public class ImportPDO extends ActionSupport implements ServletRequestAware {
 	private HttpServletRequest request;
@@ -72,6 +72,11 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 				double value = cell.getNumericCellValue();
 				Date date = org.apache.poi.ss.usermodel.DateUtil.getJavaDate(value);
 				result = sdf.format(date);
+			} else if (format == 22){
+				sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				double value = cell.getNumericCellValue();
+				Date date = org.apache.poi.ss.usermodel.DateUtil.getJavaDate(value);
+				result = sdf.format(date);
 			}
 			else {
 				double value = cell.getNumericCellValue();
@@ -101,7 +106,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		SQLManage mysql = null;
-		String sqlcmd,tag;
+		String sqlcmd, tag;
 		ResultSet mydata = null;
 		try {
 			Workbook book = WorkbookFactory.create((new FileInputStream(excelFile)));
@@ -116,9 +121,17 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 				mysql.setString(2, sheetName);
 				mydata = mysql.executeQuery();
 				if (mydata.next()) {
+					int count = mydata.getInt("counts");
+					sqlcmd = "update pdos set counts=? where userName=? and PDOName=?";
+					mysql = new SQLManage(sqlcmd);
+					mysql.setInteger(1, count+sheet.getLastRowNum());
+					mysql.setString(2, userName);
+					mysql.setString(3, sheetName);
+					mysql.executeUpdate();
 					sqlcmd = "insert into " + userName + "_" + sheetName + " (";
 					Row ros = sheet.getRow(0);
-					for (int j = 0; j < ros.getLastCellNum(); j++) {
+					int columnNum = ros.getLastCellNum();
+					for (int j = 0; j < columnNum; j++) {
 						sqlcmd += ros.getCell(j).getRichStringCellValue().toString() + ",";
 					}
 					sqlcmd += "link";
@@ -127,47 +140,56 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					for (int j = 1; j <= sheet.getLastRowNum(); j++) {
 						sqlcmd = sql_copy;
 						ros = sheet.getRow(j);
-						for (int k = 0; k < ros.getLastCellNum(); k++) {
+						for (int k = 0; k < columnNum; k++) {
 							sqlcmd += "?,";
 						}
 						sqlcmd += "?)";
 						mysql = new SQLManage(sqlcmd);
-						for (int k = 0; k < ros.getLastCellNum(); k++) {
+						for (int k = 0; k < columnNum; k++) {
 							String result = toFormat(ros.getCell(k));
 							mysql.setString(k + 1, result);
 						}
-						mysql.setString(ros.getLastCellNum() + 1, "");
+						mysql.setString(columnNum + 1, "");
 						mysql.executeUpdate();
 					}
 				} else {
-					sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts) values (?,?,?,?)";
+					sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts,tag) values (?,?,?,?,?)";
 					mysql = new SQLManage(sqlcmd);
 					Timestamp t = new Timestamp(new Date().getTime());
+					Row ros = sheet.getRow(0);
+					int columnNum = ros.getLastCellNum();
+					for (int j = 0; j < columnNum; j++) {
+						switch (ros.getCell(j).getRichStringCellValue().toString()) {
+						case "时间":
+							tag = "1" + tag.substring(1);
+							break;
+						case "地点":
+							tag = tag.substring(0, 1) + "1" + tag.substring(2);
+							break;
+						case "人物":
+							tag = tag.substring(0, 2) + "1";
+							break;
+						default:
+							;
+						}
+					}
 					mysql.setString(1, sheetName);
 					mysql.setTimestamp(2, t);
 					mysql.setString(3, userName);
-					mysql.setInteger(4, 0);
+					mysql.setInteger(4, sheet.getLastRowNum());
+					mysql.setString(5, tag);
 					mysql.executeUpdate();
 					sqlcmd = "create table " + userName + "_" + sheetName + " (";
 					sqlcmd += "eventID int not null auto_increment,";
-					Row ros = sheet.getRow(0);
-					for (int j = 0; j < ros.getLastCellNum(); j++) {
-						switch(ros.getCell(j).getRichStringCellValue().toString()) {
-						case "时间" :
-							tag = "1" + tag.substring(1);
-							break;
-						case "地点" :
-							tag = tag.substring(0, 1) + "1" + tag.substring(2);
-							break;
-						case "人物" :
-							tag = tag.substring(0,2) + "1";
-							break;
-						default:
-							sqlcmd += ros.getCell(j).getRichStringCellValue().toString() + " varchar(100) not null,";	
+					for (int j = 0; j < columnNum; j++) {
+						if (!ros.getCell(j).getRichStringCellValue().toString().equals("时间")
+								&& !ros.getCell(j).getRichStringCellValue().toString().equals("地点")
+								&& !ros.getCell(j).getRichStringCellValue().toString().equals("人物")) {
+							sqlcmd += ros.getCell(j).getRichStringCellValue().toString() + " varchar(100) not null,";
 						}
 					}
 					if (tag.charAt(0) == '1') {
-						sqlcmd += "时间 date,";
+						sqlcmd += "时间 date not null,";
 					}
 					if (tag.charAt(1) == '1') {
 						sqlcmd += "地点 varchar(100) not null,";
@@ -180,7 +202,7 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					mysql.executeUpdate();
 					sqlcmd = "insert into " + userName + "_" + sheetName + " (";
 					ros = sheet.getRow(0);
-					for (int j = 0; j < ros.getLastCellNum(); j++) {
+					for (int j = 0; j < columnNum; j++) {
 						sqlcmd += ros.getCell(j).toString() + ",";
 					}
 					sqlcmd = sqlcmd + "link";
@@ -189,16 +211,16 @@ public class ImportPDO extends ActionSupport implements ServletRequestAware {
 					for (int j = 1; j <= sheet.getLastRowNum(); j++) {
 						sqlcmd = sql_copy;
 						ros = sheet.getRow(j);
-						for (int k = 0; k < ros.getLastCellNum(); k++) {
+						for (int k = 0; k < columnNum; k++) {
 							sqlcmd += "?,";
 						}
 						sqlcmd += "?)";
 						mysql = new SQLManage(sqlcmd);
-						for (int k = 0; k < ros.getLastCellNum(); k++) {
+						for (int k = 0; k < columnNum; k++) {
 							String result = toFormat(ros.getCell(k));
 							mysql.setString(k + 1, result);
 						}
-						mysql.setString(ros.getLastCellNum() + 1, "");
+						mysql.setString(columnNum + 1, "");
 						mysql.executeUpdate();
 					}
 				}
