@@ -81,7 +81,7 @@
 			class="com.myfile.ShowHeader"
 			method="showHeader">
 			<result>
-				/ShowHeader.jsp
+				/AddEvent.jsp
 			</result>
 		</action>
 		

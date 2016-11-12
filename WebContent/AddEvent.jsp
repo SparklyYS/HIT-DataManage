@@ -131,10 +131,10 @@
 			<div class="container-fluid main-nav clearfix">
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href="HomeAction"><span
-								aria-hidden="true" class="se7en-home"></span>主页</a></li>
-						<li><a  class="current" href="ShowPDOAction"> <span aria-hidden="true"
-								class="se7en-forms"></span>我的个人数据
+						<li><a href="HomeAction"><span aria-hidden="true"
+								class="se7en-home"></span>主页</a></li>
+						<li><a class="current" href="ShowPDOAction"> <span
+								aria-hidden="true" class="se7en-forms"></span>我的个人数据
 						</a></li>
 						<li><a href=""> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
@@ -152,32 +152,31 @@
 		<!-- End Navigation -->
 		<div class="container-fluid main-content">
 			<!-- Statistics -->
-		<div class="col-md-3 visible-md visible-lg">
-            <div class="widget-container fluid-height">
-              <div class="heading">
-                <i class="icon-calendar"></i>添加事件
-              </div>
-              <div class="widget-content padded">
-              <div class="external-events">
-              		<div class="heading">
-                        <i class="icon-briefcase"></i>饮食
-                    </div>
-                    <div class="form-group">
-                    <input class="input form-control" name="data" id="event_title" placeholder="1" type="text" value="">
-                    </div>
-                    <div class="form-group">
-                    <input class="input form-control" name="data" id="event_title" placeholder="2" type="text" value="">
-                    </div>
-                </div>
-               	<div class="external-events form-group">
-               		<div class="form-group">
-                    <input class="input form-control" name="data" id="event_title" placeholder="3" type="text" value="">
-                    </div>
-               	</div>
-               	<button class="btn btn-success" id="event_add">添加事件</button>
-              </div>
-            </div>
-          </div>
+			<div class="col-md-3 visible-md visible-lg">
+				<div class="widget-container fluid-height">
+					<div class="heading">
+						<i class="icon-calendar"></i>添加事件
+					</div>
+					<div class="widget-content padded">
+						<s:iterator value="pdoHeaders.keySet()" var="pdo">
+							<div class="external-events">
+								<div class="heading">
+									<i class="icon-briefcase"></i>
+									<s:property value="#pdo" />
+								</div>
+								<s:iterator value="pdoHeaders[#pdo]" var="head">
+									<div class="form-group">
+										<label><b><s:property value="#head" /></b></label>
+										<input class="input form-control" name="data" id="event_title"
+											type="text" value="">
+									</div>
+								</s:iterator>
+							</div>
+						</s:iterator>
+						<button class="btn btn-success" id="event_add">添加事件</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
