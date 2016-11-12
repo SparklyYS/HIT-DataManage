@@ -287,7 +287,7 @@
 								</tbody>
 							</table>
 						</div>
-						<form id="PdoForm" method="post" action ="">
+						<form id="PdoForm" method="post" action ="Error.jsp">
 		            	<div id="AddSuccess" class="pull-right" style="display: none">
 		                <button id="AddBtn" type="button" class="btn btn-success">
 		                  <i class="glyphicon glyphicon-ok-sign">
@@ -404,6 +404,13 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- End the choose dialog -->
+	
+  <script>
+  	$(document).ready(function(){
+  		alert("hello");
+  		$.cookie("status", "0");
+  	});
+  </script>
   
   <script>
   	$('.actions').each(function(){
@@ -423,9 +430,9 @@
   </script>
   
   <script type="text/javascript">
-      var status = 0;
 	  $('#AddEvent').click(function(){
-	    if(status == 0){ //fadeIn
+	    var status = $.cookie("status");
+	    if(status == "0"){ //fadeIn
 	      //Change the text in the button
 	      $(this).text("撤销添加");
 	      //Change the style of the button
@@ -435,7 +442,8 @@
 	      $('.tcheckbox').fadeIn();
 	      //fadeIn all AddSuccess btn
 	      $('#AddSuccess').fadeIn();
-	      status = 1;
+	      status = "1";
+	      $.cookie("status", status);
 	    }else{
 	      //Change the text in the button
 	      $(this).text("添加事件");
@@ -446,7 +454,8 @@
 	      $('.tcheckbox').fadeOut();
 	      //fadeOut all AddSuccess btn
 	      $('#AddSuccess').fadeOut();
-	      status = 0;
+	      status = "0";
+	      $.cookie("status", status);
 	    }
 	  });
   </script>
