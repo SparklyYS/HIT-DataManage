@@ -200,6 +200,7 @@
 			//alert(data);
 			$('#form').append("<input style='display:none' name='data' type='text' value="+data+">");
 			$('#form').submit();
+
 		});
 	</script>
 </body>

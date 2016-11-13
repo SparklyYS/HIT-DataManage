@@ -2,12 +2,26 @@
     pageEncoding="UTF-8"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>出错啦</title>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>消失在宇宙星空中的404页面</title>
+<link href="stylesheets/jq22.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<h1>别乱跳action</h1>
+
+<!-- 代码 开始 -->
+<div class="fullScreen" id="fullScreen">
+    <img class="rotating" src="images/spaceman.svg" />
+    <div class="pagenotfound-text">
+    <h1>Page lost in space</h1>
+    <h2><a href="index.jsp">Go back to the homepage</a></h2>
+    </div>
+    <canvas id="canvas2d"></canvas>
+</div>
+<script type="text/javascript" src="javascripts/jq22.js"></script>
+<!-- 代码 结束 -->
+
+
 </body>
 </html>

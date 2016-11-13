@@ -15,12 +15,13 @@ public class SQLManage extends ActionSupport {
 	private PreparedStatement pstmt = null;
 
 	public SQLManage(String sqlCmd) throws ClassNotFoundException, SQLException {
-		String url = "jdbc:mysql://localhost:3306/Account?characterEncoding=utf8";
-		String username = "root";
-		String password = "123456";
+		String url = "jdbc:mysql://localhost:3306/Account";
+		String username = "root";	
+		String password = "zhi";
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection(url, username, password);
 		pstmt = con.prepareStatement(sqlCmd);
+		
 	}
 
 	public void setString(int index, String str) throws SQLException {
