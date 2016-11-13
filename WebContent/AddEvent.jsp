@@ -171,6 +171,8 @@
 							</div>
 						</s:iterator>
 						<button class="btn btn-success" id="event_add">添加事件</button>
+						<form id="form" name="form" action="AddEventAction" method="post">
+						</form>
 					</div>
 				</div>
 			</div>
@@ -194,7 +196,11 @@
 				data += "/";
 				// alert(data);
 			});
-			data = data.substring(0, data.length-2);
+			data = data.substring(0, data.length-1);
+			//alert(data);
+			$('#form').append("<input style='display:none' name='data' type='text' value="+data+">");
+			$('#form').submit();
+
 		});
 	</script>
 </body>

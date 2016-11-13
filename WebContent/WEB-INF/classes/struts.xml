@@ -89,7 +89,7 @@
 			class="com.myfile.AddEvent"
 			method="addEvent">
 			<result type="redirectAction">
-				<param name="actionName">ShowEventAction</param>
+				<param name="actionName">ShowPDOAction</param>
 			</result>
 		</action>
 		
