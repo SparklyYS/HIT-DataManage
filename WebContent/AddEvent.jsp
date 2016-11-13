@@ -98,6 +98,7 @@
 <script src="javascripts/jquery.sparkline.min.js" type="text/javascript"></script>
 <script src="javascripts/main.js" type="text/javascript"></script>
 <script src="javascripts/respond.js" type="text/javascript"></script>
+<script src="./javascripts/jquery.cookie.js" type="text/javascript"></script>
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	name="viewport">
@@ -184,15 +185,20 @@
 				data += $(this).find('#PDOName').text();
 				var InputList = $(this).find("input");
 				InputList.each(function(){
-				data = data + "&" + $(this).val(); //Add Property value to the str
+					if($(this).val() == ""){
+						data = data + "&" + " ";
+					}else{
+						data = data + "&" + $(this).val();//Add Property value to the str
+					}
 				});
-				data += "//";
+				data += "/";
 				// alert(data);
 			});
 			data = data.substring(0, data.length-2);
 			$.cookie("data", data);
-			window.location='ShowPDOAction';
-		}
+			alert(data);
+			window.location='';
+		});
 	</script>
 </body>
 </html>
