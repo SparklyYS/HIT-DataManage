@@ -1,9 +1,11 @@
 package com.search;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -70,6 +72,8 @@ public class Search extends ActionSupport implements ServletRequestAware {
 			String sqlcmd;
 			SQLManage mysql;
 			ResultSet mydata;
+			ResultSetMetaData column;
+			int columnCount;
 			String[] parse = choice.split("\\/");
 			HashMap<String , String> pdos = new HashMap<>();
 			sqlcmd="select * from pdos where userName=?";
@@ -83,6 +87,8 @@ public class Search extends ActionSupport implements ServletRequestAware {
 			//开始遍历各个pdo
 			for(String PDOName : pdos.keySet()) {
 				if(belongTo(parse[0], pdos.get(PDOName))) {
+					HashMap<String, String> tmp = new HashMap<>();
+					tmp.put("PDOName", PDOName);
 					sqlcmd = "select * from " + userName+"_"+PDOName;
 					if(choice.charAt(1) == '1') {
 						sqlcmd = " 地点=?";
@@ -99,7 +105,19 @@ public class Search extends ActionSupport implements ServletRequestAware {
 							mysql.setString(i-1, parse[i]);
 						}
 					}
-					System.out.println(sqlcmd);
+					mydata = mysql.executeQuery();
+					column = mydata.getMetaData();
+					columnCount = column.getColumnCount();
+					List<String> headers = new ArrayList<>();
+					for (int i = 2; i <= columnCount; i++) {
+						headers.add(column.getColumnName(i));
+					}
+					while(mydata.next()) {
+						for(String head : headers) {
+							tmp.put(head, mydata.getString(head));
+						}
+					}
+					results.add(tmp);
 				}
 			}
 			status = SUCCESS;
