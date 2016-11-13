@@ -175,6 +175,12 @@
 				</div>
 			</div>
 		</div>
+		
+		<div style="display:none">
+		<form name="form" action="AddEventAction" method="post" id="AddEvent">
+			<input id="data" type="text" name="data">
+		</form>
+		</div>
 	</div>
 	
 	<script>
@@ -195,9 +201,11 @@
 				// alert(data);
 			});
 			data = data.substring(0, data.length-2);
-			$.cookie("data", data);
-			alert(data);
-			window.location='';
+			//$.cookie("data", data);
+			//alert(data);
+			//window.location='';
+			$('#data').attr(value, data);
+			$('#form').submit();
 		});
 	</script>
 </body>
