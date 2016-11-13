@@ -135,5 +135,13 @@
 			</result>
 		</action>
 		
+		<action name="SearchAction"
+			class="com.search.Search"
+			method="searchResult">
+			<result>
+				/Error.jsp
+			</result>
+		</action>
+		
    	</package>
 </struts>
