@@ -139,7 +139,7 @@
 						<li><a href="charts.html"> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
 						</a></li>
-						<li><a href="charts.html"> <span aria-hidden="true"
+						<li><a href="Search.jsp"> <span aria-hidden="true"
 								class="icon-search"></span>按维度搜索
 						</a></li>
 						<li><a href="charts.html"> <span aria-hidden="true"

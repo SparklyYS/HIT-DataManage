@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,23 +22,23 @@ import com.sql.SQLManage;
 public class Search extends ActionSupport implements ServletRequestAware {
 	private String status;
 	private HttpServletRequest request;
-	// private String choice;
-	private HashMap<ArrayList<String>, ArrayList<String>> results = new HashMap<>();
+	private String choice;
+	private ArrayList<TimeEvent> results = new ArrayList<>();
 
-	// public String getChoice() {
-	// return choice;
-	// }
-	//
-	// public void setChoice(String choice) {
-	// this.choice = choice;
-	// }
-
-	public HashMap<ArrayList<String>, ArrayList<String>> getResults() {
+	public ArrayList<TimeEvent> getResults() {
 		return results;
 	}
 
-	public void setResults(HashMap<ArrayList<String>, ArrayList<String>> results) {
+	public void setResults(ArrayList<TimeEvent> results) {
 		this.results = results;
+	}
+
+	public String getChoice() {
+		return choice;
+	}
+
+	public void setChoice(String choice) {
+		this.choice = choice;
 	}
 
 	public HttpServletRequest getServletRequest() {
@@ -68,7 +69,6 @@ public class Search extends ActionSupport implements ServletRequestAware {
 		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		// 前台编码格式为111/*&*/*/*
-		String choice = "100/2000-01-01&2002-02-03/ / ";
 		try {
 			String sqlcmd;
 			SQLManage mysql;
@@ -89,7 +89,7 @@ public class Search extends ActionSupport implements ServletRequestAware {
 				if (belongTo(parse[0], pdos.get(PDOName))) {
 					ArrayList<String> value = new ArrayList<>();
 					ArrayList<String> head = new ArrayList<>();
-					head.add(PDOName);
+					ArrayList<String> link = new ArrayList<>();
 					sqlcmd = "select * from " + userName + "_" + PDOName;
 					if (choice.charAt(1) == '1') {
 						sqlcmd += " where 地点=?";
@@ -111,9 +111,7 @@ public class Search extends ActionSupport implements ServletRequestAware {
 					mydata = mysql.executeQuery();
 					column = mydata.getMetaData();
 					columnCount = column.getColumnCount();
-					List<String> headers = new ArrayList<>();
-					for (int i = 2; i <= columnCount; i++) {
-						headers.add(column.getColumnName(i));
+					for (int i = 2; i < columnCount; i++) {
 						head.add(column.getColumnName(i));
 					}
 					while (mydata.next()) {
@@ -121,20 +119,31 @@ public class Search extends ActionSupport implements ServletRequestAware {
 							String[] times = parse[1].split("\\&");
 							String time = mydata.getString("时间");
 							if (time.compareTo(times[0]) >= 0 && time.compareTo(times[1]) <= 0) {
-								for (String h : headers) {
+								for (String h : head) {
 									value.add(mydata.getString(h));
+								}
+								String[] l = mydata.getString("link").split("\\&");
+								for (int i = 0; i < l.length; i++) {
+									link.add(l[i]);
 								}
 							}
 						} else {
-							for (String h : headers) {
+							for (String h : head) {
 								value.add(mydata.getString(h));
 							}
+							String[] l = mydata.getString("link").split("\\&");
+							for (int i = 0; i < l.length; i++) {
+								link.add(l[i]);
+							}
+						}
+						if (!value.isEmpty()) {
+							results.add(new TimeEvent(PDOName, head, value,link));
 						}
 					}
-					if (!value.isEmpty()) {
-						results.put(head, value);
-					}
 				}
+			}
+			if(choice.charAt(0) == '1') {
+				Collections.sort(results);
 			}
 			status = SUCCESS;
 			mysql.close();

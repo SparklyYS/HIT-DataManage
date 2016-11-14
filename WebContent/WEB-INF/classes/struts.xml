@@ -139,7 +139,7 @@
 			class="com.search.Search"
 			method="searchResult">
 			<result>
-				/Error.jsp
+				/test.jsp
 			</result>
 		</action>
 		

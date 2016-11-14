@@ -145,7 +145,7 @@
 						<li><a href="charts.html"> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
 						</a></li>
-						<li><a href="charts.html"> <span aria-hidden="true"
+						<li><a href="Search.jsp"> <span aria-hidden="true"
 								class="icon-search"></span>按维度搜索
 						</a></li>
 						<li><a href="charts.html"> <span aria-hidden="true"
@@ -300,6 +300,8 @@
 
 	          }else{
 	        	 if(headers[index+1] == "时间"){ //Add Calendar
+	        		var arr = Cell.split("-");
+	        	 	Cell = arr[0] + "/" + arr[1] + "/" + arr[2];
 	          		$('#Dynamic_Modal').append("<div class='form-group'><label><b>"+headers[index+1]+"</b></label><input class='form-control' type='date' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");
 	        	 }else{
 		          	$('#Dynamic_Modal').append("<div class='form-group'><label><b>"+headers[index+1]+"</b></label><input class='form-control' type='text' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");
@@ -314,7 +316,7 @@
   	<script type="text/javascript">
 	    $('.deleteclass').each(function(){
 	      var btn = $(this).children();
-	      btn.bind('click', function(event) {
+	      	btn.bind('click', function(event) {
 	        /* Act on the event */
 	        //delete Every rows before
 	        $('#Delete_Modal').find("div[class='form-group']").each(function(){
@@ -331,7 +333,6 @@
 	
 	        //Add EventID row
 	        $('#Delete_Modal').append("<div class='form-group' style='display:none'><input class='form-control' type='text' name='eventID' value="+EventID+"></input></div>");
-	
 	      });
 	    })
   	</script>
