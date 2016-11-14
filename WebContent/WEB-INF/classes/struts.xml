@@ -139,7 +139,10 @@
 			class="com.search.Search"
 			method="searchResult">
 			<result>
-				/test.jsp
+				/Search_Time.jsp
+			</result>
+			<result name="other">
+				/Search_Place.jsp
 			</result>
 		</action>
 		
@@ -147,7 +150,7 @@
 			class="com.search.ShowLink"
 			method="show">
 			<result>
-				/Error.jsp
+				/SingleResult.jsp
 			</result>
 		</action>
 		

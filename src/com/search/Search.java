@@ -87,7 +87,6 @@ public class Search extends ActionSupport implements ServletRequestAware {
 			// 开始遍历各个pdo
 			for (String PDOName : pdos.keySet()) {
 				if (belongTo(parse[0], pdos.get(PDOName))) {
-					ArrayList<String> value = new ArrayList<>();
 					ArrayList<String> head = new ArrayList<>();
 					ArrayList<String> link = new ArrayList<>();
 					sqlcmd = "select * from " + userName + "_" + PDOName;
@@ -115,6 +114,7 @@ public class Search extends ActionSupport implements ServletRequestAware {
 						head.add(column.getColumnName(i));
 					}
 					while (mydata.next()) {
+						ArrayList<String> value = new ArrayList<>();
 						if (choice.charAt(0) == '1') {
 							String[] times = parse[1].split("\\&");
 							String time = mydata.getString("时间");
@@ -144,8 +144,11 @@ public class Search extends ActionSupport implements ServletRequestAware {
 			}
 			if(choice.charAt(0) == '1') {
 				Collections.sort(results);
+				status = SUCCESS;
 			}
-			status = SUCCESS;
+			else {
+				status = "other";
+			}
 			mysql.close();
 		} catch (ClassNotFoundException e) {
 			status = ERROR;

@@ -21,9 +21,36 @@ public class ShowLink extends ActionSupport implements ServletRequestAware {
 	private String status;
 	private HttpServletRequest request;
 	private String link;
+	private String PDOName;
 	private ArrayList<String> headers = new ArrayList<>();
-	private ArrayList<String> value = new ArrayList<>();
+	private ArrayList<String> values = new ArrayList<>();
+	private ArrayList<String> links = new ArrayList<>();
 	
+	
+	public String getPDOName() {
+		return PDOName;
+	}
+
+	public void setPDOName(String pDOName) {
+		PDOName = pDOName;
+	}
+
+	public ArrayList<String> getLinks() {
+		return links;
+	}
+
+	public void setLinks(ArrayList<String> links) {
+		this.links = links;
+	}
+
+	public ArrayList<String> getValues() {
+		return values;
+	}
+
+	public void setValues(ArrayList<String> values) {
+		this.values = values;
+	}
+
 	public ArrayList<String> getHeaders() {
 		return headers;
 	}
@@ -32,13 +59,6 @@ public class ShowLink extends ActionSupport implements ServletRequestAware {
 		this.headers = headers;
 	}
 
-	public ArrayList<String> getValue() {
-		return value;
-	}
-
-	public void setValue(ArrayList<String> value) {
-		this.value = value;
-	}
 
 	public String getLink() {
 		return link;
@@ -68,7 +88,7 @@ public class ShowLink extends ActionSupport implements ServletRequestAware {
 			ResultSet mydata;
 			ResultSetMetaData column;
 			int columnCount;
-			headers.add(link.substring(0, link.indexOf("_")));
+			PDOName = link.substring(0, link.indexOf("_"));
 			String tableName = userName+"_"+link.substring(0, link.indexOf("_"));
 			String eventID = link.substring(link.indexOf("_") + 1);
 			sqlcmd = "select * from " + tableName + " where eventID=?";
@@ -77,14 +97,16 @@ public class ShowLink extends ActionSupport implements ServletRequestAware {
 			mydata = mysql.executeQuery();
 			column = mydata.getMetaData();
 			columnCount = column.getColumnCount();
-			List<String> head = new ArrayList<>();
-			for (int i = 2; i <= columnCount; i++) {
+			for (int i = 2; i < columnCount; i++) {
 				headers.add(column.getColumnName(i));
-				head.add(column.getColumnName(i));
 			}
 			if(mydata.next()) {
-				for (String h : head) {
-					value.add(mydata.getString(h));
+				for (String h : headers) {
+					values.add(mydata.getString(h));
+				}
+				String[] tmp = mydata.getString("link").split("\\&");
+				for (int i = 0; i < tmp.length; i++) {
+					links.add(tmp[i]);
 				}
 			}
 			status = SUCCESS;
