@@ -109,8 +109,85 @@
 	height: 20px;
 	border-radius: 200px;
 }
-</style>
+    .btn-social {
+        border-radius: 50%;
+        color: #ffffff !important;
+        display: inline-block;
+        height: 27px;
+        line-height: 54px;
+        margin: 8px 4px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color .3s;
+        webkit-transition: background-color .3s;
+        width: 27px;
+    }
+    
+    .btn-social .fa,
+    .btn-social i {
+        backface-visibility: hidden;
+        moz-backface-visibility: hidden;
+        ms-transform: scale(1);
+        o-transform: scale(1);
+        transform: scale(1);
+        transition: all .25s;
+        webkit-backface-visibility: hidden;
+        webkit-transform: scale(1);
+        webkit-transition: all .25s;
+    }
+    
+    .btn-social:hover,
+    .btn-social:focus {
+        color: #fff;
+        outline: none;
+        text-decoration: none;
+    }
+    
+    .btn-social:hover .fa,
+    .btn-social:focus .fa,
+    .btn-social:hover i,
+    .btn-social:focus i {
+        ms-transform: scale(1.3);
+        o-transform: scale(1.3);
+        transform: scale(1.3);
+        webkit-transform: scale(1.3);
+    }
+    
+    .btn-social.btn-xs {
+        font-size: 9px;
+        height: 24px;
+        line-height: 13px;
+        margin: 6px 2px;
+        width: 24px;
+    }
+    
+    .btn-social.btn-sm {
+        font-size: 13px;
+        height: 36px;
+        line-height: 18px;
+        margin: 6px 2px;
+        width: 36px;
+    }
+    
+    .btn-social.btn-lg {
+        font-size: 22px;
+        height: 72px;
+        line-height: 40px;
+        margin: 10px 6px;
+        width: 72px;
+    }
+    
+    .btn-instagram {
+        background-color: #3f729b;
+    }
+    
+    .btn-instagram:hover {
+        background-color: #548cb9;
+    }
+    </style>
+
 </head>
+
 
 <body>
 	<div class="modal-shiftfix">
@@ -255,8 +332,9 @@
 								<h2>
 									<s:property value="#event.PDOName" />
 								</h2>
-								<table>
-									<thead>
+								<div class="table-responsive">
+								<table class="table">
+									<thead id="table_head">
 										<tr>
 											<s:iterator value="#event.headers" var="head">
 												<th><s:property value="#head" /></th>
@@ -271,13 +349,22 @@
 										</tr>
 									</tbody>
 								</table>
-								<div class="panel">
+								</div>
+<%-- 								<div class="panel">
 									<s:iterator value="#event.link" var="l">
 										<s:url var="url" value="ShowLinkAction">
 										<s:param name="link" value="%{#l}"></s:param>
 										</s:url>
 										<s:a href="%{url}"><s:property value="#l" /></s:a>
 									</s:iterator>
+								</div> --%>
+								
+								<div class="panel">
+									<div class="panel-body">
+										<div class="col-xs-1 col-md-1 col-sm-2 col-xs-3 text-center">
+                                    	<a href="" class="btn-social btn-instagram" title="时间"></a>
+                                		</div>
+									</div>
 								</div>
 							</div>
 						</li>

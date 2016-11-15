@@ -102,6 +102,12 @@
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	name="viewport">
+	
+	<style type="text/css">
+		.visible-lg{
+			margin-top: 10px;
+		}
+	</style>
 </head>
 <body>
 	<div class="modal-shiftfix">
@@ -146,6 +152,7 @@
 						<li><a href=""> <span aria-hidden="true"
 								class="icon-user"></span>个人主页
 						</a></li>
+						<li><button class="btn btn-success" id="event_add">添加事件</button></li>
 					</ul>
 				</div>
 			</div>
@@ -153,7 +160,7 @@
 		<!-- End Navigation -->
 		<div class="container-fluid main-content">
 			<!-- Statistics -->
-			<div class="col-md-3 visible-md visible-lg">
+<%-- 			<div class="col-md-3 visible-md visible-lg">
 				<div class="widget-container fluid-height">
 					<div class="heading">
 						<i class="icon-calendar"></i>添加事件
@@ -170,12 +177,35 @@
 								</s:iterator>
 							</div>
 						</s:iterator>
-						<button class="btn btn-success" id="event_add">添加事件</button>
+						<form id="form" name="form" action="AddEventAction" method="post">
+						</form>
+					</div>
+				</div>
+			</div> --%>
+			
+			<s:iterator value="pdoHeaders.keySet()" var="pdo">
+			<div class="col-md-3 visible-md visible-lg">
+				<div class="widget-container fluid-height">
+					<div class="heading">
+						<i class="icon-calendar"></i>添加事件
+					</div>
+					<div class="widget-content padded">
+							<div class="external-events">
+								<div class="heading" id="PDOName"><i class="icon-briefcase"></i><s:property value="#pdo" /></div>
+								<s:iterator value="pdoHeaders[#pdo]" var="head">
+								<div class="form-group">
+								<label><b><s:property value="#head" /></b></label>
+								<input class="input form-control" name="data" id="event_title" type="text" value="">
+								</div>
+								</s:iterator>
+							</div>
 						<form id="form" name="form" action="AddEventAction" method="post">
 						</form>
 					</div>
 				</div>
 			</div>
+			</s:iterator>
+			
 		</div>
 	</div>
 	

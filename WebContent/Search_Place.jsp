@@ -252,8 +252,9 @@
 								<h2>
 									<s:property value="#event.PDOName" />
 								</h2>
-								<table>
-									<thead>
+								<div class="table-responsive">
+								<table class="table">
+									<thead id="table_head">
 										<tr>
 											<s:iterator value="#event.headers" var="head">
 												<th><s:property value="#head" /></th>
@@ -268,13 +269,21 @@
 										</tr>
 									</tbody>
 								</table>
-								<div class="panel">
+								</div>
+<%-- 								<div class="panel">
 									<s:iterator value="#event.link" var="l">
 										<s:url var="url" value="ShowLinkAction">
 											<s:param name="link" value="%{#l}"></s:param>
 										</s:url>
 										<s:a href="%{url}"><s:property value="#l" /></s:a>
 									</s:iterator>
+								</div> --%>
+								<div class="panel">
+									<div class="panel-body">
+										<div class="col-xs-1 col-md-1 col-sm-2 col-xs-3 text-center">
+                                    	<a href="" class="btn-social btn-instagram" title="时间"></a>
+                                		</div>
+									</div>
 								</div>
 							</div>
 						</li>
