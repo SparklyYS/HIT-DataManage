@@ -6,7 +6,7 @@
 
 <struts>
 	<constant name="struts.devMode" value="true" />
-	<package name="show_result" extends="struts-default">
+	<package name="Struts2" extends="struts-default">
 		
 		<!-- 全局result -->
 		<global-results>
@@ -154,7 +154,7 @@
 		
 		<action name="ShowLinkAction"
 			class="com.search.ShowLink"
-			method="show">
+			method="showLink">
 			<result>
 				/SingleResult.jsp
 			</result>

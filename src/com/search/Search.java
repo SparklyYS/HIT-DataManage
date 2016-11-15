@@ -69,7 +69,6 @@ public class Search extends ActionSupport implements ServletRequestAware {
 		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		// 前台编码格式为111/*&*/*/*
-		System.out.println(choice);
 		try {
 			String sqlcmd;
 			SQLManage mysql;

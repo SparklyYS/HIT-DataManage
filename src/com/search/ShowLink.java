@@ -76,7 +76,7 @@ public class ShowLink extends ActionSupport implements ServletRequestAware {
 		this.request = request;
 	}
 	
-	public String show() {
+	public String showLink() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		HttpServletResponse response = ServletActionContext.getResponse();
