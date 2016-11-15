@@ -300,8 +300,6 @@
 
 	          }else{
 	        	 if(headers[index+1] == "时间"){ //Add Calendar
-	        		var arr = Cell.split("-");
-	        	 	Cell = arr[0] + "/" + arr[1] + "/" + arr[2];
 	          		$('#Dynamic_Modal').append("<div class='form-group'><label><b>"+headers[index+1]+"</b></label><input class='form-control' type='date' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");
 	        	 }else{
 		          	$('#Dynamic_Modal').append("<div class='form-group'><label><b>"+headers[index+1]+"</b></label><input class='form-control' type='text' name=" +"data"+"["+index+"] value="+Cell+"></input></div>");

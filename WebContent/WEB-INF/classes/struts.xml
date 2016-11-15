@@ -6,7 +6,7 @@
 
 <struts>
 	<constant name="struts.devMode" value="true" />
-	<package name="show_result" namespace="/" extends="struts-default">
+	<package name="show_result" extends="struts-default">
 		
 		<!-- 全局result -->
 		<global-results>
@@ -18,6 +18,12 @@
 		<!-- 以下是各种action -->
 		<!-- 设置默认action，用户输入非法url自动执行LoginPage这个action -->
 		<action name="*">
+			<result>
+				/Error.jsp
+			</result>
+		</action>
+		
+		<action name="*/">
 			<result>
 				/Error.jsp
 			</result>

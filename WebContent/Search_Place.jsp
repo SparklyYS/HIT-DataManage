@@ -98,6 +98,7 @@
 <script src="javascripts/jquery.sparkline.min.js" type="text/javascript"></script>
 <script src="javascripts/main.js" type="text/javascript"></script>
 <script src="javascripts/respond.js" type="text/javascript"></script>
+<script src="./javascripts/jquery.cookie.js" type="text/javascript"></script>
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	name="viewport">
@@ -150,7 +151,7 @@
 						<li><a href="charts.html"> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
 						</a></li>
-						<li><a class="current" href="SearchAction"> <span
+						<li><a class="current" href="Search.jsp"> <span
 								aria-hidden="true" class="icon-search"></span>按维度搜索
 						</a></li>
 						<li><a href="charts.html"> <span aria-hidden="true"
@@ -283,105 +284,120 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-    var timestatus = 0;
-    $('#checktime').change(function() {
-        if (timestatus == 0) {
-            $('#time_key').fadeIn();
-            timestatus = 1;
-        } else {
-            $('#dpd1').val("");
-            $('#dpd2').val("");
-            $('#time_key').fadeOut();
-            timestatus = 0;
-        }
-    });
+	
+	  <script>
+  	$(document).ready(function(){
+  		//refresh the page
+  		$('.checkclass').each(function(){
+  			$(this).attr("checked", false);
+  		});
+  		
+  		//set cookie
+  		$.cookie("timestatus", "0");
+  		$.cookie("placestatus", "0");
+  		$.cookie("personstatus", "0");
+  	});
+  </script>
 
-    var placestatus = 0;
-    $('#checkplace').change(function() {
-        if (placestatus == 0) {
-            $('#place_key').fadeIn();
-            placestatus = 1;
-        } else {
-            $("#place").val("");
-            $('#place_key').fadeOut();
-            placestatus = 0;
+  <script type="text/javascript">
+      var timestatus = $.cookie("timestatus");
+      $('#checktime').change(function(){
+        if(timestatus == "0"){
+          $('#time_key').fadeIn();
+          timestatus = "1";
+        }else{
+          $('#dpd1').val("");
+          $('#dpd2').val("");
+          $('#time_key').fadeOut();
+          timestatus = "0";
         }
-    });
+      });
 
-    var personstatus = 0;
-    $('#checkperson').change(function() {
-        if (personstatus == 0) {
-            $('#person_key').fadeIn();
-            personstatus = 1;
-        } else {
-            $("#person").val("");
-            $('#person_key').fadeOut();
-            personstatus = 0;
+      var placestatus = $.cookie("placestatus");
+      $('#checkplace').change(function(){
+        if(placestatus == "0"){
+          $('#place_key').fadeIn();
+          placestatus = "1";
+        }else{
+          $("#place").val("");
+          $('#place_key').fadeOut();
+          placestatus = "0";
         }
-    });
+      });
 
-    var searchstatus = "";
-    $('.checkclass').change(function() {
+      var personstatus = $.cookie("personstatus");
+      $('#checkperson').change(function(){
+        if(personstatus == "0"){
+          $('#person_key').fadeIn();
+          personstatus = "1";
+        }else{
+          $("#person").val("");
+          $('#person_key').fadeOut();
+          personstatus = "0";
+        }
+      });
+
+      var searchstatus = "";
+      $('.checkclass').change(function(){
         searchstatus = "";
-        $('.checkclass').each(function() {
-            if ($(this).is(':checked')) {
-                searchstatus += "1";
-            } else {
-                searchstatus += "0";
-            }
+        $('.checkclass').each(function(){
+          if($(this).is(':checked')){
+            searchstatus += "1";
+          }else{
+            searchstatus += "0";
+          }
         })
 
-        if (searchstatus == "000") {
-            $('#search').fadeOut();
-        } else {
-            $('#search').fadeIn();
+        if(searchstatus == "000"){
+          $('#search').fadeOut();
+        }else{
+          $('#search').fadeIn();
         }
-    });
+      });
 
-    $('#search_btn').click(function() {
+      $('#search_btn').click(function(){
         var res = searchstatus;
-
+        
         //start time
         var str = $('#dpd1').val();
-        if (str == "") {
-            res = res + "/ "; //空则增加空格
-        } else {
-            var arr = str.split("/");
-            str = arr[2] + "-" + arr[0] + "-" + arr[1];
-            res = res + "/" + str;
+        if(str == ""){
+          res = res +  "/"; //空则增加空格
+        }else{
+          var arr = str.split("/");
+          str = arr[2] + "-" + arr[0] + "-" + arr[1];
+          res = res + "/" + str;
         }
 
         //end time
         str = $('#dpd2').val();
-        if (str == "") {
-            res = res + "/ "; //空则增加空格
-        } else {
-            var arr = str.split("/");
-            str = arr[2] + "-" + arr[0] + "-" + arr[1];
-            res = res + "&" + str;
+        if(str == ""){
+          res = res; //空则增加空格
+        }else{
+          var arr = str.split("/");
+          str = arr[2] + "-" + arr[0] + "-" + arr[1];
+          res = res + "&" + str;
         }
 
         //place
         str = $('#place').val();
-        if (str == "") {
-            res = res + "/ "; //空则增加空格
-        } else {
-            res = res + "/" + str;
+        if(str == ""){
+          res = res + "/ "; //空则增加空格
+        }else{
+          res = res + "/" + str;
         }
 
         //person
         str = $('#person').val();
-        if (str == "") {
-            res = res + "/ ";
-        } else {
-            res = res + "/" + str;
+        if(str == ""){
+          res = res + "/ ";
+        }else{
+          res = res + "/" + str;
         }
-
         $('input[name="choice"]').val(res);
         $('form[name="form"]').submit();
-    });
-    </script>
+      });
+
+  </script>
 </body>
 
 </html>

@@ -98,6 +98,7 @@
 <script src="javascripts/jquery.sparkline.min.js" type="text/javascript"></script>
 <script src="javascripts/main.js" type="text/javascript"></script>
 <script src="javascripts/respond.js" type="text/javascript"></script>
+<script src="./javascripts/jquery.cookie.js" type="text/javascript"></script>
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	name="viewport">
@@ -141,7 +142,7 @@
 						<li><a href="charts.html"> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
 						</a></li>
-						<li><a class="current" href="SearchAction"> <span
+						<li><a class="current" href="Search.jsp"> <span
 								aria-hidden="true" class="icon-search"></span>按维度搜索
 						</a></li>
 						<li><a href="charts.html"> <span aria-hidden="true"
@@ -169,8 +170,7 @@
 								<div class="panel-collapse collapse in" id="collapseOne">
 									<div class="panel-body">
 										<div class="form-group">
-											<label class="checkbox-inline"><input id="checktime"
-												class="checkclass" name="checkAll" type="checkbox"><span></span>时间</label>
+											<label class="checkbox-inline"><input id="checktime" class="checkclass" name="checkAll" type="checkbox"><span></span>时间</label>
 											<label class="checkbox-inline"><input
 												id="checkplace" class="checkclass" name="checkAll"
 												type="checkbox"><span></span>地点</label> <label
@@ -218,7 +218,7 @@
 										<!-- search button -->
 										<div style="display: none" id="search">
 											<button class="btn btn-success btn-block" id="search_btn">搜索</button>
-											<form name="form" action="" method="post">
+											<form name="form" action="SearchAction" method="post">
 												<input style="display: none" type="text" name="choice" />
 											</form>
 										</div>
@@ -262,42 +262,56 @@
 
 		</div>
 	</div>
+	
+	  <script>
+  	$(document).ready(function(){
+  		//refresh the page
+  		$('.checkclass').each(function(){
+  			$(this).attr("checked", false);
+  		});
+  		
+  		//set cookie
+  		$.cookie("timestatus", "0");
+  		$.cookie("placestatus", "0");
+  		$.cookie("personstatus", "0");
+  	});
+  </script>
 
-	<script type="text/javascript">
-      var timestatus = 0;
+  <script type="text/javascript">
+      var timestatus = $.cookie("timestatus");
       $('#checktime').change(function(){
-        if(timestatus == 0){
+        if(timestatus == "0"){
           $('#time_key').fadeIn();
-          timestatus = 1;
+          timestatus = "1";
         }else{
           $('#dpd1').val("");
           $('#dpd2').val("");
           $('#time_key').fadeOut();
-          timestatus = 0;
+          timestatus = "0";
         }
       });
 
-      var placestatus = 0;
+      var placestatus = $.cookie("placestatus");
       $('#checkplace').change(function(){
-        if(placestatus == 0){
+        if(placestatus == "0"){
           $('#place_key').fadeIn();
-          placestatus = 1;
+          placestatus = "1";
         }else{
           $("#place").val("");
           $('#place_key').fadeOut();
-          placestatus = 0;
+          placestatus = "0";
         }
       });
 
-      var personstatus = 0;
+      var personstatus = $.cookie("personstatus");
       $('#checkperson').change(function(){
-        if(personstatus == 0){
+        if(personstatus == "0"){
           $('#person_key').fadeIn();
-          personstatus = 1;
+          personstatus = "1";
         }else{
           $("#person").val("");
           $('#person_key').fadeOut();
-          personstatus = 0;
+          personstatus = "0";
         }
       });
 
@@ -321,11 +335,11 @@
 
       $('#search_btn').click(function(){
         var res = searchstatus;
-
+        
         //start time
         var str = $('#dpd1').val();
         if(str == ""){
-          res = res +  "/ "; //空则增加空格
+          res = res +  "/"; //空则增加空格
         }else{
           var arr = str.split("/");
           str = arr[2] + "-" + arr[0] + "-" + arr[1];
@@ -335,7 +349,7 @@
         //end time
         str = $('#dpd2').val();
         if(str == ""){
-          res = res + "/ "; //空则增加空格
+          res = res; //空则增加空格
         }else{
           var arr = str.split("/");
           str = arr[2] + "-" + arr[0] + "-" + arr[1];
@@ -357,13 +371,9 @@
         }else{
           res = res + "/" + str;
         }
-
         $('input[name="choice"]').val(res);
-
-
         $('form[name="form"]').submit();
       });
-
 
   </script>
 </body>

@@ -108,5 +108,10 @@
 `提交名为“complete all functions”`
 
 ####内容
-
 * 后台完成所有基本功能
+
+###提交2.8
+`提交名为“improve the filter”`
+
+####内容
+* 完善了过滤器

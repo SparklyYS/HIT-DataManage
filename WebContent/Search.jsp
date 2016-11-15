@@ -284,7 +284,7 @@
         //end time
         str = $('#dpd2').val();
         if(str == ""){
-          res = res + " "; //空则增加空格
+          res = res; //空则增加空格
         }else{
           var arr = str.split("/");
           str = arr[2] + "-" + arr[0] + "-" + arr[1];
