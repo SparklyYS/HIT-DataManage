@@ -198,7 +198,7 @@
 					<ul class="nav navbar-nav pull-right">
 						<li class="dropdown user hidden-xs"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"> <img width="34" height="34"
-								src="images/avatar-male.jpg" />vachester<b class="caret"></b></a>
+								src="images/avatar-male.jpg" />${sessionScope.userName}<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"> <i class="icon-user"></i>个人主页
 								</a></li>
