@@ -109,6 +109,77 @@
 	height: 20px;
 	border-radius: 200px;
 }
+.btn-social {
+	border-radius: 50%;
+	color: #ffffff !important;
+	display: inline-block;
+	height: 27px;
+	line-height: 54px;
+	margin: 8px 4px;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color .3s;
+	webkit-transition: background-color .3s;
+	width: 27px;
+}
+
+.btn-social .fa, .btn-social i {
+	backface-visibility: hidden;
+	moz-backface-visibility: hidden;
+	ms-transform: scale(1);
+	o-transform: scale(1);
+	transform: scale(1);
+	transition: all .25s;
+	webkit-backface-visibility: hidden;
+	webkit-transform: scale(1);
+	webkit-transition: all .25s;
+}
+
+.btn-social:hover, .btn-social:focus {
+	color: #fff;
+	outline: none;
+	text-decoration: none;
+}
+
+.btn-social:hover .fa, .btn-social:focus .fa, .btn-social:hover i,
+	.btn-social:focus i {
+	ms-transform: scale(1.3);
+	o-transform: scale(1.3);
+	transform: scale(1.3);
+	webkit-transform: scale(1.3);
+}
+
+.btn-social.btn-xs {
+	font-size: 9px;
+	height: 24px;
+	line-height: 13px;
+	margin: 6px 2px;
+	width: 24px;
+}
+
+.btn-social.btn-sm {
+	font-size: 13px;
+	height: 36px;
+	line-height: 18px;
+	margin: 6px 2px;
+	width: 36px;
+}
+
+.btn-social.btn-lg {
+	font-size: 22px;
+	height: 72px;
+	line-height: 40px;
+	margin: 10px 6px;
+	width: 72px;
+}
+
+.btn-instagram {
+	background-color: #3f729b;
+}
+
+.btn-instagram:hover {
+	background-color: #548cb9;
+}
 </style>
 </head>
 
@@ -121,7 +192,8 @@
 					<ul class="nav navbar-nav pull-right">
 						<li class="dropdown user hidden-xs"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"> <img width="34" height="34"
-								src="images/avatar-male.jpg" />${sessionScope.userName}<b class="caret"></b></a>
+								src="images/avatar-male.jpg" />${sessionScope.userName}<b
+								class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"> <i class="icon-user"></i>个人主页
 								</a></li>
@@ -253,36 +325,36 @@
 									<s:property value="#event.PDOName" />
 								</h2>
 								<div class="table-responsive">
-								<table class="table">
-									<thead id="table_head">
-										<tr>
-											<s:iterator value="#event.headers" var="head">
-												<th><s:property value="#head" /></th>
-											</s:iterator>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<s:iterator value="#event.values" var="value">
-												<td><s:property value="#value" /></td>
-											</s:iterator>
-										</tr>
-									</tbody>
-								</table>
+									<table class="table">
+										<thead id="table_head">
+											<tr>
+												<s:iterator value="#event.headers" var="head">
+													<th><s:property value="#head" /></th>
+												</s:iterator>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<s:iterator value="#event.values" var="value">
+													<td><s:property value="#value" /></td>
+												</s:iterator>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-<%-- 								<div class="panel">
-									<s:iterator value="#event.link" var="l">
-										<s:url var="url" value="ShowLinkAction">
-											<s:param name="link" value="%{#l}"></s:param>
-										</s:url>
-										<s:a href="%{url}"><s:property value="#l" /></s:a>
-									</s:iterator>
-								</div> --%>
 								<div class="panel">
 									<div class="panel-body">
-										<div class="col-xs-1 col-md-1 col-sm-2 col-xs-3 text-center">
-                                    	<a href="" class="btn-social btn-instagram" title="时间"></a>
-                                		</div>
+										<s:iterator value="#event.link" var="l">
+											<s:url var="url" value="ShowLinkAction">
+												<s:param name="link" value="%{#l}"></s:param>
+											</s:url>
+											<s:a href="%{url}">
+												<div class="col-xs-1 col-md-1 col-sm-2 col-xs-3 text-center">
+													<span class="btn-social btn-instagram"
+														title="<s:property value="#l" />"></span>
+												</div>
+											</s:a>
+										</s:iterator>
 									</div>
 								</div>
 							</div>
@@ -293,120 +365,121 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			//refresh the page
+			$('.checkclass').each(function() {
+				$(this).attr("checked", false);
+			});
+
+			//set cookie
+			$.cookie("timestatus", "0");
+			$.cookie("placestatus", "0");
+			$.cookie("personstatus", "0");
+		});
+	</script>
+
+	<script type="text/javascript">
+		var timestatus = $.cookie("timestatus");
+		$('#checktime').change(function() {
+			if (timestatus == "0") {
+				$('#time_key').fadeIn();
+				timestatus = "1";
+			} else {
+				$('#dpd1').val("");
+				$('#dpd2').val("");
+				$('#time_key').fadeOut();
+				timestatus = "0";
+			}
+		});
+
+		var placestatus = $.cookie("placestatus");
+		$('#checkplace').change(function() {
+			if (placestatus == "0") {
+				$('#place_key').fadeIn();
+				placestatus = "1";
+			} else {
+				$("#place").val("");
+				$('#place_key').fadeOut();
+				placestatus = "0";
+			}
+		});
+
+		var personstatus = $.cookie("personstatus");
+		$('#checkperson').change(function() {
+			if (personstatus == "0") {
+				$('#person_key').fadeIn();
+				personstatus = "1";
+			} else {
+				$("#person").val("");
+				$('#person_key').fadeOut();
+				personstatus = "0";
+			}
+		});
+
+		var searchstatus = "";
+		$('.checkclass').change(function() {
+			searchstatus = "";
+			$('.checkclass').each(function() {
+				if ($(this).is(':checked')) {
+					searchstatus += "1";
+				} else {
+					searchstatus += "0";
+				}
+			})
+
+			if (searchstatus == "000") {
+				$('#search').fadeOut();
+			} else {
+				$('#search').fadeIn();
+			}
+		});
+
+		$('#search_btn').click(function() {
+			var res = searchstatus;
+
+			//start time
+			var str = $('#dpd1').val();
+			if (str == "") {
+				res = res + "/"; //空则增加空格
+			} else {
+				var arr = str.split("/");
+				str = arr[2] + "-" + arr[0] + "-" + arr[1];
+				res = res + "/" + str;
+			}
+
+			//end time
+			str = $('#dpd2').val();
+			if (str == "") {
+				res = res; //空则增加空格
+			} else {
+				var arr = str.split("/");
+				str = arr[2] + "-" + arr[0] + "-" + arr[1];
+				res = res + "&" + str;
+			}
+
+			//place
+			str = $('#place').val();
+			if (str == "") {
+				res = res + "/ "; //空则增加空格
+			} else {
+				res = res + "/" + str;
+			}
+
+			//person
+			str = $('#person').val();
+			if (str == "") {
+				res = res + "/ ";
+			} else {
+				res = res + "/" + str;
+			}
+			$('input[name="choice"]').val(res);
+			$('form[name="form"]').submit();
+		});
 	
-	  <script>
-  	$(document).ready(function(){
-  		//refresh the page
-  		$('.checkclass').each(function(){
-  			$(this).attr("checked", false);
-  		});
-  		
-  		//set cookie
-  		$.cookie("timestatus", "0");
-  		$.cookie("placestatus", "0");
-  		$.cookie("personstatus", "0");
-  	});
-  </script>
-
-  <script type="text/javascript">
-      var timestatus = $.cookie("timestatus");
-      $('#checktime').change(function(){
-        if(timestatus == "0"){
-          $('#time_key').fadeIn();
-          timestatus = "1";
-        }else{
-          $('#dpd1').val("");
-          $('#dpd2').val("");
-          $('#time_key').fadeOut();
-          timestatus = "0";
-        }
-      });
-
-      var placestatus = $.cookie("placestatus");
-      $('#checkplace').change(function(){
-        if(placestatus == "0"){
-          $('#place_key').fadeIn();
-          placestatus = "1";
-        }else{
-          $("#place").val("");
-          $('#place_key').fadeOut();
-          placestatus = "0";
-        }
-      });
-
-      var personstatus = $.cookie("personstatus");
-      $('#checkperson').change(function(){
-        if(personstatus == "0"){
-          $('#person_key').fadeIn();
-          personstatus = "1";
-        }else{
-          $("#person").val("");
-          $('#person_key').fadeOut();
-          personstatus = "0";
-        }
-      });
-
-      var searchstatus = "";
-      $('.checkclass').change(function(){
-        searchstatus = "";
-        $('.checkclass').each(function(){
-          if($(this).is(':checked')){
-            searchstatus += "1";
-          }else{
-            searchstatus += "0";
-          }
-        })
-
-        if(searchstatus == "000"){
-          $('#search').fadeOut();
-        }else{
-          $('#search').fadeIn();
-        }
-      });
-
-      $('#search_btn').click(function(){
-        var res = searchstatus;
-        
-        //start time
-        var str = $('#dpd1').val();
-        if(str == ""){
-          res = res +  "/"; //空则增加空格
-        }else{
-          var arr = str.split("/");
-          str = arr[2] + "-" + arr[0] + "-" + arr[1];
-          res = res + "/" + str;
-        }
-
-        //end time
-        str = $('#dpd2').val();
-        if(str == ""){
-          res = res; //空则增加空格
-        }else{
-          var arr = str.split("/");
-          str = arr[2] + "-" + arr[0] + "-" + arr[1];
-          res = res + "&" + str;
-        }
-
-        //place
-        str = $('#place').val();
-        if(str == ""){
-          res = res + "/ "; //空则增加空格
-        }else{
-          res = res + "/" + str;
-        }
-
-        //person
-        str = $('#person').val();
-        if(str == ""){
-          res = res + "/ ";
-        }else{
-          res = res + "/" + str;
-        }
-        $('input[name="choice"]').val(res);
-        $('form[name="form"]').submit();
-      });
-
-  </script>
+		
+	</script>
 </body>
 
 </html>

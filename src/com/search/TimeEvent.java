@@ -7,6 +7,26 @@ public class TimeEvent implements Comparable<TimeEvent> {
 	private ArrayList<String> headers = new ArrayList<>();
 	private ArrayList<String> values = new ArrayList<>();
 	private ArrayList<String> link = new ArrayList<>();
+	private String year;
+	private String md;
+	
+	
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getMd() {
+		return md;
+	}
+
+	public void setMd(String md) {
+		this.md = md;
+	}
 
 	public ArrayList<String> getLink() {
 		return link;
@@ -16,11 +36,13 @@ public class TimeEvent implements Comparable<TimeEvent> {
 		this.link = link;
 	}
 
-	public TimeEvent(String PDOName, ArrayList<String> headers, ArrayList<String> values, ArrayList<String> link) {
+	public TimeEvent(String PDOName, ArrayList<String> headers, ArrayList<String> values, ArrayList<String> link,String year,String md) {
 		this.PDOName = PDOName;
 		this.headers = headers;
 		this.values = values;
 		this.link = link;
+		this.year = year;
+		this.md = md;
 	}
 
 	public String getPDOName() {

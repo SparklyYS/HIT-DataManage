@@ -89,6 +89,7 @@ public class Search extends ActionSupport implements ServletRequestAware {
 				if (belongTo(parse[0], pdos.get(PDOName))) {
 					ArrayList<String> head = new ArrayList<>();
 					ArrayList<String> link = new ArrayList<>();
+					String time = "";
 					sqlcmd = "select * from " + userName + "_" + PDOName;
 					if (choice.charAt(1) == '1') {
 						sqlcmd += " where 地点=?";
@@ -117,27 +118,36 @@ public class Search extends ActionSupport implements ServletRequestAware {
 						ArrayList<String> value = new ArrayList<>();
 						if (choice.charAt(0) == '1') {
 							String[] times = parse[1].split("\\&");
-							String time = mydata.getString("时间");
+							time = mydata.getString("时间");
 							if (time.compareTo(times[0]) >= 0 && time.compareTo(times[1]) <= 0) {
 								for (String h : head) {
 									value.add(mydata.getString(h));
 								}
-								String[] l = mydata.getString("link").split("\\&");
-								for (int i = 0; i < l.length; i++) {
-									link.add(l[i]);
+								if(!mydata.getString("link").replaceAll(" ", "").equals("")) {
+									String[] l = mydata.getString("link").split("\\&");
+									for (int i = 0; i < l.length; i++) {
+										link.add(l[i]);
+									}
 								}
 							}
 						} else {
 							for (String h : head) {
 								value.add(mydata.getString(h));
 							}
-							String[] l = mydata.getString("link").split("\\&");
-							for (int i = 0; i < l.length; i++) {
-								link.add(l[i]);
+							if(!mydata.getString("link").replaceAll(" ", "").equals("")) {
+								String[] l = mydata.getString("link").split("\\&");
+								for (int i = 0; i < l.length; i++) {
+									link.add(l[i]);
+								}
 							}
 						}
 						if (!value.isEmpty()) {
-							results.add(new TimeEvent(PDOName, head, value,link));
+							if(time.equals("")) {
+								results.add(new TimeEvent(PDOName, head, value,link,"",""));
+							}
+							else {
+								results.add(new TimeEvent(PDOName, head, value,link,time.substring(0,time.indexOf("-")),time.substring(time.indexOf("-")+1)));
+							}
 						}
 					}
 				}
