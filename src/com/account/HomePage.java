@@ -14,12 +14,14 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Result;
 import com.sql.SQLManage;
 
 public class HomePage extends ActionSupport implements ServletRequestAware {
 	private String status;
 	private List<Message> messages = new ArrayList<Message>();
 	private HttpServletRequest request;
+	private Counts myCounts;
 
 	public HttpServletRequest getServletRequest() {
 		return request;
@@ -37,6 +39,14 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 		this.messages = messages;
 	}
 
+	public Counts getMyCounts() {
+		return myCounts;
+	}
+
+	public void setMyCounts(Counts myCounts) {
+		this.myCounts = myCounts;
+	}
+
 	public String showHome() {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
@@ -48,12 +58,23 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 			SQLManage mysql = new SQLManage(sqlcmd);
 			mysql.setString(1, userName);
 			ResultSet mymess = mysql.executeQuery();
-			status = SUCCESS;
 			while (mymess.next()) {
 				String mess = mymess.getString("message");
 				Timestamp t = mymess.getTimestamp("messageTime");
 				messages.add(new Message(mess, t));
 			}
+			
+			int pdoCount = 0,eventCount = 0;
+			sqlcmd = "select * from pdos where userName=?";
+			mysql = new SQLManage(sqlcmd);
+			mysql.setString(1, userName);
+			mymess = mysql.executeQuery();
+			status = SUCCESS;
+			while(mymess.next()) {
+				pdoCount ++;
+				eventCount += mymess.getInt("counts");
+			}
+			myCounts = new Counts(pdoCount, eventCount);
 			mysql.close();
 		} catch (ClassNotFoundException e) {
 			status = ERROR;
