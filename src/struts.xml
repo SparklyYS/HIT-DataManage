@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="Struts2" extends="struts-default">
+		
+		<!-- 全局result -->
+		<global-results>
+			<result name="error">
+				/Error.jsp
+			</result>	
+		</global-results>
+		
+		<!-- 以下是各种action -->
+		<!-- 设置默认action，用户输入非法url自动执行LoginPage这个action -->
+		<action name="*">
+			<result>
+				/Error.jsp
+			</result>
+		</action>
+		
+		<action name="*/">
+			<result>
+				/Error.jsp
+			</result>
+		</action>
+		
+		<action name="LoginAction"
+			class="com.account.LoginIn"
+			method="matchAccount">
+			<result type="redirectAction">
+				<param name="actionName">HomeAction</param>
+			</result>
+			<result name="noMatch">
+				/Nomatch.jsp
+			</result>
+		</action>
+		
+		<action name="SignAction"
+			class="com.account.SignUp"
+			method="createAccount">
+			<result type="redirectAction">
+				<param name="actionName">HomeAction</param>
+			</result>
+			<result name="existed">
+				/Nomatch.jsp
+			</result>
+		</action>
+		
+		<action name="LogOutAction"
+			class="com.account.LogOut"
+			method="logout">
+			<result type="redirect">
+				<param name="location">index.jsp</param>
+			</result>	
+		</action>
+		
+		<action name="HomeAction"
+			class="com.account.HomePage"
+			method="showHome">
+			<result>
+				/homepage.jsp
+			</result>			
+		</action>
+		
+		<action name="AddPDOAction"
+			class="com.myfile.AddPDO"
+			method="addPDO">
+			<result type="redirectAction">
+				<param name="actionName">ShowPDOAction</param>
+			</result>
+		</action>
+		
+		<action name="ShowPDOAction"
+			class="com.myfile.ShowPDO"
+			method="showPDO">
+			<result>
+				/MyFiles.jsp
+			</result>
+		</action>
+		
+		<action name="ShowHeaderAction"
+			class="com.myfile.ShowHeader"
+			method="showHeader">
+			<result>
+				/AddEvent.jsp
+			</result>
+		</action>
+		
+		<action name="AddEventAction"
+			class="com.myfile.AddEvent"
+			method="addEvent">
+			<result type="redirectAction">
+				<param name="actionName">ShowPDOAction</param>
+			</result>
+		</action>
+		
+		<action name="ShowEventAction"
+			class="com.myfile.ShowEvent"
+			method="showEvent">
+			<result>
+				/ShowEvent.jsp
+			</result>
+		</action>
+		
+		<action name="DeletePDOAction"
+			class="com.myfile.DeletePDO"
+			method="deletePDO">
+			<result type="redirectAction">
+				<param name="actionName">ShowPDOAction</param>
+			</result>
+		</action>
+		
+		<action name="EditEventAction"
+			class="com.myfile.EditEvent"
+			method="editEvent">
+			<result type="redirectAction">
+				<param name="actionName">ShowEventAction</param>
+				<param name="PDOName">${PDOName}</param>
+			</result>
+		</action>
+		
+		<action name="DeleteEventAction"
+			class="com.myfile.DeleteEvent"
+			method="deleteEvent">
+			<result type="redirectAction">
+				<param name="actionName">ShowEventAction</param>
+				<param name="PDOName">${PDOName}</param>
+			</result>
+		</action>
+		
+		<action name="ImportPDOAction"
+			class="com.myfile.ImportPDO"
+			method="importPDO">
+			<result type="redirectAction">
+				<param name="actionName">ShowPDOAction</param>
+			</result>
+		</action>
+		
+		<action name="SearchAction"
+			class="com.search.Search"
+			method="searchResult">
+			<result>
+				/Search_Time.jsp
+			</result>
+			<result name="other">
+				/Search_Place.jsp
+			</result>
+		</action>
+		
+		<action name="ShowLinkAction"
+			class="com.search.ShowLink"
+			method="showLink">
+			<result>
+				/SingleResult.jsp
+			</result>
+		</action>
+		
+   	</package>
+</struts>
