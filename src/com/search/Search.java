@@ -88,7 +88,6 @@ public class Search extends ActionSupport implements ServletRequestAware {
 			for (String PDOName : pdos.keySet()) {
 				if (belongTo(parse[0], pdos.get(PDOName))) {
 					ArrayList<String> head = new ArrayList<>();
-					ArrayList<String> link = new ArrayList<>();
 					String time = "";
 					sqlcmd = "select * from " + userName + "_" + PDOName;
 					if (choice.charAt(1) == '1') {
@@ -115,6 +114,7 @@ public class Search extends ActionSupport implements ServletRequestAware {
 						head.add(column.getColumnName(i));
 					}
 					while (mydata.next()) {
+						ArrayList<String> link = new ArrayList<>();
 						ArrayList<String> value = new ArrayList<>();
 						if (choice.charAt(0) == '1') {
 							String[] times = parse[1].split("\\&");
