@@ -5,6 +5,7 @@
 <title>注册</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="boostrap/bootstrap.min.css" rel="stylesheet">
+<script src="javascripts/jquery.min.js" type="text/javascript"></script>
 <style type="text/css">
 body {
 	background-color: #444;
@@ -55,24 +56,6 @@ body {
 }
 </style>
 </head>
-<script>
-    function checkpwd(){
-        var password = document.getElementById("password").value;
-        var confirmpassword = document.getElementById("confirmpassword").value;
-        if(password === ""){
-            alert("请输入密码");
-            document.getElementById("password").focus();
-            return false;
-        }
-        if(password != confirmpassword){
-            document.getElementById("msg").innerHTML="两次输入密码不一致，请重新输入";
-        }else{
-            document.getElementById("msg").innerHTML="";
-            return true;
-        }
-
-    }
-</script>
 <body>
 	<div class="container">
 		<div class="row vertical-offset-100">
@@ -106,7 +89,7 @@ body {
 								<input class="form-control" placeholder="确认密码"
 									id="confirmpassword" type="password" onchange="checkpwd()">
 							</div>
-							<div id="msg" style="color: red;"></div>
+							<div id="userCue" class="cue" style="display: none"></div>
 							<p>
 								已有账号？您可以<a href="Login.html">立即登录</a>
 							</p>
@@ -118,7 +101,49 @@ body {
 			</div>
 		</div>
 	</div>
-</body>
-</div>
+	
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+		var pwdmin = 6;
+		$('#Regist').click(function(){
+
+			if ($('#username').val() == "") {
+				$('#username').focus();
+				$('#userCue').html("<font color='red'><b>×用户名不能为空</b></font>");
+				$('#userCue').fadeIn();
+			return false;
+			}
+
+			var semail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(!semail.test($('#EmailAddress').val())){
+				$('#EmailAddress').focus();
+				$('#userCue').html("<font color='red'><b>×邮箱格式不正确</b></font>");
+				$('#userCue').fadeIn();
+			return false;
+			} else {
+				$('#EmailAddress').css({
+					border: "1px solid #D7D7D7",
+					boxShadow: "none"
+				});
+			}
+
+			if($('#password').val().length < pwdmin) {
+				$('#password').focus();
+				$('#userCue').html("<font color='red'><b>×密码不能小于" + pwdmin + "位</b></font>");
+				$('#userCue').fadeIn();
+				return false;
+			}
+			if ($('#confirmpassword').val() != $('#password').val()) {
+				$('#confirmpassword').focus();
+				$('#userCue').html("<font color='red'><b>×两次密码不一致！</b></font>");
+				$('#userCue').fadeIn();
+				return false;
+			}
+			$('#form').submit();
+		});
+	});
+</script>
 </body>
 </html>
