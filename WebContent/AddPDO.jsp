@@ -164,8 +164,8 @@
               </thead>
               <tbody>
                 <tr name="property">
-                  <td name="No" width=6%>属性ID: 2</td>
-                  <td><input id="property" name="headers[1]"
+                  <td name="No" width=6%>属性ID: 1</td>
+                  <td><input id="property" name="headers[0]"
                     class="form-control attribute"></td>
                   <td>
                     <button id="Button2" type="button" onclick="deltr(this)"
@@ -176,7 +176,7 @@
             </table>
               
             <div class="widget-content padded clearfix">
-              <form action="AddPDOAction" method="post" name="form" id="PDOForm">
+              <form action="AddPDOAction" method="post" name="form" id="PdoForm">
                 <table class="table table-bordered table-striped"
                   id="dynamictable">
                   <thead>
@@ -189,18 +189,9 @@
                       <td><input name="PDOName" class="form-control">
                       </td>
                     </tr>
-                   <tr name="property">
-                      <td name="No" width=6%>属性ID: 1</td>
-                      <td><input id="property" name="headers[0]"
-                        class="form-control attribute"></td>
-                      <td>
-                        <button id="Button2" type="button" onclick="deltr(this)"
-                          class='btn btn-danger btn-sm glyphicon glyphicon-remove row-remove'></button>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
-                <button id="submit" type="button" class="btn btn-primary pull-right">提交</button>
+                <button id="sub_btn" type="button" class="btn btn-primary pull-right">提交</button>
               </form>
             </div>
           </div>
@@ -249,8 +240,8 @@
     }
 
     function deltr(opp) {
-      var length = $('#dynamictable tbody tr').length;
-      if (length <= 2) {
+      var length = $('#dynamictable tbody tr[name="property"]').length;
+      if (length <= 1) {
         alert('至少保留一个属性');
       } else {
         $(opp).parent().parent().remove();
@@ -260,7 +251,7 @@
   </script>
 
   <script type="text/javascript">
-    $('#submit').click(function(event) {
+    $('#sub_btn').click(function(event) {
       /* Act on the event */
       
       //判断PDO名称
@@ -272,18 +263,22 @@
 
       //判断属性
       var cnt = 1;
+      var flag = 0;
       $('.attribute').each(function() {
         var value = $(this).val();
         if(cnt != 1){
           if(value == ""){
             alert("属性不能为空");
-            return false;
+            flag = 1;
           }
         }
         cnt++;
       });
-
-      var form = $('#PDOForm');
+		
+      //The attribute is empty
+      if(flag == 1) return false;
+      
+      var form = $('#PdoForm');
       form.submit();
     });
   </script>
