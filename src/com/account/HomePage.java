@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +66,7 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 				Timestamp t = mymess.getTimestamp("messageTime");
 				messages.add(new Message(mess, t));
 			}
-			
+			Collections.reverse(messages);
 			int pdoCount = 0,eventCount = 0;
 			sqlcmd = "select * from pdos where userName=?";
 			mysql = new SQLManage(sqlcmd);

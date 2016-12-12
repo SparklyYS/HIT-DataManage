@@ -1,46 +1,145 @@
-##设计思路
-`提交名为“final design”`
+#HIT-DataManage
+###提交1.0
+`提交名为“first commit”`
 
-####tables
-* messages 记录每次操作的信息，如：新建了PDO，删除了PDO...
-	* message varchar(100) 存储信息
-	* messageTime timestamp 操作发生的时间
-	* userName varchar(100) 操作所属的用户
+####内容
+* 添加了登录、注册方面的后台处理
 
-* users 各种用户信息 
-	* userName varchar(100) 用户名
-	* userPasswd varchar(100) 用户密码
-	* userEmail varchar(100) 用户邮箱
-	* createTime timestamp 创建用户的时间
+###提交1.1
+`提交名为“login complete rough”`
 
-* pdos 各个pdo的简短信息
-	* PDOName varchar(100) PDO的名字
-	* PDOTime timestamp PDO创建的时间
-	* userName varchar(100) PDO所属的用户
-	* counts int(11) 记录该PDO中事件的数量
-	* tag varchar(100) 一个3位的二进制数(用字符串存储)，每位对应着时间、地点、人物这三个维度是否选中
+####内容
+* 加入了登录身份验证的过滤器，能够过滤action和页面，未登录的用户无法访问目录下的资源且会重定向到登录界面;
+* 与前台的登录和注册页面合并
 
-* 每创建一个PDO，都会创建一个PDO，例如：chester的用户创建了test的PDO，有header1,header2,header3三个表头，而且带有时间和人物属性，即tag为101，则会创建名字为chester\_test的table:
-	* eventID int(11) auto\_increment 用于锁定每个事件的ID，以便查找或者与其他事件关联
-	* header1 varchar(100) 
-	* header2 varchar(100)
-	* header3 varchar(100)
-	* 时间 date
-	* 人物 varchar(100)
-	* link varchar(100) 用于存储与当前事件有关的其他事件
+###提交1.2
+`提交名为“filter improved”`
 
-####复杂性分析
+####内容
+* 完善了过滤器，当用户输入不存在的action时，跳转到默认action
 
-`假设总pdo数量为n，每个PDO平均事件为m，每个时间平均关联d个事件，平均关联事件数量为t`
-* 时间复杂性
-	* 搜索某具体事件，O(m)
-	* 添加单个事件或者新建PDO，O(1)
-	* 添加关联事件，O(t\*d)
-	* 删除某个事件，O(d)
-	* 删除一个PDO，O(m\*d)
+###提交1.3
+`提交名为“homepage”`
 
-`假设总pdo数量为n，每个PDO平均事件为m，每个PDO平均表头数量为k`	
-* 空间复杂性
-	* 由于这个设计的数据库的table数量总在不断增长，其消耗的存储与PDO数量和它的表头和事件数有关，所以其空间复杂度为O(n\*m\*k)
-   	
+####内容
+* 实现了登录后显示的主页
+
+###提交1.4
+`提交名为“addPDO&Event”`
+
+####内容
+* 实现了添加PDO的功能，添加事件(Event)还在继续完善
+* 第二天应该能实现添加事件功能
+
+###提交1.5
+`提交名为“completeAdd”`
+
+####内容
+* 实现了添加事件功能
+
+###提交1.6
+`提交名为“completeDelete”`
+
+####内容
+* 实现了删除PDA和Event操作
+
+###提交1.7
+`提交名为“excelimport”`
+
+####内容
+* 实现了excel文件的导入操作
+
+###提交1.8
+`提交名为“first_merge_master”`
+
+####内容
+* 第一次合并总分支
+
+###提交1.9
+`提交名为“fix some problems”`
+
+####内容
+* 实现excel导入，事件删除，pdo删除
+
+###提交2.0
+`提交名为“complete logout”`
+
+####内容
+* 实现登出功能
+
+###提交2.1
+`提交名为“complete some functions”`
+
+####内容
+* 和前端合并
+
+###提交2.2
+`提交名为“charset problems”`
+
+####内容
+* 主要是尝试解决excel导入时候乱码以及数据库乱码问题
+
+###提交2.3
+`提交名为“fix data format problem on both xls and xlsx”`
+
+####内容
+* 终于解决了xls和xlsx文件中所有日期格式处理的问题
+
+###提交2.4
+`提交名为“complete events counts”`
+
+####内容
+* 实现对event个数的计数问题
+
+###提交2.5
+`提交名为“merge with some pages”`
+
+####内容
+* 和前端merge，实现搜索维度的PDO添加
+
+###提交2.6
+`提交名为“just left search”`
+
+####内容
+
+* 基本功能除搜索都实现了
+
+###提交2.7
+`提交名为“complete all functions”`
+
+####内容
+* 后台完成所有基本功能
+
+###提交2.8
+`提交名为“improve the filter”`
+
+####内容
+* 完善了过滤器
+
+###提交2.9
+`提交名为“ready to middle-discuss”`
+
+####内容
+* 和前端无缝连接，完成所有基本功能，准备中期答辩
+
+###提交3.0
+`提交名为“fix a bg bug”`
+
+####内容
+* 查询时关联数据出错，后台及时修改了
+
+###提交3.1
+`提交名为“add a sum-up model”`
+
+####内容
+* 在主页添加了一些统计信息
+
+###提交3.2
+`提交名为“fix some bugs”`
+
+####内容
+* 解决了一系列bug:
+	* 注册页面：密码多次匹配，输入不能为空
+	* 添加事件页面：若有时间属性，改为日历
+
 
