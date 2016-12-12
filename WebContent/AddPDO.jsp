@@ -164,11 +164,11 @@
 							</thead>
 							<tbody>
 								<tr name="property">
-									<td name="No" width=6%>属性ID: 1</td>
-									<td><input id="property" name="headers[0]"
-										class="form-control"></td>
+									<td name="No" width=6%>属性ID: 2</td>
+									<td><input id="property" name="headers[1]"
+										class="form-control attribute"></td>
 									<td>
-										<button id="Button2" onclick="deltr(this)"
+										<button id="Button2" type="button" onclick="deltr(this)"
 											class='btn btn-danger btn-sm glyphicon glyphicon-remove row-remove'></button>
 									</td>
 								</tr>
@@ -176,7 +176,7 @@
 						</table>
 							
 						<div class="widget-content padded clearfix">
-							<form action="AddPDOAction" method="post" name="form">
+							<form action="AddPDOAction" method="post" name="form" id="PDOForm">
 								<table class="table table-bordered table-striped"
 									id="dynamictable">
 									<thead>
@@ -189,18 +189,18 @@
 											<td><input name="PDOName" class="form-control">
 											</td>
 										</tr>
-<!-- 										<tr>
+< 										<tr name="property">
 											<td name="No" width=6%>属性ID: 1</td>
 											<td><input id="property" name="headers[0]"
-												class="form-control"></td>
+												class="form-control attribute"></td>
 											<td>
-												<button id="Button2" onclick="deltr(this)"
+												<button id="Button2" type="button" onclick="deltr(this)"
 													class='btn btn-danger btn-sm glyphicon glyphicon-remove row-remove'></button>
 											</td>
-										</tr> -->
+										</tr>
 									</tbody>
 								</table>
-								<button id="submit" type="submit"
+								<button id="submit" type="button"
 									class="btn btn-primary pull-right">提交</button>
 							</form>
 						</div>
@@ -262,6 +262,35 @@
 			}
 		}
 	</script>
+	
+	<script type="text/javascript">
+    $('#submit').click(function(event) {
+      /* Act on the event */
+      
+      //判断PDO名称
+      if($('input[name="PDOName"]').val() == ""){
+        $('input[name="PDOName"]').focus();
+        alert('PDO名称不能为空');
+        return false;
+      }
+
+      //判断属性
+      var cnt = 1;
+      $('.attribute').each(function() {
+        var value = $(this).val();
+        if(cnt != 1){
+          if(value == ""){
+            alert("属性不能为空");
+            return false;
+          }
+        }
+        cnt++;
+      });
+
+      $('#PDOForm').submit();
+    });
+  </script>
+	
 
 </body>
 
