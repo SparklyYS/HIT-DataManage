@@ -102,12 +102,12 @@
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	name="viewport">
-	
-	<style type="text/css">
-		.visible-lg{
-			margin-top: 10px;
-		}
-	</style>
+
+<style type="text/css">
+.visible-lg {
+	margin-top: 10px;
+}
+</style>
 </head>
 <body>
 	<div class="modal-shiftfix">
@@ -118,10 +118,9 @@
 					<ul class="nav navbar-nav pull-right">
 						<li class="dropdown user hidden-xs"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"> <img width="34" height="34"
-								src="images/avatar-male.jpg" />${sessionScope.userName}<b class="caret"></b></a>
+								src="images/avatar-male.jpg" />${sessionScope.userName}<b
+								class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#"> <i class="icon-user"></i>个人主页
-								</a></li>
 								<li><a href="LogOutAction"> <i class="icon-signout"></i>登出
 								</a></li>
 							</ul></li>
@@ -143,14 +142,11 @@
 						<li><a class="current" href="ShowPDOAction"> <span
 								aria-hidden="true" class="se7en-forms"></span>我的个人数据
 						</a></li>
-						<li><a href=""> <span aria-hidden="true"
+						<li><a href="QuickAddEvent"> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
 						</a></li>
 						<li><a href="Search.jsp"> <span aria-hidden="true"
 								class="icon-search"></span>按维度搜索
-						</a></li>
-						<li><a href=""> <span aria-hidden="true"
-								class="icon-user"></span>个人主页
 						</a></li>
 						<li><button class="btn btn-success" id="event_add">添加事件</button></li>
 					</ul>
@@ -160,7 +156,7 @@
 		<!-- End Navigation -->
 		<div class="container-fluid main-content">
 			<!-- Statistics -->
-<%-- 			<div class="col-md-3 visible-md visible-lg">
+			<%-- 			<div class="col-md-3 visible-md visible-lg">
 				<div class="widget-container fluid-height">
 					<div class="heading">
 						<i class="icon-calendar"></i>添加事件
@@ -182,56 +178,70 @@
 					</div>
 				</div>
 			</div> --%>
-			
+
 			<s:iterator value="pdoHeaders.keySet()" var="pdo">
-			<div class="col-md-3 visible-md visible-lg">
-				<div class="widget-container fluid-height">
-					<div class="heading">
-						<i class="icon-calendar"></i>添加事件
-					</div>
-					<div class="widget-content padded">
+				<div class="col-md-3 visible-md visible-lg">
+					<div class="widget-container fluid-height">
+						<div class="heading">
+							<i class="icon-calendar"></i>添加事件
+						</div>
+						<div class="widget-content padded">
 							<div class="external-events">
-								<div class="heading" id="PDOName"><i class="icon-briefcase"></i><s:property value="#pdo" /></div>
-								<s:iterator value="pdoHeaders[#pdo]" var="head">
-								<div class="form-group">
-								<label><b><s:property value="#head" /></b></label>
-								<input class="input form-control" name="data" id="event_title" type="text" value="">
+								<div class="heading" id="PDOName">
+									<i class="icon-briefcase"></i>
+									<s:property value="#pdo" />
 								</div>
+								<s:iterator value="pdoHeaders[#pdo]" var="head">
+									<div class="form-group">
+										<label><b><s:property value="#head" /></b></label>
+										<s:if test="#head == '时间'">
+											<input class="input form-control" name="data"
+												id="event_title" type="date" value="2016-01-01">
+										</s:if>
+										<s:else>
+											<input class="input form-control" name="data"
+												id="event_title" type="text" value="">
+										</s:else>
+									</div>
 								</s:iterator>
 							</div>
-						<form id="form" name="form" action="AddEventAction" method="post">
-						</form>
+							<form id="form" name="form" action="AddEventAction" method="post">
+							</form>
+						</div>
 					</div>
 				</div>
-			</div>
 			</s:iterator>
-			
+
 		</div>
 	</div>
-	
-	<script>
-		$('#event_add').click(function(){
-			var data = "";
-			$('.external-events').each(function(){
-				//Add PDOName to the str
-				data += $(this).find('#PDOName').text();
-				var InputList = $(this).find("input");
-				InputList.each(function(){
-					if($(this).val() == ""){
-						data = data + "&" + " ";
-					}else{
-						data = data + "&" + $(this).val();//Add Property value to the str
-					}
-				});
-				data += "/";
-				// alert(data);
-			});
-			data = data.substring(0, data.length-1);
-			//alert(data);
-			$('#form').append("<input style='display:none' name='data' type='text' value="+data+">");
-			$('#form').submit();
 
-		});
+	<script>
+		$('#event_add')
+				.click(
+						function() {
+							var data = "";
+							$('.external-events').each(function() {
+								//Add PDOName to the str
+								data += $(this).find('#PDOName').text();
+								var InputList = $(this).find("input");
+								InputList.each(function() {
+									if ($(this).val() == "") {
+										data = data + "&" + " ";
+									} else {
+										data = data + "&" + $(this).val();//Add Property value to the str
+									}
+								});
+								data += "/";
+								// alert(data);
+							});
+							data = data.substring(0, data.length - 1);
+							//alert(data);
+							$('#form')
+									.append(
+											"<input style='display:none' name='data' type='text' value="+data+">");
+							$('#form').submit();
+
+						});
 	</script>
 </body>
 </html>

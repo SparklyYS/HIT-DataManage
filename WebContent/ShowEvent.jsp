@@ -119,8 +119,6 @@
 							class="dropdown-toggle" href="#"> <img width="34" height="34"
 								src="images/avatar-male.jpg" />${sessionScope.userName}<b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#"> <i class="icon-user"></i>个人主页
-								</a></li>
 								<li><a href="LogOutAction"> <i class="icon-signout"></i>登出
 								</a></li>
 							</ul></li>
@@ -142,14 +140,11 @@
 						<li><a class="current" href="ShowPDOAction"> <span
 								aria-hidden="true" class="se7en-forms"></span>我的个人数据
 						</a></li>
-						<li><a href="charts.html"> <span aria-hidden="true"
+						<li><a href="QuickAddEvent"> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
 						</a></li>
 						<li><a href="Search.jsp"> <span aria-hidden="true"
 								class="icon-search"></span>按维度搜索
-						</a></li>
-						<li><a href="charts.html"> <span aria-hidden="true"
-								class="icon-user"></span>个人主页
 						</a></li>
 					</ul>
 				</div>

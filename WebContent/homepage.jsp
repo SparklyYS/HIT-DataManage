@@ -110,10 +110,9 @@
 					<ul class="nav navbar-nav pull-right">
 						<li class="dropdown user hidden-xs"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#"> <img width="34" height="34"
-								src="images/avatar-male.jpg" />${sessionScope.userName}<b class="caret"></b></a>
+								src="images/avatar-male.jpg" />${sessionScope.userName}<b
+								class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#"> <i class="icon-user"></i>个人主页
-								</a></li>
 								<li><a href="LogOutAction"> <i class="icon-signout"></i>登出
 								</a></li>
 							</ul></li>
@@ -135,80 +134,74 @@
 						<li><a href="ShowPDOAction"> <span aria-hidden="true"
 								class="se7en-forms"></span>我的个人数据
 						</a></li>
-						<li><a href=""> <span aria-hidden="true"
+						<li><a href="QuickAddEvent"> <span aria-hidden="true"
 								class="se7en-pages"></span>添加事件
 						</a></li>
 						<li><a href="Search.jsp"> <span aria-hidden="true"
 								class="icon-search"></span>按维度搜索
-						</a></li>
-						<li><a href=""> <span aria-hidden="true"
-								class="icon-user"></span>个人主页
 						</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<!-- End Navigation -->
-      <div class="container-fluid main-content">
-        <!-- Statistics -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="widget-container stats-container">
-              <div class="col-md-4">
-                <div class="number">
-                  <div class="icon-briefcase"></div>
-                  86
-                </div>
-                <div class="text">
-                  PDO数量
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="number">
-                  <div class="icon-file-alt"></div>
-                  613
-                </div>
-                <div class="text">
-                   	事件总数
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="number">
-                  <div class="icon-comments-alt"></div>
-                  924
-                </div>
-                <div class="text">
-                  Messaage
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-       <!-- End Statistics -->
-       <div class="row">
-          <!-- Conversation -->
-          <div class="col-lg-10">
-            <div class="widget-container scrollable chat chat-page">
-              <div class="heading">
-                <i class="icon-comments"></i>Message
-              </div>
-              <div class="widget-content padded">
-                <ul>
-                  <li>
-                    <img width="30" height="30" src="images/avatar-male.jpg" />
-                    <div class="bubble">
-                      <a class="user-name" href="#">John Smith</a>
-                      <p class="message">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+		<div class="container-fluid main-content">
+			<!-- Statistics -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="widget-container stats-container">
+						<div class="col-md-4">
+							<div class="number">
+								<div class="icon-briefcase"></div>
+								<s:property value="myCounts.pdos" />
+							</div>
+							<div class="text">PDO数量</div>
+						</div>
+						<div class="col-md-4">
+							<div class="number">
+								<div class="icon-file-alt"></div>
+								<s:property value="myCounts.events" />
+							</div>
+							<div class="text">事件总数</div>
+						</div>
+						<div class="col-md-4">
+							<div class="number">
+								<div class="icon-comments-alt"></div>
+								<s:property value="myCounts.messages" />
+							</div>
+							<div class="text">Messaage</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Statistics -->
+			<div class="row">
+				<!-- Conversation -->
+				<div class="col-lg-10">
+					<div class="widget-container scrollable chat chat-page">
+						<div class="heading">
+							<i class="icon-comments"></i>Message
+						</div>
+						<div class="widget-content padded">
+							<ul>
+								<s:iterator value="messages" var="m">
+									<li><img width="30" height="30"
+										src="images/avatar-male.jpg" />
+										<div class="bubble">
+											<p class="message">
+												<s:property value="#m.mess" />
+											</p>
+											<p class="time">
+												<s:date name="#m.t" format="yyyy/MM/dd HH:mm:ss"/>
+											</p>
+										</div></li>
+								</s:iterator>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
