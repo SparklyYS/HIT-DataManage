@@ -54,11 +54,13 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 		response.setContentType("application/msexcel;charset=UTF-8"); 
 		String userName = session.getAttribute("userName").toString();
 		try {
+			int messCounts = 0;
 			String sqlcmd = "select * from messages where userName=?";
 			SQLManage mysql = new SQLManage(sqlcmd);
 			mysql.setString(1, userName);
 			ResultSet mymess = mysql.executeQuery();
 			while (mymess.next()) {
+				messCounts ++;
 				String mess = mymess.getString("message");
 				Timestamp t = mymess.getTimestamp("messageTime");
 				messages.add(new Message(mess, t));
@@ -74,7 +76,7 @@ public class HomePage extends ActionSupport implements ServletRequestAware {
 				pdoCount ++;
 				eventCount += mymess.getInt("counts");
 			}
-			myCounts = new Counts(pdoCount, eventCount);
+			myCounts = new Counts(pdoCount, eventCount, messCounts);
 			mysql.close();
 		} catch (ClassNotFoundException e) {
 			status = ERROR;

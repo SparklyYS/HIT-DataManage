@@ -230,8 +230,8 @@
 							</div>
 							<div class="pull-right">
 								<div class="btn-group">
-									<button id="AddEvent" class="btn btn-info">
-										<i class="fa fa-file-text"> </i>添加事件
+									<button id="AddEvent" class="btn btn-danger">
+										<i class="fa fa-file-text"> </i>撤销添加
 									</button>
 									<button data-title="Edit" data-toggle="modal"
 										data-target="#edit" class="btn btn-info">
@@ -244,7 +244,7 @@
 							<table class="table table-bordered table-striped" id="dataTable1">
 								<thead>
 									<tr>
-										<th style="display: none" class="tcheckbox check-header"><label><input
+										<th class="tcheckbox check-header"><label><input
 												id="checkAll" name="checkAll" type="checkbox"><span></span></label>
 										</th>
 										<th>数据名</th>
@@ -258,7 +258,7 @@
 								<tbody>
 									<s:iterator value="pdos" var="pdo">
 										<tr>
-											<td style="display: none" class="thcheckbox check"><label><input
+											<td class="thcheckbox check"><label><input
 													class="tbox" name="optionsRadios1" type="checkbox"
 													value="option1"><span></span></label></td>
 											<td><s:url var="eventurl" value="ShowEventAction">
@@ -281,7 +281,7 @@
 							</table>
 						</div>
 						<form id="PdoForm" method="post" action="ShowHeaderAction">
-							<div id="AddSuccess" class="pull-right" style="display: none">
+							<div id="AddSuccess" class="pull-right">
 								<button id="AddBtn" type="button" class="btn btn-success">
 									<i class="glyphicon glyphicon-ok-sign"> </i>确定添加
 								</button>
@@ -414,7 +414,7 @@
 	<script>
 		$(document).ready(function(){
 			//Set Cookie
-			$.cookie("status", "0");
+			$.cookie("event_status", "1");
 		});
 	</script>
 
@@ -452,7 +452,7 @@
 
 	<script type="text/javascript">
 		$('#AddEvent').click(function() {
-			var status = $.cookie("status");
+			var status = $.cookie("event_status");
 			if (status == "0") { //fadeIn
 				//Change the text in the button
 				$(this).text("撤销添加");
@@ -464,7 +464,7 @@
 				//fadeIn all AddSuccess btn
 				$('#AddSuccess').fadeIn();
 				status = "1";
-				$.cookie("status", status);
+				$.cookie("event_status", status);
 			} else {
 				//Change the text in the button
 				$(this).text("添加事件");
@@ -476,7 +476,7 @@
 				//fadeOut all AddSuccess btn
 				$('#AddSuccess').fadeOut();
 				status = "0";
-				$.cookie("status", status);
+				$.cookie("event_status", status);
 			}
 		});
 	</script>

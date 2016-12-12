@@ -76,6 +76,7 @@ public class LoginIn extends ActionSupport implements ServletRequestAware {
 				String passwd = mydata.getString("userPasswd");
 				if (passwd.equals(userPasswd)) {
 					status = SUCCESS;
+					userName = mydata.getString("userName");
 					session.setAttribute("status", "success");
 					session.setAttribute("userName", userName);
 					sqlcmd = "select * from messages where userName=?";

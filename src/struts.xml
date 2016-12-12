@@ -160,5 +160,13 @@
 			</result>
 		</action>
 		
+		<action name="QuickAddEvent"
+			class="com.myfile.ShowPDO"
+			method="showPDO">
+			<result>
+				/FilesAddEvent.jsp
+			</result>
+		</action>
+		
    	</package>
 </struts>
