@@ -149,10 +149,66 @@
 			</div>
 		</div>
 		<!-- End Navigation -->
-		<div class="container-fluid main-content">
-			<!-- Statistics -->
-
-		</div>
+      <div class="container-fluid main-content">
+        <!-- Statistics -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="widget-container stats-container">
+              <div class="col-md-4">
+                <div class="number">
+                  <div class="icon-briefcase"></div>
+                  86
+                </div>
+                <div class="text">
+                  PDO数量
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="number">
+                  <div class="icon-file-alt"></div>
+                  613
+                </div>
+                <div class="text">
+                   	事件总数
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="number">
+                  <div class="icon-comments-alt"></div>
+                  924
+                </div>
+                <div class="text">
+                  Messaage
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       <!-- End Statistics -->
+       <div class="row">
+          <!-- Conversation -->
+          <div class="col-lg-10">
+            <div class="widget-container scrollable chat chat-page">
+              <div class="heading">
+                <i class="icon-comments"></i>Message
+              </div>
+              <div class="widget-content padded">
+                <ul>
+                  <li>
+                    <img width="30" height="30" src="images/avatar-male.jpg" />
+                    <div class="bubble">
+                      <a class="user-name" href="#">John Smith</a>
+                      <p class="message">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 	</div>
 </body>
 </html>
