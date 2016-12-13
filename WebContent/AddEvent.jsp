@@ -187,10 +187,7 @@
 						</div>
 						<div class="widget-content padded">
 							<div class="external-events">
-								<div class="heading" id="PDOName">
-									<i class="icon-briefcase"></i>
-									<s:property value="#pdo" />
-								</div>
+								<div class="heading" id="PDOName"><i class="icon-briefcase"></i><s:property value="#pdo" /></div>
 								<s:iterator value="pdoHeaders[#pdo]" var="head">
 									<div class="form-group">
 										<label><b><s:property value="#head" /></b></label>
@@ -232,10 +229,8 @@
 									}
 								});
 								data += "/";
-								// alert(data);
 							});
 							data = data.substring(0, data.length - 1);
-							//alert(data);
 							$('#form')
 									.append(
 											"<input style='display:none' name='data' type='text' value="+data+">");
