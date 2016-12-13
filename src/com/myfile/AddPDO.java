@@ -64,7 +64,7 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 		this.headers = headers;
 	}
 
-	public String addPDO() {
+	public String addPDO() throws ClassNotFoundException, SQLException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -119,9 +119,21 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 			mysql.close();
 		} catch (ClassNotFoundException e) {
 			status = ERROR;
+			String sqlcmd = "delete from pdos where userName=? and PDOName=?";
+			SQLManage mysql = new SQLManage(sqlcmd);
+			mysql.setString(1, userName);
+			mysql.setString(2, PDOName);
+			mysql.executeUpdate();
+			mysql.close();
 			e.printStackTrace();
 		} catch (SQLException e) {
 			status = ERROR;
+			String sqlcmd = "delete from pdos where userName=? and PDOName=?";
+			SQLManage mysql = new SQLManage(sqlcmd);
+			mysql.setString(1, userName);
+			mysql.setString(2, PDOName);
+			mysql.executeUpdate();
+			mysql.close();
 			e.printStackTrace();
 		}
 		return status;

@@ -11,7 +11,7 @@
 	
 	<!-- 设置session的有效期 -->
 	<session-config>
-		<session-timeout>120</session-timeout>
+		<session-timeout>240</session-timeout>
 	</session-config>
 
 	<!-- 这里配置了一个用户登录的过滤器 -->
