@@ -1,5 +1,6 @@
 package com.myfile;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -70,40 +71,50 @@ public class AddPDO extends ActionSupport implements ServletRequestAware {
 		response.setContentType("application/msexcel;charset=UTF-8");
 		String userName = session.getAttribute("userName").toString();
 		try {
-			String sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts,tag) values (?,?,?,?,?)";
+			String sqlcmd = "select * from pdos where PDOName=? and userName=?";
 			SQLManage mysql = new SQLManage(sqlcmd);
-			Timestamp t = new Timestamp(new Date().getTime());
 			mysql.setString(1, PDOName);
-			mysql.setTimestamp(2, t);
-			mysql.setString(3, userName);
-			mysql.setInteger(4, 0);
-			mysql.setString(5, tag);
-			mysql.executeUpdate();
-			String PDOTable = userName + "_" + PDOName;
-			sqlcmd = "create table " + PDOTable + " (";
-			sqlcmd += "eventID int not null auto_increment,";
-			for (String header : headers) {
-				sqlcmd += header + " varchar(100) not null,";
+			mysql.setString(2, userName);
+			ResultSet mydata = mysql.executeQuery();
+			if(!mydata.next()) {
+				sqlcmd = "insert into pdos (PDOName,PDOTime,userName,counts,tag) values (?,?,?,?,?)";
+				mysql = new SQLManage(sqlcmd);
+				Timestamp t = new Timestamp(new Date().getTime());
+				mysql.setString(1, PDOName);
+				mysql.setTimestamp(2, t);
+				mysql.setString(3, userName);
+				mysql.setInteger(4, 0);
+				mysql.setString(5, tag);
+				mysql.executeUpdate();
+				String PDOTable = userName + "_" + PDOName;
+				sqlcmd = "create table " + PDOTable + " (";
+				sqlcmd += "eventID int not null auto_increment,";
+				for (String header : headers) {
+					sqlcmd += header + " varchar(100) not null,";
+				}
+				if (tag.charAt(0) == '1') {
+					sqlcmd += "时间 date not null,";
+				}
+				if (tag.charAt(1) == '1') {
+					sqlcmd += "地点 varchar(100) not null,";
+				}
+				if (tag.charAt(2) == '1') {
+					sqlcmd += "人物 varchar(100) not null,";
+				}
+				sqlcmd += "link varchar(100) not null,";
+				sqlcmd += "primary key (eventID)) charset=utf8";
+				mysql = new SQLManage(sqlcmd);
+				mysql.executeUpdate();
+				sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
+				mysql = new SQLManage(sqlcmd);
+				mysql.setString(1, "添加了一个PDO：" + PDOName);
+				mysql.setTimestamp(2, t);
+				mysql.setString(3, userName);
+				mysql.executeUpdate();
 			}
-			if (tag.charAt(0) == '1') {
-				sqlcmd += "时间 date not null,";
+			else {
+				status = ERROR;
 			}
-			if (tag.charAt(1) == '1') {
-				sqlcmd += "地点 varchar(100) not null,";
-			}
-			if (tag.charAt(2) == '1') {
-				sqlcmd += "人物 varchar(100) not null,";
-			}
-			sqlcmd += "link varchar(100) not null,";
-			sqlcmd += "primary key (eventID)) charset=utf8";
-			mysql = new SQLManage(sqlcmd);
-			mysql.executeUpdate();
-			sqlcmd = "insert into messages (message,messageTime,userName) values (?,?,?)";
-			mysql = new SQLManage(sqlcmd);
-			mysql.setString(1, "添加了一个PDO：" + PDOName);
-			mysql.setTimestamp(2, t);
-			mysql.setString(3, userName);
-			mysql.executeUpdate();
 			status = SUCCESS;
 			mysql.close();
 		} catch (ClassNotFoundException e) {
